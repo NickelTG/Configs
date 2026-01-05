@@ -11,7 +11,7 @@ proxy-groups:
   # Мультиплексирование: распределение нагрузки между всеми подписками
   - name: LOAD-BALANCE
     type: load-balance
-    strategy: consistent-hash
+    strategy: round-robin
     use: &sub_list
       - AvenCores_sub_24
       - sub_hans_thomas
