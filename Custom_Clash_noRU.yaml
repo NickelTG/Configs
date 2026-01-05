@@ -15,6 +15,14 @@ proxy-groups:
       - fi_danial; fr_danial; gb_danial; gr_danial; hu_danial; ie_danial; it_danial; lu_danial
       - lv_danial; md_danial; nl_danial; no_danial; pl_danial; pt_danial; ro_danial; rs_danial; se_danial
 
+  # Фильтр-группа: выбирает только те узлы, которые успешно прошли тест скорости
+  - name: ⚡️ FAST-BACKBONE
+    type: url-test
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    tolerance: 50
+    use: *all_providers
+
   - name: auto
     type: url-test
     url: http://cp.cloudflare.com/generate_204
@@ -28,18 +36,21 @@ proxy-groups:
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     strategy: consistent-hashing
-    use: *all_providers
+    proxies:
+      - ⚡️ FAST-BACKBONE
 
   - name: BALANCE-RR
     type: load-balance
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     strategy: round-robin
-    use: *all_providers
+    proxies:
+      - ⚡️ FAST-BACKBONE
 
   - name: PROXY
     type: select
     proxies:
+      - ⚡️ FAST-BACKBONE
       - BALANCE-HASH
       - BALANCE-RR
       - auto
@@ -50,7 +61,7 @@ common-settings: &common_settings
   type: http
   health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
   override: {udp: true}
-  interval: 43200 # Обновление списка ссылок раз в 12 часов
+  interval: 43200
 
 proxy-providers:
   # SoliSpirit
