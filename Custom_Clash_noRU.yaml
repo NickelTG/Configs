@@ -10,9 +10,9 @@ proxy-groups:
     type: select
     proxies:      
       - BALANCE-SD
-	  - BALANCE-HASH	  
+      - BALANCE-HASH	  
       - BALANCE-RR
-	  - auto
+      - auto
       - DIRECT
 
   - name: auto
