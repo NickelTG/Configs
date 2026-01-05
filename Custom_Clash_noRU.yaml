@@ -20,6 +20,7 @@ proxy-groups:
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     tolerance: 50
+    expected-proxies-count: 10
     use: &all_providers
       - sweden_Soli
       - lithuania_Soli
