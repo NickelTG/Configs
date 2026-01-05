@@ -55,6 +55,7 @@ proxy-providers:
     type: http
     interval: 3600
     filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺|MSK|SPB|STRUGOV|STR97)).*$"
+    exclude-filter: "duplicates"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
