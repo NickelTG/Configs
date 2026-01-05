@@ -8,19 +8,19 @@ keep-alive-interval: 1800
 proxy-groups:
   - name: PROXY
     type: select
-    proxies:
-      - ⚡️ FAST-BACKBONE
-      - BALANCE-HASH
+    proxies:      
+      - BALANCE-SD
+	  - BALANCE-HASH	  
       - BALANCE-RR
-      - auto
+	  - auto
       - DIRECT
 
-  - name: ⚡️ FAST-BACKBONE
+  - name: auto
     type: url-test
     url: http://cp.cloudflare.com/generate_204
     interval: 300
-    tolerance: 50
-    expected-proxies-count: 10
+    tolerance: 150
+    lazy: true
     use: &all_providers
       - sweden_Soli
       - lithuania_Soli
@@ -57,29 +57,26 @@ proxy-groups:
       - serbia_danial
       - sweden_danial
 
-  - name: auto
-    type: url-test
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    tolerance: 150
-    lazy: true
-    use: *all_providers
-
   - name: BALANCE-HASH
     type: load-balance
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     strategy: consistent-hashing
-    proxies:
-      - ⚡️ FAST-BACKBONE
+    use: *all_providers
 
   - name: BALANCE-RR
     type: load-balance
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     strategy: round-robin
-    proxies:
-      - ⚡️ FAST-BACKBONE
+    use: *all_providers
+
+  - name: BALANCE-SD
+    type: load-balance
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    strategy: smallest-delay
+    use: *all_providers
 
 # --- ПРОВАЙДЕРЫ ПРОКСИ ---
 common-settings: &common_settings
@@ -89,20 +86,15 @@ common-settings: &common_settings
   interval: 43200
 
 proxy-providers:
-  # SoliSpirit
   sweden_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Sweden.txt", path: ./pp/se_soli.yml }
   lithuania_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Lithuania.txt", path: ./pp/lt_soli.yml }
   estonia_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Estonia.txt", path: ./pp/ee_soli.yml }
   switzerland_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Switzerland.txt", path: ./pp/ch_soli.yml }
   netherlands_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/The_Netherlands.txt", path: ./pp/nl_soli.yml }
-  
-  # F0rc3Run
   latvia_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Latvia.txt", path: ./pp/lv_force.yml }
   austria_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Austria.txt", path: ./pp/at_force.yml }
   finland_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Finland.txt", path: ./pp/fi_force.yml }
   poland_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Poland.txt", path: ./pp/pl_force.yml }
-
-  # Danialsamadi (Updated Names)
   austria_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/AT.txt", path: ./pp/at_danial.yml }
   belgium_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BE.txt", path: ./pp/be_danial.yml }
   bulgaria_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BG.txt", path: ./pp/bg_danial.yml }
