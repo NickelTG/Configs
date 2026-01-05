@@ -6,8 +6,20 @@ keep-alive-interval: 1800
 
 # --- ГРУППЫ ПРОКСИ ---
 proxy-groups:
-  - name: 🛠 ALL_SERVERS
+  - name: PROXY
     type: select
+    proxies:
+      - ⚡️ FAST-BACKBONE
+      - BALANCE-HASH
+      - BALANCE-RR
+      - auto
+      - DIRECT
+
+  - name: ⚡️ FAST-BACKBONE
+    type: url-test
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    tolerance: 50
     use: &all_providers
       - sweden_Soli
       - lithuania_Soli
@@ -18,31 +30,31 @@ proxy-groups:
       - austria_Force
       - finland_Force
       - poland_Force
-      - at_danial
-      - be_danial
-      - bg_danial
-      - ch_danial
-      - cz_danial
-      - de_danial
-      - dk_danial
-      - es_danial
-      - fi_danial
-      - fr_danial
-      - gb_danial
-      - gr_danial
-      - hu_danial
-      - ie_danial
-      - it_danial
-      - lu_danial
-      - lv_danial
-      - md_danial
-      - nl_danial
-      - no_danial
-      - pl_danial
-      - pt_danial
-      - ro_danial
-      - rs_danial
-      - se_danial
+      - austria_danial
+      - belgium_danial
+      - bulgaria_danial
+      - switzerland_danial
+      - czech_danial
+      - germany_danial
+      - denmark_danial
+      - spain_danial
+      - finland_danial
+      - france_danial
+      - united_kingdom_danial
+      - greece_danial
+      - hungary_danial
+      - ireland_danial
+      - italy_danial
+      - luxembourg_danial
+      - latvia_danial
+      - moldova_danial
+      - netherlands_danial
+      - norway_danial
+      - poland_danial
+      - portugal_danial
+      - romania_danial
+      - serbia_danial
+      - sweden_danial
 
   - name: auto
     type: url-test
@@ -57,29 +69,23 @@ proxy-groups:
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     strategy: consistent-hashing
-    use: *all_providers
+    proxies:
+      - ⚡️ FAST-BACKBONE
 
   - name: BALANCE-RR
     type: load-balance
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     strategy: round-robin
-    use: *all_providers
-
-  - name: PROXY
-    type: select
     proxies:
-      - BALANCE-HASH
-      - BALANCE-RR
-      - auto
-      - DIRECT
+      - ⚡️ FAST-BACKBONE
 
 # --- ПРОВАЙДЕРЫ ПРОКСИ ---
 common-settings: &common_settings
   type: http
   health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
   override: {udp: true}
-  interval: 43200 # Обновление списка ссылок раз в 12 часов
+  interval: 43200
 
 proxy-providers:
   # SoliSpirit
@@ -95,34 +101,34 @@ proxy-providers:
   finland_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Finland.txt", path: ./pp/fi_force.yml }
   poland_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Poland.txt", path: ./pp/pl_force.yml }
 
-  # Danialsamadi
-  at_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/AT.txt", path: ./pp/at_danial.yml }
-  be_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BE.txt", path: ./pp/be_danial.yml }
-  bg_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BG.txt", path: ./pp/bg_danial.yml }
-  ch_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/CH.txt", path: ./pp/ch_danial.yml }
-  cz_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/CZ.txt", path: ./pp/cz_danial.yml }
-  de_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DE.txt", path: ./pp/de_danial.yml }
-  dk_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DK.txt", path: ./pp/dk_danial.yml }
-  es_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/ES.txt", path: ./pp/es_danial.yml }
-  fi_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/FI.txt", path: ./pp/fi_danial.yml }
-  fr_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/FR.txt", path: ./pp/fr_danial.yml }
-  gb_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/GB.txt", path: ./pp/gb_danial.yml }
-  gr_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/GR.txt", path: ./pp/gr_danial.yml }
-  hu_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/HU.txt", path: ./pp/hu_danial.yml }
-  ie_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/IE.txt", path: ./pp/ie_danial.yml }
-  it_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/IT.txt", path: ./pp/it_danial.yml }
-  lu_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/LU.txt", path: ./pp/lu_danial.yml }
-  lv_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/LV.txt", path: ./pp/lv_danial.yml }
-  md_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/MD.txt", path: ./pp/md_danial.yml }
-  nl_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/NL.txt", path: ./pp/nl_danial.yml }
-  no_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/NO.txt", path: ./pp/no_danial.yml }
-  pl_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/PL.txt", path: ./pp/pl_danial.yml }
-  pt_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/PT.txt", path: ./pp/pt_danial.yml }
-  ro_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/RO.txt", path: ./pp/ro_danial.yml }
-  rs_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/RS.txt", path: ./pp/rs_danial.yml }
-  se_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/SE.txt", path: ./pp/se_danial.yml }
+  # Danialsamadi (Updated Names)
+  austria_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/AT.txt", path: ./pp/at_danial.yml }
+  belgium_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BE.txt", path: ./pp/be_danial.yml }
+  bulgaria_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BG.txt", path: ./pp/bg_danial.yml }
+  switzerland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/CH.txt", path: ./pp/ch_danial.yml }
+  czech_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/CZ.txt", path: ./pp/cz_danial.yml }
+  germany_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DE.txt", path: ./pp/de_danial.yml }
+  denmark_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DK.txt", path: ./pp/dk_danial.yml }
+  spain_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/ES.txt", path: ./pp/es_danial.yml }
+  finland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/FI.txt", path: ./pp/fi_danial.yml }
+  france_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/FR.txt", path: ./pp/fr_danial.yml }
+  united_kingdom_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/GB.txt", path: ./pp/gb_danial.yml }
+  greece_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/GR.txt", path: ./pp/gr_danial.yml }
+  hungary_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/HU.txt", path: ./pp/hu_danial.yml }
+  ireland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/IE.txt", path: ./pp/ie_danial.yml }
+  italy_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/IT.txt", path: ./pp/it_danial.yml }
+  luxembourg_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/LU.txt", path: ./pp/lu_danial.yml }
+  latvia_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/LV.txt", path: ./pp/lv_danial.yml }
+  moldova_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/MD.txt", path: ./pp/md_danial.yml }
+  netherlands_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/NL.txt", path: ./pp/nl_danial.yml }
+  norway_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/NO.txt", path: ./pp/no_danial.yml }
+  poland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/PL.txt", path: ./pp/pl_danial.yml }
+  portugal_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/PT.txt", path: ./pp/pt_danial.yml }
+  romania_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/RO.txt", path: ./pp/ro_danial.yml }
+  serbia_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/RS.txt", path: ./pp/rs_danial.yml }
+  sweden_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/SE.txt", path: ./pp/se_danial.yml }
 
-# --- ПРАВИЛА ---
+# --- ПРОВАЙДЕРЫ ПРАВИЛ ---
 rule-providers:
   skrepysh-proxy:
     type: http
@@ -146,6 +152,7 @@ rule-providers:
     url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
     interval: 86400
 
+# --- ПРАВИЛА ---
 rules:
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
