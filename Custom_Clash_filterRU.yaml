@@ -1,41 +1,3 @@
-# Системные настройки
-mode: rule
-log-level: info
-ipv6: false
-allow-lan: true
-mixed-port: 7890
-unified-delay: true
-tcp-concurrent: true
-
-# Перехват метаданных (Sniffing)
-sniffer:
-  enable: true
-  sniff:
-    TLS:
-      ports: [443, 8443]
-    HTTP:
-      ports: [80, 8080-8888]
-      proxy-override: true
-  force-domain:
-    - "+"
-
-# DNS настройки
-dns:
-  enable: true
-  ipv6: false
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  nameserver:
-    - 77.88.8.8
-    - 8.8.8.8
-    - https://dns.google/dns-query
-  proxy-server-nameserver:
-    - 8.8.8.8
-  nameserver-policy:
-    "geosite:ru,private": [77.88.8.8, 8.8.8.8]
-    "geosite:category-ads-all": rcode://name_error
-
-# Группы прокси
 proxy-groups:
   - name: PROXY
     type: select
@@ -43,7 +5,7 @@ proxy-groups:
       - auto
       - fallback
       - DIRECT
-    use:
+    use: &sub_list # Используем якорь, чтобы не дублировать список 10 раз
       - sub_main
       - sub_6
       - sub_22
@@ -53,32 +15,20 @@ proxy-groups:
 
   - name: auto
     type: url-test
+    use: *sub_list
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     tolerance: 50
     lazy: true
-    use:
-      - sub_main
-      - sub_6
-      - sub_22
-      - sub_23
-      - sub_24
-      - sub_eternity
 
   - name: fallback
     type: fallback
+    use: *sub_list
     url: http://cp.cloudflare.com/generate_204
     interval: 300
-    use:
-      - sub_main
-      - sub_6
-      - sub_22
-      - sub_23
-      - sub_24
-      - sub_eternity
 
-# Источники прокси
 proxy-providers:
+  # Общий фильтр для всех: без РФ и только с поддержкой UDP
   sub_main:
     type: http
     url: "https://raw.githubusercontent.com/barry-far/V2ray-config/main/All_Configs_Sub.txt"
@@ -133,15 +83,7 @@ proxy-providers:
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
-# Наборы правил
 rule-providers:
-  ads:
-    type: http
-    behavior: domain
-    format: mrs
-    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/ads.mrs"
-    path: ./rule-sets/ads.mrs
-    interval: 86400
   skrepysh-proxy:
     type: http
     behavior: classical
@@ -163,9 +105,7 @@ rule-providers:
     url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
     interval: 86400
 
-# Правила
 rules:
-  - RULE-SET,ads,REJECT
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
   - PROCESS-NAME,org.thoughtcrime.securesms,DIRECT
