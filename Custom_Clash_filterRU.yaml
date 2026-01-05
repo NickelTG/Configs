@@ -1,3 +1,4 @@
+# Системные настройки
 mode: rule
 log-level: info
 ipv6: false
@@ -6,6 +7,7 @@ mixed-port: 7890
 unified-delay: true
 tcp-concurrent: true
 
+# Перехват метаданных (Sniffing)
 sniffer:
   enable: true
   sniff:
@@ -13,6 +15,7 @@ sniffer:
     HTTP: {ports: [80, 8080-8888], proxy-override: true}
   force-domain: ["+"]
 
+# DNS настройки
 dns:
   enable: true
   ipv6: false
@@ -26,14 +29,23 @@ dns:
     - 8.8.8.8
   nameserver-policy:
     "geosite:ru,private": [77.88.8.8, 8.8.8.8]
-    # Блокировка рекламы на уровне DNS
     "geosite:category-ads-all": rcode://name_error
 
+# Группы прокси
 proxy-groups:
   - name: PROXY
     type: select
-    proxies: [- auto, - fallback, - DIRECT]
-    use: &sub_list [sub_main, sub_6, sub_22, sub_23, sub_24, sub_eternity]
+    proxies:
+      - auto
+      - fallback
+      - DIRECT
+    use: &sub_list
+      - sub_main
+      - sub_6
+      - sub_22
+      - sub_23
+      - sub_24
+      - sub_eternity
 
   - name: auto
     type: url-test
@@ -49,6 +61,7 @@ proxy-groups:
     url: http://cp.cloudflare.com/generate_204
     interval: 300
 
+# Источники прокси (БЕЗ СОКРАЩЕНИЙ)
 proxy-providers:
   sub_main:
     type: http
@@ -58,7 +71,7 @@ proxy-providers:
     filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
-  # ... (остальные sub_6, 22, 23, 24 из предыдущего ответа остаются без изменений)
+
   sub_6:
     type: http
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/6.txt"
@@ -67,6 +80,7 @@ proxy-providers:
     filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
+
   sub_22:
     type: http
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/22.txt"
@@ -75,6 +89,7 @@ proxy-providers:
     filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
+
   sub_23:
     type: http
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/23.txt"
@@ -83,6 +98,7 @@ proxy-providers:
     filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
+
   sub_24:
     type: http
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt"
@@ -91,6 +107,7 @@ proxy-providers:
     filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
+
   sub_eternity:
     type: http
     url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt"
@@ -100,6 +117,7 @@ proxy-providers:
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
+# Наборы правил
 rule-providers:
   ads:
     type: http
@@ -129,22 +147,14 @@ rule-providers:
     url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
     interval: 86400
 
+# Правила
 rules:
-  # 1. Блокировка рекламы
   - RULE-SET,ads,REJECT
-  
-  # 2. Торренты (DIRECT)
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
-  
-  # 3. Приложения и исключения
   - PROCESS-NAME,org.thoughtcrime.securesms,DIRECT
   - PROCESS-NAME,com.badoo.mobile,PROXY
   - PROCESS-NAME,com.bumble.app,PROXY
-  
-  # 4. Списки обхода блокировок
   - RULE-SET,skrepysh-proxy,PROXY
   - RULE-SET,ru-bundle,PROXY
-  
-  # 5. Финал
   - MATCH,DIRECT
