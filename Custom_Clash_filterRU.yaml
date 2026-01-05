@@ -5,7 +5,7 @@ proxy-groups:
       - auto
       - fallback
       - DIRECT
-    use: &sub_list # Используем якорь, чтобы не дублировать список 10 раз
+    use: &sub_list
       - sub_main
       - sub_6
       - sub_22
@@ -28,13 +28,13 @@ proxy-groups:
     interval: 300
 
 proxy-providers:
-  # Общий фильтр для всех: без РФ и только с поддержкой UDP
+  # Общий фильтр: только топовая Европа (Германия, Нидерланды, Финляндия, Франция, Швеция, Польша, Эстония, Австрия)
   sub_main:
     type: http
     url: "https://raw.githubusercontent.com/barry-far/V2ray-config/main/All_Configs_Sub.txt"
     path: ./proxy_providers/sub_main.yml
     interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    filter: "(?i)Germany|DE|Netherlands|NL|Finland|FI|France|FR|Sweden|SE|Poland|PL|Estonia|EE|Austria|AT"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
@@ -43,7 +43,7 @@ proxy-providers:
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/6.txt"
     path: ./proxy_providers/sub_6.yml
     interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    filter: "(?i)Germany|DE|Netherlands|NL|Finland|FI|France|FR|Sweden|SE|Poland|PL|Estonia|EE|Austria|AT"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
@@ -52,7 +52,7 @@ proxy-providers:
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/22.txt"
     path: ./proxy_providers/sub_22.yml
     interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    filter: "(?i)Germany|DE|Netherlands|NL|Finland|FI|France|FR|Sweden|SE|Poland|PL|Estonia|EE|Austria|AT"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
@@ -61,7 +61,7 @@ proxy-providers:
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/23.txt"
     path: ./proxy_providers/sub_23.yml
     interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    filter: "(?i)Germany|DE|Netherlands|NL|Finland|FI|France|FR|Sweden|SE|Poland|PL|Estonia|EE|Austria|AT"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
@@ -70,7 +70,7 @@ proxy-providers:
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt"
     path: ./proxy_providers/sub_24.yml
     interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    filter: "(?i)Germany|DE|Netherlands|NL|Finland|FI|France|FR|Sweden|SE|Poland|PL|Estonia|EE|Austria|AT"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
@@ -79,7 +79,7 @@ proxy-providers:
     url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt"
     path: ./proxy_providers/sub_eternity.yml
     interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    filter: "(?i)Germany|DE|Netherlands|NL|Finland|FI|France|FR|Sweden|SE|Poland|PL|Estonia|EE|Austria|AT"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
@@ -112,6 +112,7 @@ rules:
   - PROCESS-NAME,com.badoo.mobile,PROXY
   - PROCESS-NAME,com.bumble.app,PROXY
   - PROCESS-NAME,com.whatsapp,PROXY
+  - PROCESS-NAME,ru.fourpda.client,PROXY
   - RULE-SET,skrepysh-proxy,PROXY
   - RULE-SET,ru-bundle,PROXY
   - MATCH,DIRECT
