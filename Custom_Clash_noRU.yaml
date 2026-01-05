@@ -9,10 +9,10 @@ proxy-groups:
   - name: PROXY
     type: select
     proxies:      
-      - BALANCE-SD
       - BALANCE-HASH	  
       - BALANCE-RR
       - auto
+      - FALLBACK
       - DIRECT
 
   - name: auto
@@ -57,6 +57,12 @@ proxy-groups:
       - serbia_danial
       - sweden_danial
 
+  - name: FALLBACK
+    type: fallback
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    use: *all_providers
+
   - name: BALANCE-HASH
     type: load-balance
     url: http://cp.cloudflare.com/generate_204
@@ -69,13 +75,6 @@ proxy-groups:
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     strategy: round-robin
-    use: *all_providers
-
-  - name: BALANCE-SD
-    type: load-balance
-    url: http://cp.cloudflare.com/generate_204
-    interval: 300
-    strategy: smallest-delay
     use: *all_providers
 
 # --- ПРОВАЙДЕРЫ ПРОКСИ ---
