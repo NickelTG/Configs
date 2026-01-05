@@ -1,0 +1,150 @@
+mode: rule
+log-level: info
+ipv6: false
+allow-lan: true
+mixed-port: 7890
+unified-delay: true
+tcp-concurrent: true
+
+sniffer:
+  enable: true
+  sniff:
+    TLS: {ports: [443, 8443]}
+    HTTP: {ports: [80, 8080-8888], proxy-override: true}
+  force-domain: ["+"]
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - 77.88.8.8
+    - 8.8.8.8
+    - https://dns.google/dns-query
+  proxy-server-nameserver:
+    - 8.8.8.8
+  nameserver-policy:
+    "geosite:ru,private": [77.88.8.8, 8.8.8.8]
+    # Блокировка рекламы на уровне DNS
+    "geosite:category-ads-all": rcode://name_error
+
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies: [- auto, - fallback, - DIRECT]
+    use: &sub_list [sub_main, sub_6, sub_22, sub_23, sub_24, sub_eternity]
+
+  - name: auto
+    type: url-test
+    use: *sub_list
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    tolerance: 50
+    lazy: true
+
+  - name: fallback
+    type: fallback
+    use: *sub_list
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+
+proxy-providers:
+  sub_main:
+    type: http
+    url: "https://raw.githubusercontent.com/barry-far/V2ray-config/main/All_Configs_Sub.txt"
+    path: ./proxy_providers/sub_main.yml
+    interval: 3600
+    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+  # ... (остальные sub_6, 22, 23, 24 из предыдущего ответа остаются без изменений)
+  sub_6:
+    type: http
+    url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/6.txt"
+    path: ./proxy_providers/sub_6.yml
+    interval: 3600
+    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+  sub_22:
+    type: http
+    url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/22.txt"
+    path: ./proxy_providers/sub_22.yml
+    interval: 3600
+    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+  sub_23:
+    type: http
+    url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/23.txt"
+    path: ./proxy_providers/sub_23.yml
+    interval: 3600
+    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+  sub_24:
+    type: http
+    url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt"
+    path: ./proxy_providers/sub_24.yml
+    interval: 3600
+    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+  sub_eternity:
+    type: http
+    url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt"
+    path: ./proxy_providers/sub_eternity.yml
+    interval: 3600
+    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+rule-providers:
+  ads:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://github.com/MetaCubeX/meta-rules-dat/raw/release/ads.mrs"
+    path: ./rule-sets/ads.mrs
+    interval: 86400
+  skrepysh-proxy:
+    type: http
+    behavior: classical
+    url: https://github.com/Skrepysh/mihomo-rulesets/raw/refs/heads/main/skrepysh-rulesets/skrepysh-proxy.yaml
+    interval: 86400
+  ru-bundle:
+    type: http
+    behavior: domain
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.yaml
+    interval: 86400
+  torrent-clients:
+    type: http
+    behavior: classical
+    url: 'https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/refs/heads/main/other/torrent-clients.yaml'
+    interval: 86400
+  torrent-trackers:
+    type: http
+    behavior: domain
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
+    interval: 86400
+
+rules:
+  # 1. Блокировка рекламы
+  - RULE-SET,ads,REJECT
+  
+  # 2. Торренты (DIRECT)
+  - RULE-SET,torrent-clients,DIRECT
+  - RULE-SET,torrent-trackers,DIRECT
+  
+  # 3. Приложения и исключения
+  - PROCESS-NAME,org.thoughtcrime.securesms,DIRECT
+  - PROCESS-NAME,com.badoo.mobile,PROXY
+  - PROCESS-NAME,com.bumble.app,PROXY
+  
+  # 4. Списки обхода блокировок
+  - RULE-SET,skrepysh-proxy,PROXY
+  - RULE-SET,ru-bundle,PROXY
+  
+  # 5. Финал
+  - MATCH,DIRECT
