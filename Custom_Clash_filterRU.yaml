@@ -111,6 +111,7 @@ rules:
   - PROCESS-NAME,org.thoughtcrime.securesms,DIRECT
   - PROCESS-NAME,com.badoo.mobile,PROXY
   - PROCESS-NAME,com.bumble.app,PROXY
+  - PROCESS-NAME,com.whatsapp,PROXY
   - RULE-SET,skrepysh-proxy,PROXY
   - RULE-SET,ru-bundle,PROXY
   - MATCH,DIRECT
