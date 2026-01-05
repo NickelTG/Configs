@@ -9,11 +9,40 @@ proxy-groups:
   - name: 🛠 ALL_SERVERS
     type: select
     use: &all_providers
-      - sweden_Soli; lithuania_Soli; estonia_Soli; switzerland_Soli; netherlands_Soli
-      - latvia_Force; austria_Force; finland_Force; poland_Force
-      - at_danial; be_danial; bg_danial; ch_danial; cz_danial; de_danial; dk_danial; es_danial
-      - fi_danial; fr_danial; gb_danial; gr_danial; hu_danial; ie_danial; it_danial; lu_danial
-      - lv_danial; md_danial; nl_danial; no_danial; pl_danial; pt_danial; ro_danial; rs_danial; se_danial
+      - sweden_Soli
+      - lithuania_Soli
+      - estonia_Soli
+      - switzerland_Soli
+      - netherlands_Soli
+      - latvia_Force
+      - austria_Force
+      - finland_Force
+      - poland_Force
+      - at_danial
+      - be_danial
+      - bg_danial
+      - ch_danial
+      - cz_danial
+      - de_danial
+      - dk_danial
+      - es_danial
+      - fi_danial
+      - fr_danial
+      - gb_danial
+      - gr_danial
+      - hu_danial
+      - ie_danial
+      - it_danial
+      - lu_danial
+      - lv_danial
+      - md_danial
+      - nl_danial
+      - no_danial
+      - pl_danial
+      - pt_danial
+      - ro_danial
+      - rs_danial
+      - se_danial
 
   - name: auto
     type: url-test
