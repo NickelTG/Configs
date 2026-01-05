@@ -1,6 +1,6 @@
 unified-delay: true        # Учитывает задержку рукопожатия, а не только пинг
-tcp-concurrent: true       # ВАЖНО: Разрешает многопоточную обработку TCP (ускоряет загрузку тяжелых сайтов)
-global-client-fingerprint: chrome # Маскировка под браузер (помогает от шейпинга)
+tcp-concurrent: true       # Разрешает многопоточную обработку TCP
+global-client-fingerprint: chrome # Маскировка под браузер
 keep-alive-interval: 1800  # Держит соединения живыми дольше
 
 proxy-groups:
@@ -8,13 +8,13 @@ proxy-groups:
   - name: PROXY
     type: select
     proxies:
-      - LOAD-BALANCE  # Теперь это основной вариант по умолчанию
+      - LOAD-BALANCE
       - LOAD-BALANCE_RR
       - auto
       - fallback
       - DIRECT
 
-  # Мультиплексирование: распределение нагрузки между всеми подписками
+  # Мультиплексирование: распределение нагрузки
   - name: LOAD-BALANCE
     type: load-balance
     strategy: consistent-hashing
@@ -30,15 +30,9 @@ proxy-groups:
   - name: LOAD-BALANCE_RR
     type: load-balance
     strategy: round-robin
-    use: &sub_list
-      - AvenCores_sub_24
-      - sub_hans_thomas
-      - sub_v2go_de
-      - sub_vless_universal
-      - sub_proxify_mixed
+    use: *sub_list
     url: http://cp.cloudflare.com/generate_204
     interval: 300
-    
 
   # Авто-выбор самого быстрого сервера
   - name: auto
@@ -56,50 +50,38 @@ proxy-groups:
     interval: 300
 
 proxy-providers:
-  AvenCores_sub_24:
+  # ОБЩИЙ БЛОК НАСТРОЕК (Якорь)
+  common-settings: &common_filter
     type: http
+    interval: 3600
+    filter: "geoip: !ru"  # Фильтрация серверов (исключаем РФ)
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  AvenCores_sub_24:
+    <<: *common_filter
     url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt"
     path: ./proxy_providers/sub_24.yml
-    interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
-    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
-    override: {udp: true}
 
   sub_hans_thomas:
-    type: http
+    <<: *common_filter
     url: "https://raw.githubusercontent.com/hans-thomas/v2ray-subscription/master/servers.txt"
     path: ./proxy_providers/hans_thomas.yml
-    interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
-    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
-    override: {udp: true}
 
   sub_v2go_de:
-    type: http
+    <<: *common_filter
     url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DE.txt"
     path: ./proxy_providers/v2go_de.yml
-    interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
-    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
-    override: {udp: true}
 
   sub_vless_universal:
-    type: http
+    <<: *common_filter
     url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt"
     path: ./proxy_providers/vless_universal.yml
-    interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
-    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
-    override: {udp: true}
 
   sub_proxify_mixed:
-    type: http
+    <<: *common_filter
     url: "https://raw.githubusercontent.com/Firmfox/proxify/main/v2ray_configs/mixed/subscription-1.txt"
     path: ./proxy_providers/proxify_mixed.yml
-    interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺)).*$"
-    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
-    override: {udp: true}
 
 rule-providers:
   skrepysh-proxy:
@@ -127,7 +109,6 @@ rules:
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
   - PROCESS-NAME,org.thoughtcrime.securesms,DIRECT
-  # Эти сервисы теперь используют LOAD-BALANCE через группу PROXY
   - PROCESS-NAME,com.badoo.mobile,PROXY
   - PROCESS-NAME,com.bumble.app,PROXY
   - PROCESS-NAME,com.whatsapp,PROXY
