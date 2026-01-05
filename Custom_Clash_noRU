@@ -1,0 +1,131 @@
+proxy-groups:
+  - name: auto
+    type: url-test
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    tolerance: 150
+    lazy: true
+    use:
+      - sweden
+      - latvia
+      - lithuania
+      - austria
+      - estonia
+      - finland
+      - poland
+      - switzerland
+      - netherlands
+
+  - name: PROXY
+    type: select
+    proxies:
+      - auto
+    use:
+      - sweden
+      - latvia
+      - lithuania
+      - austria
+      - estonia
+      - finland
+      - poland
+      - switzerland
+      - netherlands
+
+proxy-providers:
+  sweden:
+    type: http
+    url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Sweden.txt"
+    path: ./proxy_providers/sweden.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  latvia:
+    type: http
+    url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Latvia.txt"
+    path: ./proxy_providers/latvia.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  lithuania:
+    type: http
+    url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Lithuania.txt"
+    path: ./proxy_providers/lithuania.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  austria:
+    type: http
+    url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Austria.txt"
+    path: ./proxy_providers/austria.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  estonia:
+    type: http
+    url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Estonia.txt"
+    path: ./proxy_providers/estonia.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  finland:
+    type: http
+    url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Finland.txt"
+    path: ./proxy_providers/finland.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  poland:
+    type: http
+    url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Poland.txt"
+    path: ./proxy_providers/poland.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  switzerland:
+    type: http
+    url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Switzerland.txt"
+    path: ./proxy_providers/switzerland.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+  netherlands:
+    type: http
+    url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/The_Netherlands.txt"
+    path: ./proxy_providers/netherlands.yml
+    health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+    override: {udp: true}
+
+rule-providers:
+  skrepysh-proxy:
+    type: http
+    behavior: classical
+    url: https://github.com/Skrepysh/mihomo-rulesets/raw/refs/heads/main/skrepysh-rulesets/skrepysh-proxy.yaml
+    interval: 86400
+  ru-bundle:
+    type: http
+    behavior: domain
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.yaml
+    interval: 86400
+  torrent-clients:
+    type: http
+    behavior: classical
+    url: 'https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/refs/heads/main/other/torrent-clients.yaml'
+    interval: 86400
+  torrent-trackers:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
+    interval: 86400
+
+rules:
+  # Всякое
+  - PROCESS-NAME,com.badoo.mobile,PROXY
+  - PROCESS-NAME,com.bumble.app,PROXY
+  - PROCESS-NAME,org.thoughtcrime.securesms,DIRECT
+  # Ваши остальные правила
+  - RULE-SET,torrent-clients,DIRECT
+  - RULE-SET,torrent-trackers,DIRECT
+  - RULE-SET,skrepysh-proxy,PROXY
+  - RULE-SET,ru-bundle,PROXY
+  - MATCH,DIRECT
