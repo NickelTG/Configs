@@ -54,7 +54,7 @@ proxy-providers:
   common-settings: &common_filter
     type: http
     interval: 3600
-    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺|MSK|SPB|STRUGOV|STR97|🔥PORTAL)).*$"
+    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺|MSK|SPB|STRUGOV|STR97|🔥PORTAL|🔥Join)).*$"
     exclude-filter: "duplicates"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
