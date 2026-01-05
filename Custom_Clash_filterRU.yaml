@@ -1,15 +1,33 @@
+unified-delay: true        # Учитывает задержку рукопожатия, а не только пинг
+tcp-concurrent: true       # ВАЖНО: Разрешает многопоточную обработку TCP (ускоряет загрузку тяжелых сайтов)
+global-client-fingerprint: chrome # Маскировка под браузер (помогает от шейпинга)
+keep-alive-interval: 1800  # Держит соединения живыми дольше
+
 proxy-groups:
   # Основная группа выбора
   - name: PROXY
     type: select
     proxies:
       - LOAD-BALANCE  # Теперь это основной вариант по умолчанию
+      - LOAD-BALANCE_RR
       - auto
       - fallback
       - DIRECT
 
   # Мультиплексирование: распределение нагрузки между всеми подписками
   - name: LOAD-BALANCE
+    type: load-balance
+    strategy: consistent-hashing
+    use: &sub_list
+      - AvenCores_sub_24
+      - sub_hans_thomas
+      - sub_v2go_de
+      - sub_vless_universal
+      - sub_proxify_mixed
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+  
+  - name: LOAD-BALANCE_RR
     type: load-balance
     strategy: round-robin
     use: &sub_list
@@ -20,6 +38,7 @@ proxy-groups:
       - sub_proxify_mixed
     url: http://cp.cloudflare.com/generate_204
     interval: 300
+    
 
   # Авто-выбор самого быстрого сервера
   - name: auto
