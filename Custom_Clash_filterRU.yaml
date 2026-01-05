@@ -54,7 +54,7 @@ proxy-providers:
   common-settings: &common_filter
     type: http
     interval: 3600
-    filter: "geoip: !ru"  # Фильтрация серверов (исключаем РФ)
+    filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺|MSK|SPB|STRUGOV|STR97)).*$"
     health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
     override: {udp: true}
 
