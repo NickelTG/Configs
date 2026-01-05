@@ -11,9 +11,13 @@ tcp-concurrent: true
 sniffer:
   enable: true
   sniff:
-    TLS: {ports: [443, 8443]}
-    HTTP: {ports: [80, 8080-8888], proxy-override: true}
-  force-domain: ["+"]
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8888]
+      proxy-override: true
+  force-domain:
+    - "+"
 
 # DNS настройки
 dns:
@@ -39,7 +43,7 @@ proxy-groups:
       - auto
       - fallback
       - DIRECT
-    use: &sub_list
+    use:
       - sub_main
       - sub_6
       - sub_22
@@ -49,19 +53,31 @@ proxy-groups:
 
   - name: auto
     type: url-test
-    use: *sub_list
     url: http://cp.cloudflare.com/generate_204
     interval: 300
     tolerance: 50
     lazy: true
+    use:
+      - sub_main
+      - sub_6
+      - sub_22
+      - sub_23
+      - sub_24
+      - sub_eternity
 
   - name: fallback
     type: fallback
-    use: *sub_list
     url: http://cp.cloudflare.com/generate_204
     interval: 300
+    use:
+      - sub_main
+      - sub_6
+      - sub_22
+      - sub_23
+      - sub_24
+      - sub_eternity
 
-# Источники прокси (БЕЗ СОКРАЩЕНИЙ)
+# Источники прокси
 proxy-providers:
   sub_main:
     type: http
