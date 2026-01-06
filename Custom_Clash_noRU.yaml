@@ -130,24 +130,37 @@ rule-providers:
   ru-bundle:
     type: http
     behavior: domain
-    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.yaml
-    interval: 86400
-  torrent-clients:
-    type: http
-    behavior: classical
-    url: 'https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/refs/heads/main/other/torrent-clients.yaml'
-    interval: 86400
+    format: mrs
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs
+    path: ./ru-bundle/rule.mrs
+    interval: 86400  
   torrent-trackers:
     type: http
     behavior: domain
     format: mrs
     url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
+    path: ./rule-sets/torrent-trackers.mrs
+    interval: 86400
+  torrent-websites:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs
+    path: ./rule-sets/torrent-websites.mrs
+    interval: 86400
+  torrent-clients:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml
+    path: ./rule-sets/torrent-clients.yaml
     interval: 86400
 
 # --- ПРАВИЛА ---
 rules:
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
+  - RULE-SET,torrent-websites,PROXY
   - PROCESS-NAME,org.thoughtcrime.securesms,DIRECT
   - PROCESS-NAME,com.badoo.mobile,PROXY
   - PROCESS-NAME,com.bumble.app,PROXY
