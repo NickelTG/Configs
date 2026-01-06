@@ -110,7 +110,7 @@ common-settings: &common_settings
 
 proxy-providers:
   sweden_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Sweden.txt", path: ./pp/se_soli.yml }
-#  lithuania_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Lithuania.txt", path: ./pp/lt_soli.yml }
+  lithuania_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Lithuania.txt", path: ./pp/lt_soli.yml }
   estonia_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Estonia.txt", path: ./pp/ee_soli.yml }
   switzerland_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Switzerland.txt", path: ./pp/ch_soli.yml }
   netherlands_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/The_Netherlands.txt", path: ./pp/nl_soli.yml }
@@ -118,8 +118,8 @@ proxy-providers:
   austria_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Austria.txt", path: ./pp/at_force.yml }
   finland_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Finland.txt", path: ./pp/fi_force.yml }
   poland_Force: { <<: *common_settings, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-country/Poland.txt", path: ./pp/pl_force.yml }
-#  austria_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/AT.txt", path: ./pp/at_danial.yml }
-  belgium_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BE.txt", path: ./pp/be_danial.yml }
+  austria_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/AT.txt", path: ./pp/at_danial.yml }
+#  belgium_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BE.txt", path: ./pp/be_danial.yml }
 #  bulgaria_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BG.txt", path: ./pp/bg_danial.yml }
 #  switzerland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/CH.txt", path: ./pp/ch_danial.yml }
 #  czech_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/CZ.txt", path: ./pp/cz_danial.yml }
@@ -337,11 +337,12 @@ rules:
   - RULE-SET,torrent-websites,VPN
   
   # Всякое
-  - GEOSITE,badoo,VPN
+  
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
 #  - PROCESS-NAME,com.whatsapp,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
+  - PROCESS-NAME,app.bumpy.android,DIRECT
   - DOMAIN,lens-pa.googleapis.com,DIRECT    
   - GEOIP,facebook,VPN
   
@@ -353,11 +354,11 @@ rules:
   - RULE-SET,whatsapp-domain,WhatsApp
   
   # Заблокированные в РФ сайты
-  - RULE-SET,skrepysh-proxy,VPN
+#  - RULE-SET,skrepysh-proxy,VPN
   - RULE-SET,ru-bundle,VPN
   
   # Инструменты проверки IP    
-  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
+  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN,ident.me),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
   
   # Блокировка рекламы
 #  - RULE-SET,oisd_big,REJECT
