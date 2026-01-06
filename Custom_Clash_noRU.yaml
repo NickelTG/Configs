@@ -337,6 +337,7 @@ rules:
   - RULE-SET,torrent-websites,VPN
   
   # Всякое
+  - GEOSITE,badoo,VPN
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
 #  - PROCESS-NAME,com.whatsapp,VPN
