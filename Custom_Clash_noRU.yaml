@@ -26,7 +26,7 @@ dns:
   
   # Направляем российские домены на локальные DNS для скорости и корректных IP
   nameserver-policy:    
-    "rule-set:ru-bundle,geosite:private":
+    "rule-set:ru-bundle":
       - https://dns.yandex.ru/dns-query
       - tls://8.8.8.8      
       - 77.88.8.8    
@@ -376,8 +376,7 @@ rules:
   
   # Социальные сети и мессенджеры
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
-  - RULE-SET,whatsapp-domain,WhatsApp
-  - GEOIP,facebook,VPN
+  - RULE-SET,whatsapp-domain,WhatsApp  
   
   # Заблокированные в РФ сайты
 #  - RULE-SET,skrepysh-proxy,VPN
@@ -390,4 +389,5 @@ rules:
 #  - RULE-SET,oisd_big,REJECT
   
   # Весь остальной трафик - напрямую
+  - GEOIP,facebook,VPN
   - MATCH,DIRECT
