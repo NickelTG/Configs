@@ -78,50 +78,41 @@ proxy-groups:
     use: *all_providers
 
   - name: Telegram
-    type: select
-    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
-    include-all: true
+    type: select        
     proxies:
       - VPN
       - DIRECT
 
   - name: WhatsApp
-    type: select
-    icon: https://github.com/OMchik33/Whatsapp-icon/blob/master/icons/whatsapp_194x194.png?raw=true
+    type: select    
     proxies:
       - VPN
       - DIRECT
 
   - name: Steam
-    type: select
-    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Steam.png
+    type: select    
     include-all: true
     proxies:
       - DIRECT
       - VPN
 
   - name: YouTube
-    type: select
-    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/YouTube.png
-    include-all: true
+    type: select        
     proxies:
-      - DIRECT
       - VPN
+      - DIRECT      
 
   - name: Twitch
-    type: select
-    icon: https://img.icons8.com/3d-fluency/94/twitch.png
+    type: select    
     proxies:
       - DIRECT
       - VPN
 
   - name: AI & Разработка
-    type: select
-    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Dark/Bot.png
-    include-all: true
-    proxies:
-      - VPN
+    type: select    
+    proxies:      
       - DIRECT
+      - VPN
 
 # --- ПРОВАЙДЕРЫ ПРОКСИ ---
 common-settings: &common_settings
