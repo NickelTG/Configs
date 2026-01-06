@@ -203,21 +203,6 @@ rule-providers:
     path: ./rule-sets/youtube.mrs
     interval: 86400
     
-  discord_domains:
-    type: http
-    behavior: domain
-    format: mrs
-    url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/discord.mrs
-    path: ./rule-sets/discord_domains.mrs
-    interval: 86400
-    
-  discord_voiceips:
-    type: http
-    behavior: ipcidr
-    format: mrs
-    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/discord-voice-ip-list.mrs
-    path: ./rule-sets/discord_voiceips.mrs
-    interval: 86400
     
   oisd_big:
     type: http
@@ -358,9 +343,9 @@ rules:
 #  - PROCESS-NAME,com.whatsapp,VPN
 #  - PROCESS-NAME,com.facebook.lite,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
-  - DOMAIN,lens-pa.googleapis.com,DIRECT
-  - RULE-SET,facebook-domain,VPN
-  - GEOSITE,facebook,VPN
+  - DOMAIN,lens-pa.googleapis.com,DIRECT  
+  - DOMAIN-KEYWORD,facebook,VPN
+  - GEOIP,facebook,VPN
 #  - AND,((DOMAIN-KEYWORD,facebook),(GEOIP,fi)),VPN
   
   # AI и разработка (высший приоритет!)
