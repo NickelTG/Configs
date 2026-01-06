@@ -358,7 +358,9 @@ rules:
 #  - PROCESS-NAME,com.whatsapp,VPN
 #  - PROCESS-NAME,com.facebook.lite,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
-  - AND,((DOMAIN-KEYWORD,facebook),(GEOIP,fi)),VPN
+  - DOMAIN,lens-pa.googleapis.com,VPN
+  - DOMAIN,facebook,VPN
+#  - AND,((DOMAIN-KEYWORD,facebook),(GEOIP,fi)),VPN
   
   # AI и разработка (высший приоритет!)
 #  - RULE-SET,github-ai,AI & Разработка
