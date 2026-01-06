@@ -358,8 +358,8 @@ rules:
 #  - PROCESS-NAME,com.whatsapp,VPN
 #  - PROCESS-NAME,com.facebook.lite,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
-  - DOMAIN,lens-pa.googleapis.com,VPN
-  - DOMAIN,facebook,VPN
+  - DOMAIN,lens-pa.googleapis.com,DIRECT
+  - DOMAIN-KEYWORD,facebook,VPN
 #  - AND,((DOMAIN-KEYWORD,facebook),(GEOIP,fi)),VPN
   
   # AI и разработка (высший приоритет!)
@@ -371,10 +371,10 @@ rules:
   - OR,((RULE-SET,discord_domains),(RULE-SET,discord_voiceips)),VPN
   
   # Заблокированные в РФ сайты
+  - RULE-SET,skrepysh-proxy,VPN
   - RULE-SET,ru-bundle,VPN
   
-  # Инструменты проверки IP и GEO
-  - RULE-SET,skrepysh-proxy,VPN
+  # Инструменты проверки IP  
   - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io)),VPN
   
   # Блокировка рекламы
