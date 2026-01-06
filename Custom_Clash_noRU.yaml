@@ -141,9 +141,7 @@ rules:
   # Заблокированные в РФ сайты
   - RULE-SET,ru-bundle,VPN
   
-  # Инструменты проверки IP
-  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io)),VPN
-  
+ 
   # Блокировка рекламы
 #  - RULE-SET,oisd_big,REJECT
   
