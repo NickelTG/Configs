@@ -201,8 +201,7 @@ rule-providers:
     format: mrs
     url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs
     path: ./rule-sets/youtube.mrs
-    interval: 86400
-    
+    interval: 86400    
     
   oisd_big:
     type: http
@@ -341,12 +340,9 @@ rules:
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
 #  - PROCESS-NAME,com.whatsapp,VPN
-#  - PROCESS-NAME,com.facebook.lite,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
-  - DOMAIN,lens-pa.googleapis.com,DIRECT  
-  - DOMAIN-KEYWORD,facebook,VPN
+  - DOMAIN,lens-pa.googleapis.com,DIRECT    
   - GEOIP,facebook,VPN
-#  - AND,((DOMAIN-KEYWORD,facebook),(GEOIP,fi)),VPN
   
   # AI и разработка (высший приоритет!)
 #  - RULE-SET,github-ai,AI & Разработка
@@ -360,7 +356,7 @@ rules:
   - RULE-SET,ru-bundle,VPN
   
   # Инструменты проверки IP    
-  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
+  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
   
   # Блокировка рекламы
 #  - RULE-SET,oisd_big,REJECT
