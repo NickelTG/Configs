@@ -26,7 +26,7 @@ dns:
   
   # Направляем российские домены на локальные DNS для скорости и корректных IP
   nameserver-policy:    
-    "geoip:ru":
+    "geoip:ru && !rule-set:ru-bundle":
       - tls://common.dot.dns.yandex.net
       - tls://8.8.8.8      
       - 77.88.8.8    
