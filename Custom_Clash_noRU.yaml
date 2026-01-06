@@ -132,6 +132,7 @@ rules:
   - RULE-SET,torrent-trackers,DIRECT
     
   # Всякое
+  - AND,((DOMAIN-KEYWORD,google), (GEOIP,US)),DIRECT
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
 #  - PROCESS-NAME,com.whatsapp,VPN
