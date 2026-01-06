@@ -77,25 +77,6 @@ proxy-groups:
     strategy: round-robin
     use: *all_providers
 
-  - name: Telegram
-    type: select        
-    proxies:
-      - VPN
-      - DIRECT
-
-  - name: WhatsApp
-    type: select    
-    proxies:
-      - VPN
-      - DIRECT
-
-  - name: YouTube
-    type: select        
-    proxies:
-      - VPN
-      - DIRECT      
-
-
 # --- ПРОВАЙДЕРЫ ПРОКСИ ---
 common-settings: &common_settings
   type: http
@@ -118,26 +99,6 @@ proxy-providers:
 #  bulgaria_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/BG.txt", path: ./pp/bg_danial.yml }
 #  switzerland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/CH.txt", path: ./pp/ch_danial.yml }
 #  czech_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/CZ.txt", path: ./pp/cz_danial.yml }
-#  germany_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DE.txt", path: ./pp/de_danial.yml }
-#  denmark_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DK.txt", path: ./pp/dk_danial.yml }
-#  spain_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/ES.txt", path: ./pp/es_danial.yml }
-#  finland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/FI.txt", path: ./pp/fi_danial.yml }
-#  france_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/FR.txt", path: ./pp/fr_danial.yml }
-#  united_kingdom_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/GB.txt", path: ./pp/gb_danial.yml }
-#  greece_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/GR.txt", path: ./pp/gr_danial.yml }
-#  hungary_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/HU.txt", path: ./pp/hu_danial.yml }
-#  ireland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/IE.txt", path: ./pp/ie_danial.yml }
-#  italy_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/IT.txt", path: ./pp/it_danial.yml }
-#  luxembourg_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/LU.txt", path: ./pp/lu_danial.yml }
-#  latvia_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/LV.txt", path: ./pp/lv_danial.yml }
-#  moldova_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/MD.txt", path: ./pp/md_danial.yml }
-#  netherlands_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/NL.txt", path: ./pp/nl_danial.yml }
-#  norway_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/NO.txt", path: ./pp/no_danial.yml }
-#  poland_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/PL.txt", path: ./pp/pl_danial.yml }
-#  portugal_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/PT.txt", path: ./pp/pt_danial.yml }
-#  romania_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/RO.txt", path: ./pp/ro_danial.yml }
-#  serbia_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/RS.txt", path: ./pp/rs_danial.yml }
-#  sweden_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/SE.txt", path: ./pp/se_danial.yml }
 
 # --- ПРОВАЙДЕРЫ ПРАВИЛ ---
 rule-providers:
