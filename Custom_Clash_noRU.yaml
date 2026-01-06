@@ -25,8 +25,13 @@ dns:
     - https://dns.quad9.net/dns-query
   
   # Направляем российские домены на локальные DNS для скорости и корректных IP
-  nameserver-policy:    
-    "geoip:ru && !rule-set:ru-bundle":
+  nameserver-policy:
+    "rule-set:ru-bundle":
+      - tls://PhoneMihomo-95eee9.dns.nextdns.io
+      - tls://dns.google
+      - https://cloudflare-dns.com/dns-query
+      - https://dns.quad9.net/dns-query
+    "geoip:ru":
       - tls://common.dot.dns.yandex.net
       - tls://8.8.8.8      
       - 77.88.8.8    
