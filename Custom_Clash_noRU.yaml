@@ -17,8 +17,8 @@ dns:
     - 1.1.1.1
     - 77.88.8.8
 
-  # Основные серверы резолва
-  nameserver:
+  # Основные серверы резолва  
+  nameserver: &main_dns
     - tls://PhoneMihomo-95eee9.dns.nextdns.io
     - tls://dns.google
     - https://cloudflare-dns.com/dns-query
@@ -26,11 +26,7 @@ dns:
   
   # Направляем российские домены на локальные DNS для скорости и корректных IP
   nameserver-policy:
-    "rule-set:ru-bundle":
-      - tls://PhoneMihomo-95eee9.dns.nextdns.io
-      - tls://dns.google
-      - https://cloudflare-dns.com/dns-query
-      - https://dns.quad9.net/dns-query
+    "rule-set:ru-bundle": *main_dns
     "geoip:ru":
       - tls://common.dot.dns.yandex.net
       - tls://8.8.8.8      
@@ -92,7 +88,7 @@ proxy-groups:
   - name: FALLBACK
     type: fallback
     url: http://cp.cloudflare.com/generate_204
-    interval: 300
+    interval: 60
     use: *all_providers
 
   - name: BALANCE-HASH
