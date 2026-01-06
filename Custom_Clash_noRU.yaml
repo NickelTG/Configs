@@ -130,8 +130,7 @@ rules:
   # Торренты
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
-  - RULE-SET,torrent-websites,VPN
-  
+    
   # Всякое
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
