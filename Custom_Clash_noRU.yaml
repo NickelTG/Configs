@@ -354,14 +354,13 @@ rules:
   # Социальные сети и мессенджеры
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
   - RULE-SET,whatsapp-domain,WhatsApp
-  - OR,((RULE-SET,discord_domains),(RULE-SET,discord_voiceips)),VPN
   
   # Заблокированные в РФ сайты
   - RULE-SET,skrepysh-proxy,VPN
   - RULE-SET,ru-bundle,VPN
   
-  # Инструменты проверки IP  
-  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io)),VPN
+  # Инструменты проверки IP    
+  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
   
   # Блокировка рекламы
 #  - RULE-SET,oisd_big,REJECT
