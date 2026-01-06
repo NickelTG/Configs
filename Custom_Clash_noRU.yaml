@@ -18,8 +18,7 @@ dns:
     - 77.88.8.8
 
   # Основные серверы резолва  
-  nameserver: &main_dns
-    - tls://PhoneMihomo-95eee9.dns.nextdns.io
+  nameserver: &main_dns    
     - tls://dns.google
     - https://cloudflare-dns.com/dns-query
     - https://dns.quad9.net/dns-query
@@ -238,13 +237,7 @@ rule-providers:
     url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs
     path: ./oisd/big.mrs
     interval: 86400
-    
-  skrepysh-proxy:
-    type: http
-    behavior: classical
-    url: https://github.com/Skrepysh/mihomo-rulesets/raw/refs/heads/main/skrepysh-rulesets/skrepysh-proxy.yaml
-    interval: 86400
-    
+
   ru-bundle:
     type: http
     behavior: domain
@@ -381,7 +374,6 @@ rules:
   - RULE-SET,youtube,YouTube
   
   # Заблокированные в РФ сайты
-#  - RULE-SET,skrepysh-proxy,VPN
   - RULE-SET,ru-bundle,VPN
   
   # Инструменты проверки IP    
