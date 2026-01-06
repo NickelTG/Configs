@@ -358,9 +358,10 @@ rules:
 #  - PROCESS-NAME,com.whatsapp,VPN
   - PROCESS-NAME,com.facebook.lite,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
-  - AND,((DOMAIN-KEYWORD,google), (GEOIP,US)),DIRECT
+#  - AND,((DOMAIN-KEYWORD,google), (GEOIP,US)),DIRECT
   
   # AI и разработка (высший приоритет!)
+  - GEOSITE,google-gemini,DIRECT
 #  - RULE-SET,github-ai,AI & Разработка
   
   # Социальные сети и мессенджеры
@@ -372,7 +373,7 @@ rules:
   - RULE-SET,ru-bundle,VPN
   
   # Инструменты проверки IP и GEO
-  - RULE-SET,skrepysh-proxy,VPN
+#  - RULE-SET,skrepysh-proxy,VPN
   - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io)),VPN
   
   # Блокировка рекламы
