@@ -376,7 +376,8 @@ rules:
   
   # Социальные сети и мессенджеры
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
-  - RULE-SET,whatsapp-domain,WhatsApp  
+  - RULE-SET,whatsapp-domain,WhatsApp
+  - RULE-SET,youtube,YouTube
   
   # Заблокированные в РФ сайты
 #  - RULE-SET,skrepysh-proxy,VPN
