@@ -346,7 +346,7 @@ rule-providers:
 
 # --- ПРАВИЛА МАРШРУТИЗАЦИИ ---
 rules:
-
+  
   # Торренты
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
@@ -358,11 +358,25 @@ rules:
 #  - PROCESS-NAME,com.whatsapp,VPN
   - PROCESS-NAME,com.facebook.lite,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
+  - AND,((DOMAIN-KEYWORD,google), (GEOIP,US)),DIRECT
   
   # AI и разработка (высший приоритет!)
 #  - RULE-SET,github-ai,AI & Разработка
-
   
-  - RULE-SET,skrepysh-proxy,VPN
+  # Социальные сети и мессенджеры
+  - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
+  - RULE-SET,whatsapp-domain,WhatsApp
+  - OR,((RULE-SET,discord_domains),(RULE-SET,discord_voiceips)),VPN
+  
+  # Заблокированные в РФ сайты
   - RULE-SET,ru-bundle,VPN
+  
+  # Инструменты проверки IP и GEO
+  - RULE-SET,skrepysh-proxy,PROXY
+  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io)),VPN
+  
+  # Блокировка рекламы
+#  - RULE-SET,oisd_big,REJECT
+  
+  # Весь остальной трафик - напрямую
   - MATCH,DIRECT
