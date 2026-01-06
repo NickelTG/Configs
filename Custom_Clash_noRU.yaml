@@ -20,14 +20,14 @@ dns:
   # Основные серверы резолва
   nameserver:
     - tls://PhoneMihomo-95eee9.dns.nextdns.io
-    - https://dns.google/dns-query
+    - tls://dns.google
     - https://cloudflare-dns.com/dns-query
     - https://dns.quad9.net/dns-query
   
   # Направляем российские домены на локальные DNS для скорости и корректных IP
   nameserver-policy:    
-    "rule-set:ru-bundle":
-      - https://dns.yandex.ru/dns-query
+    "geoip:ru":
+      - tls://common.dot.dns.yandex.net
       - tls://8.8.8.8      
       - 77.88.8.8    
 
@@ -369,14 +369,15 @@ rules:
   - PROCESS-NAME,com.bumble.app,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
   - PROCESS-NAME,app.bumpy.android,DIRECT
-  - DOMAIN,lens-pa.googleapis.com,DIRECT 
+  - DOMAIN,lens-pa.googleapis.com,DIRECT
+  - AND,((GEOIP,facebook),(NOT,((PROCESS-NAME,com.whatsapp)))),VPN
   
   # AI и разработка (высший приоритет!)
 #  - RULE-SET,github-ai,AI & Разработка
   
-  # Социальные сети и мессенджеры
+  # Социальные сети и мессенджеры и YouTube
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
-  - RULE-SET,whatsapp-domain,WhatsApp
+  - RULE-SET,whatsapp-domain,WhatsApp  
   - RULE-SET,youtube,YouTube
   
   # Заблокированные в РФ сайты
@@ -389,6 +390,5 @@ rules:
   # Блокировка рекламы
 #  - RULE-SET,oisd_big,REJECT
   
-  # Весь остальной трафик - напрямую
-  - GEOIP,facebook,VPN
+  # Весь остальной трафик - напрямую  
   - MATCH,DIRECT
