@@ -227,6 +227,12 @@ rule-providers:
     path: ./oisd/big.mrs
     interval: 86400
     
+  skrepysh-proxy:
+    type: http
+    behavior: classical
+    url: https://github.com/Skrepysh/mihomo-rulesets/raw/refs/heads/main/skrepysh-rulesets/skrepysh-proxy.yaml
+    interval: 86400
+    
   ru-bundle:
     type: http
     behavior: domain
