@@ -4,6 +4,33 @@ tcp-concurrent: true
 global-client-fingerprint: chrome
 keep-alive-interval: 1800
 
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.67.1/16
+  listen: 0.0.0.0:1053
+  
+  # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 77.88.8.8
+
+  # Основные серверы резолва
+  nameserver:
+    - tls://PhoneMihomo-95eee9.dns.nextdns.io
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.quad9.net/dns-query
+  
+  # Направляем российские домены на локальные DNS для скорости и корректных IP
+  nameserver-policy:
+    "geosite:ru,private":
+      - https://dns.yandex.ru/dns-query
+      - tls://8.8.8.8      
+      - 77.88.8.8    
+
 # --- ГРУППЫ ПРОКСИ ---
 proxy-groups:
   - name: VPN
