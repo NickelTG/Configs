@@ -372,7 +372,7 @@ rules:
   - RULE-SET,ru-bundle,VPN
   
   # Инструменты проверки IP и GEO
-  - RULE-SET,skrepysh-proxy,PROXY
+  - RULE-SET,skrepysh-proxy,VPN
   - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io)),VPN
   
   # Блокировка рекламы
