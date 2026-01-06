@@ -126,25 +126,13 @@ rule-providers:
 
 # --- ПРАВИЛА МАРШРУТИЗАЦИИ ---
 rules:
-  
-  # Торренты
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
-    
-  # Всякое
-  - AND,((DOMAIN-KEYWORD,google), (GEOIP,US)),DIRECT
+  - PROCESS-NAME,org.thoughtcrime.securesms,DIRECT
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
-#  - PROCESS-NAME,com.whatsapp,VPN
-  - PROCESS-NAME,com.facebook.lite,VPN
+  - PROCESS-NAME,com.whatsapp,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
-  
-  # Заблокированные в РФ сайты
+  - RULE-SET,skrepysh-proxy,VPN
   - RULE-SET,ru-bundle,VPN
-  
- 
-  # Блокировка рекламы
-#  - RULE-SET,oisd_big,REJECT
-  
-  # Весь остальной трафик - напрямую
   - MATCH,DIRECT
