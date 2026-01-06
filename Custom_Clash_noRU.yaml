@@ -23,7 +23,7 @@ proxy-groups:
     lazy: true
     use: &all_providers
       - sweden_Soli
-#     - lithuania_Soli
+      - lithuania_Soli
       - estonia_Soli
       - switzerland_Soli
       - netherlands_Soli
@@ -31,8 +31,8 @@ proxy-groups:
       - austria_Force
       - finland_Force
       - poland_Force
-#      - austria_danial
-      - belgium_danial
+      - austria_danial
+#      - belgium_danial
 #      - bulgaria_danial
 #      - switzerland_danial
 #      - czech_danial
