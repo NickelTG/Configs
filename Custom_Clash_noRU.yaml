@@ -115,7 +115,7 @@ proxy-groups:
       - VPN
       - DIRECT
 
-  - name: WhatsApp
+  - name: Meta
     type: select    
     proxies:
       - VPN
@@ -374,15 +374,14 @@ rules:
   - PROCESS-NAME,com.bumble.app,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
   - PROCESS-NAME,app.bumpy.android,DIRECT
-  - DOMAIN,lens-pa.googleapis.com,DIRECT
-  - AND,((GEOIP,facebook),(NOT,((PROCESS-NAME,com.whatsapp)))),VPN
+  - DOMAIN,lens-pa.googleapis.com,DIRECT  
   
   # AI и разработка (высший приоритет!)
 #  - RULE-SET,github-ai,AI & Разработка
   
   # Социальные сети и мессенджеры и YouTube
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
-  - RULE-SET,whatsapp-domain,WhatsApp  
+  - OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook)),Meta
   - RULE-SET,youtube,YouTube
   
   # Заблокированные в РФ сайты
