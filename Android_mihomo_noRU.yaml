@@ -29,7 +29,10 @@ dns:
     "geoip:ru":
       - tls://common.dot.dns.yandex.net
       - tls://8.8.8.8      
-      - 77.88.8.8    
+      - 77.88.8.8
+      "rule-set:github-ai":
+      - tls://dot.dns.geohide.ru
+      - tls://dns.astracat.ru
 
 # --- ГРУППЫ ПРОКСИ ---
 proxy-groups:
@@ -125,9 +128,9 @@ proxy-groups:
 
   - name: AI&DEV
     type: select    
-    proxies:
-     - VPN
+    proxies:     
      - DIRECT
+     - VPN
       
 
 # --- ПРОВАЙДЕРЫ ПРОКСИ ---
@@ -289,7 +292,7 @@ rule-providers:
        - DOMAIN-KEYWORD,openai
        - DOMAIN-KEYWORD,chatgpt
       
-       # Google AI (Gemini & Bard)
+       # Google AI (Gemini, Bard, NotebookLM & Labs)
        - DOMAIN-SUFFIX,gemini.google.com
        - DOMAIN-SUFFIX,bard.google.com
        - DOMAIN-SUFFIX,ai.google.dev
@@ -297,6 +300,11 @@ rule-providers:
        - DOMAIN-SUFFIX,makersuite.google.com
        - DOMAIN-SUFFIX,generativeai.google
        - DOMAIN-SUFFIX,aistudio.google.com
+       - DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
+       - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+       - DOMAIN-SUFFIX,notebooklm.google
+       - DOMAIN-SUFFIX,notebooklm.google.com
+       - DOMAIN-SUFFIX,labs.google
        - DOMAIN-KEYWORD,gemini
        - DOMAIN-KEYWORD,bard
       
