@@ -393,7 +393,7 @@ rules:
   
   # Заблокированные в РФ сайты
   - RULE-SET,ru-bundle,VPN
-  - GEOIP,ru-blocked,VPN
+  - GEOIP,geoip-ru-only:ru-blocked,VPN
   
   # Инструменты проверки IP    
   - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN,ident.me),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
