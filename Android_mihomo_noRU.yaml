@@ -4,15 +4,6 @@ tcp-concurrent: true
 global-client-fingerprint: chrome
 keep-alive-interval: 1800
 
-sniffing:
-  enable: true
-  sniff:
-    TLS:
-      ports: [443, 8443]
-    HTTP:
-      ports: [80, 8080-8888]
-      override-destination: true
-
 dns:
   enable: true
   ipv6: false
@@ -21,9 +12,6 @@ dns:
   listen: 0.0.0.0:1053
   fake-ip-filter:
     - "rule-set:github-ai"
-    - "*.google.com"
-    - "openai.com"
-    - "chatgpt.com"
   
   # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
   default-nameserver:
@@ -39,9 +27,7 @@ dns:
   
   # Направляем российские домены на локальные DNS для скорости и корректных IP
   nameserver-policy:
-    "rule-set:github-ai":
-      - 95.182.120.241
-      - 185.87.51.182
+    "rule-set:github-ai":      
       - tls://dns.geohide.ru
       - tls://dns.astracat.ru
     "rule-set:ru-bundle": *main_dns
