@@ -249,7 +249,7 @@ rule-providers:
     interval: 86400
 
   AI и разработка (полный набор доменов)
-   github-ai:
+  github-ai:
      type: inline
      behavior: classical    
      payload:
@@ -359,8 +359,7 @@ rules:
   - RULE-SET,torrent-trackers,DIRECT
   - RULE-SET,torrent-websites,VPN
   
-  # Всякое
-  
+  # Всякое  
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
   - PROCESS-NAME,ru.fourpda.client,VPN
