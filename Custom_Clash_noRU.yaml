@@ -119,10 +119,11 @@ proxy-groups:
   - name: YouTube
     type: select        
     proxies:
+      - BALANCE-RR
       - VPN
       - DIRECT      
 
-  # - name: AI & Разработка
+  # - name: AI&DEV
     # type: select    
     # proxies:      
       # - DIRECT
@@ -366,11 +367,11 @@ rules:
   - DOMAIN,lens-pa.googleapis.com,DIRECT  
   
   # AI и разработка (высший приоритет!)
-#  - RULE-SET,github-ai,AI & Разработка
+#  - RULE-SET,github-ai,AI&DEV
   
   # Социальные сети и мессенджеры и YouTube
-  - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
-  - OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook)),Meta
+  - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram  
+  - OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),Meta
   - RULE-SET,youtube,YouTube
   
   # Заблокированные в РФ сайты
