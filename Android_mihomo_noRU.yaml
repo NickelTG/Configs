@@ -19,6 +19,11 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.67.1/16
   listen: 0.0.0.0:1053
+  fake-ip-filter:
+    - "rule-set:github-ai"
+    - "*.google.com"
+    - "openai.com"
+    - "chatgpt.com"
   
   # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
   default-nameserver:
@@ -34,14 +39,16 @@ dns:
   
   # Направляем российские домены на локальные DNS для скорости и корректных IP
   nameserver-policy:
+    "rule-set:github-ai":
+      - 95.182.120.241
+      - 185.87.51.182
+      - tls://dns.geohide.ru
+      - tls://dns.astracat.ru
     "rule-set:ru-bundle": *main_dns
     "geoip:ru":
       - tls://common.dot.dns.yandex.net
       - tls://8.8.8.8      
       - 77.88.8.8
-    "rule-set:github-ai":
-      - tls://dns.geohide.ru
-      - tls://dns.astracat.ru
 
 # --- ГРУППЫ ПРОКСИ ---
 proxy-groups:
