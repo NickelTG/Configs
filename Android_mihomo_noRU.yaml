@@ -4,6 +4,15 @@ tcp-concurrent: true
 global-client-fingerprint: chrome
 keep-alive-interval: 1800
 
+sniffing:
+  enable: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8888]
+      override-destination: true
+
 dns:
   enable: true
   ipv6: false
