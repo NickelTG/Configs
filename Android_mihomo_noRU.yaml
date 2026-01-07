@@ -248,7 +248,7 @@ rule-providers:
     path: ./ru-bundle/rule.mrs
     interval: 86400
 
-  AI и разработка (полный набор доменов)
+  # AI и разработка (полный набор доменов)
   github-ai:
      type: inline
      behavior: classical    
