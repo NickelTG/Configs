@@ -179,12 +179,6 @@ proxy-providers:
 #  sweden_danial: { <<: *common_settings, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/SE.txt", path: ./pp/se_danial.yml }
 
 # --- ПРОВАЙДЕРЫ ПРАВИЛ ---
-geodata-mode: true
-geodata-loader: memconservative
-
-geox-url:
-  geoip: "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip-ru-only.dat"
-
 rule-providers:
 
   torrent-trackers:
@@ -392,8 +386,7 @@ rules:
   - RULE-SET,youtube,YouTube
   
   # Заблокированные в РФ сайты
-  - RULE-SET,ru-bundle,VPN
-  - GEOIP,geoip-ru-only:ru-blocked,VPN
+  - RULE-SET,ru-bundle,VPN  
   
   # Инструменты проверки IP    
   - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN,ident.me),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
