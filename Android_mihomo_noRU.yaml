@@ -30,7 +30,7 @@ dns:
       - tls://common.dot.dns.yandex.net
       - tls://8.8.8.8      
       - 77.88.8.8
-      "rule-set:github-ai":
+    "rule-set:github-ai":
       - tls://dot.dns.geohide.ru
       - tls://dns.astracat.ru
 
