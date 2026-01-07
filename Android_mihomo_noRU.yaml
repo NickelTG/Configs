@@ -133,7 +133,7 @@ proxy-groups:
 common-settings: &common_settings
   type: http
   health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
-  override: {udp: true}
+  override: {udp: true,tfo: true, mptcp: true}
   interval: 43200
 
 proxy-providers:
