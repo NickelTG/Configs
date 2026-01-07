@@ -324,9 +324,9 @@ rule-providers:
        - DOMAIN-KEYWORD,grok
       
        # Perplexity
-#       - DOMAIN-SUFFIX,perplexity.ai
-#       - DOMAIN-SUFFIX,pplx.ai
-#       - DOMAIN-KEYWORD,perplexity
+       - DOMAIN-SUFFIX,perplexity.ai
+       - DOMAIN-SUFFIX,pplx.ai
+       - DOMAIN-KEYWORD,perplexity
       
        # Hugging Face
        - DOMAIN-SUFFIX,huggingface.co
@@ -369,10 +369,11 @@ rules:
   - RULE-SET,torrent-trackers,DIRECT
   - RULE-SET,torrent-websites,VPN
   
-  # Всякое  
+  # Всякое
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
-  - PROCESS-NAME,ru.fourpda.client,VPN
+  - DOMAIN-SUFFIX,4pda.to,VPN
+  - DOMAIN-SUFFIX,4pda.ru,VPN
   - PROCESS-NAME,app.bumpy.android,DIRECT
   - DOMAIN,lens-pa.googleapis.com,DIRECT  
   
