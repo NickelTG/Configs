@@ -40,16 +40,16 @@ dns:
 proxy-groups:
   - name: VPN
     type: select
-    proxies:      
+    proxies:
+      - AUTO
       - BALANCE-HASH    
-      - BALANCE-RR
-      - auto
+      - BALANCE-RR      
       - FALLBACK
       - DIRECT
 
-  - name: auto
+  - name: AUTO
     type: url-test
-    url: http://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 150
     lazy: true
@@ -91,20 +91,21 @@ proxy-groups:
 
   - name: FALLBACK
     type: fallback
-    url: http://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 60
+    lazy: false
     use: *all_providers
 
   - name: BALANCE-HASH
     type: load-balance
-    url: http://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     strategy: consistent-hashing
     use: *all_providers
 
   - name: BALANCE-RR
     type: load-balance
-    url: http://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     strategy: round-robin
     use: *all_providers
@@ -133,12 +134,11 @@ proxy-groups:
     proxies:     
      - DIRECT
      - VPN
-      
 
 # --- ПРОВАЙДЕРЫ ПРОКСИ ---
 common-settings: &common_settings
   type: http
-  health-check: {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 300}
+  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
   override: {udp: true,tfo: true, mptcp: true}
   interval: 43200
 
