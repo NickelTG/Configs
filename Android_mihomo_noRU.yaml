@@ -376,6 +376,7 @@ rules:
   - DOMAIN-SUFFIX,4pda.ru,VPN
   - PROCESS-NAME,app.bumpy.android,DIRECT
   - DOMAIN,lens-pa.googleapis.com,DIRECT  
+  - DOMAIN-SUFFIX,flibusta.site,VPN
   
   # AI и разработка (высший приоритет!)
   - RULE-SET,github-ai,AI&DEV
