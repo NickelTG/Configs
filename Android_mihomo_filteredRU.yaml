@@ -46,7 +46,7 @@ proxy-groups:
       - FALLBACK
       - DIRECT
 
-- name: AUTO
+  - name: AUTO
     type: url-test
     url: https://www.gstatic.com/generate_204
     interval: 300
