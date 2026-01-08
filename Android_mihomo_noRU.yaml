@@ -308,16 +308,7 @@ rules:
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
   - RULE-SET,torrent-websites,VPN
-  
-  # Всякое
-  - PROCESS-NAME,com.badoo.mobile,VPN
-  - PROCESS-NAME,com.bumble.app,VPN
-  - DOMAIN-SUFFIX,4pda.to,VPN
-  - DOMAIN-SUFFIX,4pda.ru,VPN
-  - PROCESS-NAME,app.bumpy.android,DIRECT
-  - DOMAIN,lens-pa.googleapis.com,DIRECT  
-  - DOMAIN-SUFFIX,flibusta.site,VPN
-  
+      
   # AI и разработка (высший приоритет!)
   # - RULE-SET,github-ai,AI&DEV
   - OR,((RULE-SET,ai-bundle),(RULE-SET,gemini),(RULE-SET,openai)),AI&DEV  
@@ -326,6 +317,16 @@ rules:
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram  
   - OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),Meta
   - RULE-SET,youtube,YouTube
+  
+  # Всякое
+  - PROCESS-NAME,com.badoo.mobile,VPN
+  - PROCESS-NAME,com.bumble.app,VPN  
+  - PROCESS-NAME,app.bumpy.android,DIRECT
+  - DOMAIN,lens-pa.googleapis.com,DIRECT  
+  - DOMAIN-SUFFIX,flibusta.site,VPN
+  - OR,((DOMAIN-SUFFIX,4pda.to),(DOMAIN-SUFFIX,4pda.ru),(PROCESS-NAME,ru.fourpda.client)),VPN
+  - DOMAIN-SUFFIX,habr.com,VPN
+  - GEOSITE,google,VPN
   
   # Заблокированные в РФ сайты
   - RULE-SET,ru-bundle,VPN  
