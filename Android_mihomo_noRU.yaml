@@ -315,7 +315,7 @@ rules:
   
   # Социальные сети и мессенджеры и YouTube
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram  
-  - OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),Meta
+  - OR,((RULE-SET,whatsapp-domain),(GEOSITE,facebook),(PROCESS-NAME,com.whatsapp)),Meta
   - RULE-SET,youtube,YouTube
   
   # Всякое
@@ -326,7 +326,7 @@ rules:
   - DOMAIN-SUFFIX,flibusta.site,VPN
   - OR,((DOMAIN-SUFFIX,4pda.to),(DOMAIN-SUFFIX,4pda.ru),(PROCESS-NAME,ru.fourpda.client)),VPN
   - DOMAIN-SUFFIX,habr.com,VPN
-  - GEOSITE,google,VPN
+  - GEOSITE,google,DIRECT
   
   # Заблокированные в РФ сайты
   - RULE-SET,ru-bundle,VPN  
