@@ -11,7 +11,7 @@ dns:
   fake-ip-range: 198.18.67.1/16
   listen: 0.0.0.0:1053
   fake-ip-filter:
-    - "rule-set:github-ai"
+    - "rule-set:openai,gemini,ai-bundle"
   
   # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
   default-nameserver:
@@ -26,8 +26,8 @@ dns:
     - https://dns.quad9.net/dns-query
   
   # Направляем российские домены на локальные DNS для скорости и корректных IP
-  nameserver-policy:
-    "rule-set:github-ai":      
+  nameserver-policy:    
+    "rule-set:openai,gemini,ai-bundle":
       - tls://dns.geohide.ru
       - tls://dns.astracat.ru
     "rule-set:ru-bundle": *main_dns
@@ -180,186 +180,126 @@ proxy-providers:
 
 # --- ПРОВАЙДЕРЫ ПРАВИЛ ---
 rule-providers:
-
-  torrent-trackers:
-    type: http
-    behavior: domain
-    format: mrs
-    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs
-    path: ./rule-sets/torrent-trackers.mrs
-    interval: 86400
-  
-  torrent-websites:
-    type: http
-    behavior: domain
-    format: mrs
-    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs
-    path: ./rule-sets/torrent-websites.mrs
-    interval: 86400
-  
-  torrent-clients:
-    type: http
-    behavior: classical
-    format: yaml
-    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml
-    path: ./rule-sets/torrent-clients.yaml
-    interval: 86400
-
-  telegram-domain:
-    type: http
-    behavior: domain
-    format: mrs
-    url: https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs
-    path: ./rule-sets/telegram-domain.mrs
-    interval: 86400
-    
-  telegram-ips:
-    type: http
-    behavior: ipcidr
-    format: yaml
-    url: https://raw.githubusercontent.com/OMchik33/custom-rules/refs/heads/main/mihomo/telegram-ips.yaml
-    path: ./rule-sets/telegram-ips.yaml
-    interval: 86400
-    
-  whatsapp-domain:
-    type: http
-    behavior: domain
-    format: mrs
-    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs
-    path: ./rule-sets/whatsapp-domain.mrs
-    interval: 86400
-    
-  youtube:
-    type: http
-    behavior: domain
-    format: mrs
-    url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs
-    path: ./rule-sets/youtube.mrs
-    interval: 86400    
-    
-  oisd_big:
-    type: http
-    behavior: domain
-    format: mrs
-    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs
-    path: ./oisd/big.mrs
-    interval: 86400
-
-  ru-bundle:
-    type: http
-    behavior: domain
-    format: mrs
-    url: https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs
-    path: ./ru-bundle/rule.mrs
-    interval: 86400
+  torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
+  torrent-websites: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs", path: ./rule-sets/torrent-websites.mrs}
+  torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}
+  telegram-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs", path: ./rule-sets/telegram-domain.mrs}
+  telegram-ips: {type: http, behavior: ipcidr, format: yaml, interval: 86400, url: "https://raw.githubusercontent.com/OMchik33/custom-rules/refs/heads/main/mihomo/telegram-ips.yaml", path: ./rule-sets/telegram-ips.yaml}
+  whatsapp-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs", path: ./rule-sets/whatsapp-domain.mrs}
+  openai: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/openai.mrs", path: ./provider/rule-set/openai.mrs}
+  gemini: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/google-gemini.mrs", path: ./provider/rule-set/gemini.mrs}
+  ai-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/category-ai-!cn.mrs", path: ./provider/rule-set/ai-bundle.mrs}
+  youtube: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs", path: ./rule-sets/youtube.mrs}
+  oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
+  ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
 
   # AI и разработка (полный набор доменов)
-  github-ai:
-     type: inline
-     behavior: classical    
-     payload:
-       # GitHub & VS Code
-       - DOMAIN-SUFFIX,githubcopilot.com
-       - DOMAIN-SUFFIX,github.dev
-       - DOMAIN-SUFFIX,github.com
-       - DOMAIN-SUFFIX,githubusercontent.com
-       - DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com
-       - DOMAIN-SUFFIX,telemetry.individual.githubcopilot.com
-       - DOMAIN-SUFFIX,main.vscode-cdn.net
-       - DOMAIN-SUFFIX,api.github.com
-       - DOMAIN-SUFFIX,vscode.dev
-       - DOMAIN-SUFFIX,api.individual.githubcopilot.com
-       - DOMAIN-SUFFIX,marketplace.visualstudio.com
-       - DOMAIN-SUFFIX,vscode-cdn.net
-       - DOMAIN-SUFFIX,vscode.microsoft.com
-       - DOMAIN-SUFFIX,code.visualstudio.com
-       - DOMAIN-KEYWORD,copilot
-       - DOMAIN-KEYWORD,vscode
-       - DOMAIN-KEYWORD,github
+  # github-ai:
+     # type: inline
+     # behavior: classical    
+     # payload:
+       # # GitHub & VS Code
+       # - DOMAIN-SUFFIX,githubcopilot.com
+       # - DOMAIN-SUFFIX,github.dev
+       # - DOMAIN-SUFFIX,github.com
+       # - DOMAIN-SUFFIX,githubusercontent.com
+       # - DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com
+       # - DOMAIN-SUFFIX,telemetry.individual.githubcopilot.com
+       # - DOMAIN-SUFFIX,main.vscode-cdn.net
+       # - DOMAIN-SUFFIX,api.github.com
+       # - DOMAIN-SUFFIX,vscode.dev
+       # - DOMAIN-SUFFIX,api.individual.githubcopilot.com
+       # - DOMAIN-SUFFIX,marketplace.visualstudio.com
+       # - DOMAIN-SUFFIX,vscode-cdn.net
+       # - DOMAIN-SUFFIX,vscode.microsoft.com
+       # - DOMAIN-SUFFIX,code.visualstudio.com
+       # - DOMAIN-KEYWORD,copilot
+       # - DOMAIN-KEYWORD,vscode
+       # - DOMAIN-KEYWORD,github
       
-       # Microsoft AI
-       - DOMAIN-SUFFIX,copilot.microsoft.com
-       - DOMAIN-SUFFIX,bing.com
-       - DOMAIN-SUFFIX,microsoftcopilot.app
-       - DOMAIN-SUFFIX,sydney.bing.com
-       - DOMAIN-SUFFIX,edgeservices.bing.com
-       - DOMAIN-SUFFIX,copilot.live.com
+       # # Microsoft AI
+       # - DOMAIN-SUFFIX,copilot.microsoft.com
+       # - DOMAIN-SUFFIX,bing.com
+       # - DOMAIN-SUFFIX,microsoftcopilot.app
+       # - DOMAIN-SUFFIX,sydney.bing.com
+       # - DOMAIN-SUFFIX,edgeservices.bing.com
+       # - DOMAIN-SUFFIX,copilot.live.com
       
-       # OpenAI
-       - DOMAIN-SUFFIX,openai.com
-       - DOMAIN-SUFFIX,api.openai.com
-       - DOMAIN-SUFFIX,chat.openai.com
-       - DOMAIN-SUFFIX,chatgpt.com
-       - DOMAIN-SUFFIX,platform.openai.com
-       - DOMAIN-KEYWORD,openai
-       - DOMAIN-KEYWORD,chatgpt
+       # # OpenAI
+       # - DOMAIN-SUFFIX,openai.com
+       # - DOMAIN-SUFFIX,api.openai.com
+       # - DOMAIN-SUFFIX,chat.openai.com
+       # - DOMAIN-SUFFIX,chatgpt.com
+       # - DOMAIN-SUFFIX,platform.openai.com
+       # - DOMAIN-KEYWORD,openai
+       # - DOMAIN-KEYWORD,chatgpt
       
-       # Google AI (Gemini, Bard, NotebookLM & Labs)
-       - DOMAIN-SUFFIX,gemini.google.com
-       - DOMAIN-SUFFIX,bard.google.com
-       - DOMAIN-SUFFIX,ai.google.dev
-       - DOMAIN-SUFFIX,ai.google.com
-       - DOMAIN-SUFFIX,makersuite.google.com
-       - DOMAIN-SUFFIX,generativeai.google
-       - DOMAIN-SUFFIX,aistudio.google.com
-       - DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
-       - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
-       - DOMAIN-SUFFIX,notebooklm.google
-       - DOMAIN-SUFFIX,notebooklm.google.com
-       - DOMAIN-SUFFIX,labs.google
-       - DOMAIN-KEYWORD,gemini
-       - DOMAIN-KEYWORD,bard
+       # # Google AI (Gemini, Bard, NotebookLM & Labs)
+       # - DOMAIN-SUFFIX,gemini.google.com
+       # - DOMAIN-SUFFIX,bard.google.com
+       # - DOMAIN-SUFFIX,ai.google.dev
+       # - DOMAIN-SUFFIX,ai.google.com
+       # - DOMAIN-SUFFIX,makersuite.google.com
+       # - DOMAIN-SUFFIX,generativeai.google
+       # - DOMAIN-SUFFIX,aistudio.google.com
+       # - DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
+       # - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+       # - DOMAIN-SUFFIX,notebooklm.google
+       # - DOMAIN-SUFFIX,notebooklm.google.com
+       # - DOMAIN-SUFFIX,labs.google
+       # - DOMAIN-KEYWORD,gemini
+       # - DOMAIN-KEYWORD,bard
       
-       # Anthropic Claude
-       - DOMAIN-SUFFIX,claude.ai
-       - DOMAIN-SUFFIX,anthropic.com
-       - DOMAIN-SUFFIX,console.anthropic.com
-       - DOMAIN-KEYWORD,claude
-       - DOMAIN-KEYWORD,anthropic
+       # # Anthropic Claude
+       # - DOMAIN-SUFFIX,claude.ai
+       # - DOMAIN-SUFFIX,anthropic.com
+       # - DOMAIN-SUFFIX,console.anthropic.com
+       # - DOMAIN-KEYWORD,claude
+       # - DOMAIN-KEYWORD,anthropic
       
-       # xAI (Grok)
-       - DOMAIN-SUFFIX,x.ai
-       - DOMAIN-SUFFIX,grok.x.ai
-       - DOMAIN-SUFFIX,api.x.ai
-       - DOMAIN-KEYWORD,grok
+       # # xAI (Grok)
+       # - DOMAIN-SUFFIX,x.ai
+       # - DOMAIN-SUFFIX,grok.x.ai
+       # - DOMAIN-SUFFIX,api.x.ai
+       # - DOMAIN-KEYWORD,grok
       
-       # Perplexity
-       - DOMAIN-SUFFIX,perplexity.ai
-       - DOMAIN-SUFFIX,pplx.ai
-       - DOMAIN-KEYWORD,perplexity
+       # # Perplexity
+       # - DOMAIN-SUFFIX,perplexity.ai
+       # - DOMAIN-SUFFIX,pplx.ai
+       # - DOMAIN-KEYWORD,perplexity
       
-       # Hugging Face
-       - DOMAIN-SUFFIX,huggingface.co
-       - DOMAIN-SUFFIX,hf.co
-       - DOMAIN-SUFFIX,huggingface.com
-       - DOMAIN-KEYWORD,huggingface
+       # # Hugging Face
+       # - DOMAIN-SUFFIX,huggingface.co
+       # - DOMAIN-SUFFIX,hf.co
+       # - DOMAIN-SUFFIX,huggingface.com
+       # - DOMAIN-KEYWORD,huggingface
       
-       # Midjourney & Creative AI
-       - DOMAIN-SUFFIX,midjourney.com
-       - DOMAIN-SUFFIX,cdn.midjourney.com
-       - DOMAIN-KEYWORD,midjourney
-       - DOMAIN-SUFFIX,stability.ai
-       - DOMAIN-SUFFIX,stablediffusionweb.com
-       - DOMAIN-SUFFIX,dreamstudio.ai
-       - DOMAIN-SUFFIX,runwayml.com
-       - DOMAIN-SUFFIX,runway.ml
+       # # Midjourney & Creative AI
+       # - DOMAIN-SUFFIX,midjourney.com
+       # - DOMAIN-SUFFIX,cdn.midjourney.com
+       # - DOMAIN-KEYWORD,midjourney
+       # - DOMAIN-SUFFIX,stability.ai
+       # - DOMAIN-SUFFIX,stablediffusionweb.com
+       # - DOMAIN-SUFFIX,dreamstudio.ai
+       # - DOMAIN-SUFFIX,runwayml.com
+       # - DOMAIN-SUFFIX,runway.ml
       
-       # Character.AI & Others
-       - DOMAIN-SUFFIX,character.ai
-       - DOMAIN-SUFFIX,beta.character.ai
-       - DOMAIN-SUFFIX,replicate.com
-       - DOMAIN-SUFFIX,cohere.ai
-       - DOMAIN-SUFFIX,cohere.com
+       # # Character.AI & Others
+       # - DOMAIN-SUFFIX,character.ai
+       # - DOMAIN-SUFFIX,beta.character.ai
+       # - DOMAIN-SUFFIX,replicate.com
+       # - DOMAIN-SUFFIX,cohere.ai
+       # - DOMAIN-SUFFIX,cohere.com
       
-       # Development Tools
-       - DOMAIN-SUFFIX,jetbrains.com
-       - DOMAIN-SUFFIX,replit.com
-       - DOMAIN-SUFFIX,repl.it
-       - DOMAIN-SUFFIX,stackoverflow.com
-       - DOMAIN-SUFFIX,docker.com
-       - DOMAIN-SUFFIX,docker.io
-       - DOMAIN-SUFFIX,npmjs.com
-       - DOMAIN-SUFFIX,pypi.org
+       # # Development Tools
+       # - DOMAIN-SUFFIX,jetbrains.com
+       # - DOMAIN-SUFFIX,replit.com
+       # - DOMAIN-SUFFIX,repl.it
+       # - DOMAIN-SUFFIX,stackoverflow.com
+       # - DOMAIN-SUFFIX,docker.com
+       # - DOMAIN-SUFFIX,docker.io
+       # - DOMAIN-SUFFIX,npmjs.com
+       # - DOMAIN-SUFFIX,pypi.org
 
 # --- ПРАВИЛА МАРШРУТИЗАЦИИ ---
 rules:
@@ -379,7 +319,10 @@ rules:
   - DOMAIN-SUFFIX,flibusta.site,VPN
   
   # AI и разработка (высший приоритет!)
-  - RULE-SET,github-ai,AI&DEV
+  # - RULE-SET,github-ai,AI&DEV
+  - RULE-SET,openai,AI&DEV
+  - RULE-SET,gemini,AI&DEV
+  - RULE-SET,ai-bundle,AI&DEV
   
   # Социальные сети и мессенджеры и YouTube
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram  
