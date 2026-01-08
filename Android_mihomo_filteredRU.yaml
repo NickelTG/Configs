@@ -95,8 +95,8 @@ proxy-groups:
   - name: YouTube
     type: select        
     proxies:
-      - BALANCE-RR
       - VPN
+      - BALANCE-RR      
       - DIRECT      
 
   - name: AI&DEV
