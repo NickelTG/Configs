@@ -1,0 +1,172 @@
+# --- ГЛОБАЛЬНЫЕ НАСТРОЙКИ ---
+unified-delay: true
+tcp-concurrent: true
+global-client-fingerprint: chrome
+keep-alive-interval: 1800
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.67.1/16
+  listen: 0.0.0.0:1053
+  fake-ip-filter:
+    - "rule-set:openai,gemini,ai-bundle"
+  
+  # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 77.88.8.8
+
+  # Основные серверы резолва  
+  nameserver: &main_dns    
+    - tls://dns.google
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.quad9.net/dns-query
+  
+  # Направляем российские домены на локальные DNS для скорости и корректных IP
+  nameserver-policy:    
+    "rule-set:openai,gemini,ai-bundle":
+      - tls://dns.geohide.ru
+      - tls://dns.astracat.ru
+    "rule-set:ru-bundle": *main_dns
+    "geoip:ru":
+      - tls://common.dot.dns.yandex.net
+      - tls://8.8.8.8      
+      - 77.88.8.8
+
+proxy-groups:
+  - name: VPN
+    type: select
+    proxies:
+      - AUTO
+      - BALANCE-HASH    
+      - BALANCE-RR      
+      - FALLBACK
+      - DIRECT
+
+- name: AUTO
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
+    lazy: true
+    use: &all_providers 
+      - AvenCores_24
+      - HansThomas_V2Ray
+      - Danialsamadi_DE
+      - Zieng2_Universal
+      - Firmfox_Proxify
+
+  - name: FALLBACK
+    type: fallback
+    url: https://www.gstatic.com/generate_204
+    interval: 60
+    lazy: false
+    use: *all_providers
+
+  - name: BALANCE-HASH
+    type: load-balance
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    strategy: consistent-hashing
+    use: *all_providers
+
+  - name: BALANCE-RR
+    type: load-balance
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    strategy: round-robin
+    use: *all_providers
+    
+  - name: Telegram
+    type: select        
+    proxies:
+      - VPN
+      - DIRECT
+
+  - name: Meta
+    type: select    
+    proxies:
+      - VPN
+      - DIRECT
+
+  - name: YouTube
+    type: select        
+    proxies:
+      - BALANCE-RR
+      - VPN
+      - DIRECT      
+
+  - name: AI&DEV
+    type: select    
+    proxies:     
+     - DIRECT
+     - VPN
+
+common-settings: &common_filter
+  type: http
+  interval: 3600
+  filter: "(?i)^(?!.*(RU|Russia|Россия|🇷🇺|MSK|SPB|STRUGOV|STR97|🔥PORTAL|🔥Join)).*$"
+  exclude-filter: "duplicates"
+  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
+  override: {udp: true,tfo: true, mptcp: true}
+
+proxy-providers:
+  AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml }
+  HansThomas_V2Ray: { <<: *common_filter, url: "https://raw.githubusercontent.com/hans-thomas/v2ray-subscription/master/servers.txt", path: ./proxy_providers/hans_thomas.yml }
+  Danialsamadi_DE: { <<: *common_filter, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DE.txt", path: ./proxy_providers/v2go_de.yml }
+  Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml }
+  Firmfox_Proxify: { <<: *common_filter, url: "https://raw.githubusercontent.com/Firmfox/proxify/main/v2ray_configs/mixed/subscription-1.txt", path: ./proxy_providers/proxify_mixed.yml }
+
+rule-providers:
+  torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
+  torrent-websites: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs", path: ./rule-sets/torrent-websites.mrs}
+  torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}
+  telegram-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs", path: ./rule-sets/telegram-domain.mrs}
+  telegram-ips: {type: http, behavior: ipcidr, format: yaml, interval: 86400, url: "https://raw.githubusercontent.com/OMchik33/custom-rules/refs/heads/main/mihomo/telegram-ips.yaml", path: ./rule-sets/telegram-ips.yaml}
+  whatsapp-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs", path: ./rule-sets/whatsapp-domain.mrs}
+  openai: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/openai.mrs", path: ./provider/rule-set/openai.mrs}
+  gemini: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/google-gemini.mrs", path: ./provider/rule-set/gemini.mrs}
+  ai-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/category-ai-!cn.mrs", path: ./provider/rule-set/ai-bundle.mrs}
+  youtube: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs", path: ./rule-sets/youtube.mrs}
+  oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
+  ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
+
+rules:  
+  # Торренты
+  - RULE-SET,torrent-clients,DIRECT
+  - RULE-SET,torrent-trackers,DIRECT
+  - RULE-SET,torrent-websites,VPN
+      
+  # AI и разработка (высший приоритет!)
+  # - RULE-SET,github-ai,AI&DEV
+  - OR,((RULE-SET,ai-bundle),(RULE-SET,gemini),(RULE-SET,openai)),AI&DEV  
+  
+  # Социальные сети и мессенджеры и YouTube
+  - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram  
+  - OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),Meta
+  - RULE-SET,youtube,YouTube
+  
+  # Всякое
+  - PROCESS-NAME,com.badoo.mobile,VPN
+  - PROCESS-NAME,com.bumble.app,VPN  
+  - PROCESS-NAME,app.bumpy.android,DIRECT
+  - DOMAIN,lens-pa.googleapis.com,DIRECT  
+  - DOMAIN-SUFFIX,flibusta.site,VPN
+  - OR,((DOMAIN-SUFFIX,4pda.to),(DOMAIN-SUFFIX,4pda.ru),(PROCESS-NAME,ru.fourpda.client)),VPN
+  - DOMAIN-SUFFIX,habr.com,VPN
+  - GEOSITE,google,DIRECT
+  
+  # Заблокированные в РФ сайты
+  - RULE-SET,ru-bundle,VPN  
+  
+  # Инструменты проверки IP    
+  - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN,ident.me),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
+  
+  # Блокировка рекламы
+#  - RULE-SET,oisd_big,REJECT
+  
+  # Весь остальной трафик - напрямую  
+  - MATCH,DIRECT
