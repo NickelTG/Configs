@@ -320,9 +320,7 @@ rules:
   
   # AI и разработка (высший приоритет!)
   # - RULE-SET,github-ai,AI&DEV
-  - RULE-SET,openai,AI&DEV
-  - RULE-SET,gemini,AI&DEV
-  - RULE-SET,ai-bundle,AI&DEV
+  - OR,((RULE-SET,ai-bundle),(RULE-SET,gemini),(RULE-SET,openai)),AI&DEV  
   
   # Социальные сети и мессенджеры и YouTube
   - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram  
