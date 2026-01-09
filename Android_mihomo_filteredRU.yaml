@@ -153,6 +153,7 @@ rules:
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN  
   - PROCESS-NAME,app.bumpy.android,DIRECT
+  - PROCESS-NAME,ru.rostel,DIRECT
   - PROCESS-NAME,com.tantantribe.tribe,DIRECT
   - DOMAIN,lens-pa.googleapis.com,DIRECT  
   - DOMAIN-SUFFIX,flibusta.site,VPN
