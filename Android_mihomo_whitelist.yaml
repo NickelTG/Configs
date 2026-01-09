@@ -43,6 +43,21 @@ proxy-groups:
       - BALANCE-RR      
       - FALLBACK
       - DIRECT
+      - КИРИЛЛОЧКА
+      - IGARECK-MOB
+      - IGARECK-CAB
+
+  - name: КИРИЛЛОЧКА
+    type: select
+    use: [Kirillo4ka_WhiteList]
+
+  - name: IGARECK-MOB
+    type: select
+    use: [Igareck_Mobile]
+
+  - name: IGARECK-CAB
+    type: select
+    use: [Igareck_Cable]
 
   - name: AUTO
     type: url-test
@@ -50,12 +65,10 @@ proxy-groups:
     interval: 300
     tolerance: 150
     lazy: true
-    use: &all_providers 
-      - AvenCores_24
-      - HansThomas_V2Ray
-      - Danialsamadi_DE
-      - Zieng2_Universal
-      - Firmfox_Proxify
+    use: &all_providers      
+      - Kirillo4ka_WhiteList
+      - Igareck_Mobile
+      - Igareck_Cable
 
   - name: FALLBACK
     type: fallback
@@ -86,26 +99,26 @@ common-settings: &common_filter
 
 proxy-providers:
   Kirillo4ka_WhiteList: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/kirillo4ka_wl.yml }
+  Igareck_Mobile: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt", path: ./proxy_providers/igareck_mob.yml }
+  Igareck_Cable: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Cable.txt", path: ./proxy_providers/igareck_cable.yml }
 
 rule-providers:
   openai: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/openai.mrs", path: ./provider/rule-set/openai.mrs}
   gemini: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/google-gemini.mrs", path: ./provider/rule-set/gemini.mrs}
   ai-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/category-ai-!cn.mrs", path: ./provider/rule-set/ai-bundle.mrs}
-  oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}  
-
-whitelist:
-  type: inline
-  behavior: classical    
-  payload:    
-    - DOMAIN-SUFFIX,gosuslugi.ru,DIRECT
-    - DOMAIN-SUFFIX,yandex.ru,DIRECT
+  oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
+  
+  whitelist:
+    type: inline
+    behavior: classical
+    payload:
+      - DOMAIN-SUFFIX,gosuslugi.ru
+      - DOMAIN-SUFFIX,yandex.ru
+      - DOMAIN-SUFFIX,habr.com
+      - DOMAIN-KEYWORD,sberbank
+      - DOMAIN-KEYWORD,tinkoff
 
 rules:  
-  # Торренты
-  - RULE-SET,torrent-clients,DIRECT
-  - RULE-SET,torrent-trackers,DIRECT
-  - RULE-SET,torrent-websites,VPN
-
   # Белый список
   - RULE-SET,whitelist,DIRECT
   
