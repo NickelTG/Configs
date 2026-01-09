@@ -46,15 +46,10 @@ proxy-groups:
       - Kirillo4ka
       - IGARECK-MOB
       - IGARECK-CAB
-      - Kir2
 
   - name: Kirillo4ka
     type: select
     use: [Kir_WhiteList]
-
-  - name: Kir2
-    type: select
-    use: [Kir22]
 
   - name: IGARECK-MOB
     type: select
@@ -106,19 +101,6 @@ proxy-providers:
   Kir_WhiteList: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/kir_wl.yml }
   Igareck_Mobile: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt", path: ./proxy_providers/igareck_mob.yml }
   Igareck_Cable: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Cable.txt", path: ./proxy_providers/igareck_cable.yml }
-  Kir22:
-    type: http
-    url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt"
-    path: ./proxy_providers/sub.yml
-    override:
-      udp: true
-    health-check:
-      enable: true
-      url: http://cp.cloudflare.com/generate_204
-      interval: 300
-      timeout: 5000
-      lazy: true
-      expected-status: 204
 
 rule-providers:
   openai: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/openai.mrs", path: ./provider/rule-set/openai.mrs}
