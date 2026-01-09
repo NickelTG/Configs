@@ -44,9 +44,14 @@ proxy-groups:
       - BALANCE-RR      
       - FALLBACK
       - DIRECT
+      - Zieng2VLlite
       - Kirillo4ka
       - IGARECK-MOB
       - IGARECK-CAB
+
+  - name: Zieng2VLlite
+    type: select
+    use: [Zieng2_VLlite]
 
   - name: Kirillo4ka
     type: select
@@ -66,7 +71,8 @@ proxy-groups:
     interval: 300
     tolerance: 150
     lazy: true
-    use: &all_providers      
+    use: &all_providers
+      - Zieng2_VLlite
       - Kir_WhiteList
       - Igareck_Mobile
       - Igareck_Cable
@@ -99,6 +105,7 @@ common-settings: &common_filter
   override: {udp: true}
 
 proxy-providers:
+  Zieng2_VLlite: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/vless_lite.yml }
   Kir_WhiteList: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/kir_wl.yml }
   Igareck_Mobile: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt", path: ./proxy_providers/igareck_mob.yml }
   Igareck_Cable: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Cable.txt", path: ./proxy_providers/igareck_cable.yml }
