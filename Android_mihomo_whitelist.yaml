@@ -33,6 +33,7 @@ dns:
       - tls://common.dot.dns.yandex.net
       - tls://8.8.8.8      
       - 77.88.8.8
+      - system
 
 proxy-groups:
   - name: VPN
