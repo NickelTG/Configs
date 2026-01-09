@@ -145,8 +145,8 @@ rules:
   - OR,((RULE-SET,ai-bundle),(RULE-SET,gemini),(RULE-SET,openai)),AI&DEV  
   
   # Социальные сети и мессенджеры и YouTube
-  - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram  
-  - OR,((RULE-SET,whatsapp-domain),(GEOIP,meta),(PROCESS-NAME,com.whatsapp)),Meta
+  - OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
+  - OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),Meta
   - RULE-SET,youtube,YouTube
   
   # Всякое
