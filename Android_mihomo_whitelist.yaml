@@ -43,13 +43,13 @@ proxy-groups:
       - BALANCE-RR      
       - FALLBACK
       - DIRECT
-      - КИРИЛЛОЧКА
+      - Kirillo4ka
       - IGARECK-MOB
       - IGARECK-CAB
 
-  - name: КИРИЛЛОЧКА
+  - name: Kirillo4ka
     type: select
-    use: [Kirillo4ka_WhiteList]
+    use: [Kir_WhiteList]
 
   - name: IGARECK-MOB
     type: select
@@ -66,7 +66,7 @@ proxy-groups:
     tolerance: 150
     lazy: true
     use: &all_providers      
-      - Kirillo4ka_WhiteList
+      - Kir_WhiteList
       - Igareck_Mobile
       - Igareck_Cable
 
@@ -95,10 +95,10 @@ common-settings: &common_filter
   type: http
   interval: 3600
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
-  override: {udp: true,tfo: true, mptcp: true}
+  override: {udp: true}
 
 proxy-providers:
-  Kirillo4ka_WhiteList: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/kirillo4ka_wl.yml }
+  Kir_WhiteList: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/kir_wl.yml }
   Igareck_Mobile: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt", path: ./proxy_providers/igareck_mob.yml }
   Igareck_Cable: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Cable.txt", path: ./proxy_providers/igareck_cable.yml }
 
