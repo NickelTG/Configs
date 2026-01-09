@@ -115,6 +115,7 @@ rule-providers:
   gemini: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/google-gemini.mrs", path: ./provider/rule-set/gemini.mrs}
   ai-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/category-ai-!cn.mrs", path: ./provider/rule-set/ai-bundle.mrs}
   oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
+  whitelist_ext: {type: http, behavior: domain, format: text, interval: 86400, url: "https://raw.githubusercontent.com/hxehex/russia-mobile-internet-whitelist/refs/heads/main/whitelist.txt", path: ./provider/rule-set/whitelist_ext.txt}
   
   whitelist:
     type: inline
@@ -129,6 +130,7 @@ rule-providers:
 rules:  
   # Белый список
   - RULE-SET,whitelist,DIRECT
+  - RULE-SET,whitelist_ext,DIRECT
   
   # Блокировка рекламы
 #  - RULE-SET,oisd_big,REJECT
