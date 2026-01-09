@@ -4,6 +4,9 @@ tcp-concurrent: true
 global-client-fingerprint: chrome
 keep-alive-interval: 1800
 
+hosts:
+  'ntc.party': 130.255.77.28
+
 dns:
   enable: true
   ipv6: false
