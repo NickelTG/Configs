@@ -1,0 +1,116 @@
+# --- ГЛОБАЛЬНЫЕ НАСТРОЙКИ ---
+unified-delay: true
+tcp-concurrent: true
+global-client-fingerprint: chrome
+keep-alive-interval: 1800
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.67.1/16
+  listen: 0.0.0.0:1053
+  fake-ip-filter:
+    - "rule-set:openai,gemini,ai-bundle"
+  
+  # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 77.88.8.8
+
+  # Основные серверы резолва  
+  nameserver:
+    - tls://common.dot.dns.yandex.net
+    - tls://dns.google
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.quad9.net/dns-query
+    - 77.88.8.8
+  
+  # Направляем российские домены на локальные DNS для скорости и корректных IP
+  nameserver-policy:
+    "rule-set:whitelist":
+      - tls://common.dot.dns.yandex.net
+      - tls://8.8.8.8      
+      - 77.88.8.8
+
+proxy-groups:
+  - name: VPN
+    type: select
+    proxies:
+      - AUTO
+      - BALANCE-HASH    
+      - BALANCE-RR      
+      - FALLBACK
+      - DIRECT
+
+  - name: AUTO
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
+    lazy: true
+    use: &all_providers 
+      - AvenCores_24
+      - HansThomas_V2Ray
+      - Danialsamadi_DE
+      - Zieng2_Universal
+      - Firmfox_Proxify
+
+  - name: FALLBACK
+    type: fallback
+    url: https://www.gstatic.com/generate_204
+    interval: 60
+    lazy: false
+    use: *all_providers
+
+  - name: BALANCE-HASH
+    type: load-balance
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    strategy: consistent-hashing
+    use: *all_providers
+
+  - name: BALANCE-RR
+    type: load-balance
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    strategy: round-robin
+    use: *all_providers
+
+common-settings: &common_filter
+  type: http
+  interval: 3600
+  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
+  override: {udp: true,tfo: true, mptcp: true}
+
+proxy-providers:
+  Kirillo4ka_WhiteList: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/kirillo4ka_wl.yml }
+
+rule-providers:
+  openai: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/openai.mrs", path: ./provider/rule-set/openai.mrs}
+  gemini: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/google-gemini.mrs", path: ./provider/rule-set/gemini.mrs}
+  ai-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/category-ai-!cn.mrs", path: ./provider/rule-set/ai-bundle.mrs}
+  oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}  
+
+whitelist:
+  type: inline
+  behavior: classical    
+  payload:    
+    - DOMAIN-SUFFIX,gosuslugi.ru,DIRECT
+    - DOMAIN-SUFFIX,yandex.ru,DIRECT
+
+rules:  
+  # Торренты
+  - RULE-SET,torrent-clients,DIRECT
+  - RULE-SET,torrent-trackers,DIRECT
+  - RULE-SET,torrent-websites,VPN
+
+  # Белый список
+  - RULE-SET,whitelist,DIRECT
+  
+  # Блокировка рекламы
+#  - RULE-SET,oisd_big,REJECT
+  
+  # Весь остальной трафик - в VPN
+  - MATCH,VPN
