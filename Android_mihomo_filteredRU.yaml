@@ -57,7 +57,7 @@ proxy-groups:
       - AvenCores_24
       - HansThomas_V2Ray
       - Danialsamadi_DE
-      - Zieng2_Universal
+#      - Zieng2_Universal
       - Firmfox_Proxify
 
   - name: FALLBACK
@@ -119,7 +119,7 @@ proxy-providers:
   AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml }
   HansThomas_V2Ray: { <<: *common_filter, url: "https://raw.githubusercontent.com/hans-thomas/v2ray-subscription/master/servers.txt", path: ./proxy_providers/hans_thomas.yml }
   Danialsamadi_DE: { <<: *common_filter, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DE.txt", path: ./proxy_providers/v2go_de.yml }
-  Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml }
+#  Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml }
   Firmfox_Proxify: { <<: *common_filter, url: "https://raw.githubusercontent.com/Firmfox/proxify/main/v2ray_configs/mixed/subscription-1.txt", path: ./proxy_providers/proxify_mixed.yml }
 
 rule-providers:
