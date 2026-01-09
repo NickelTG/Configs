@@ -126,7 +126,6 @@ rule-providers:
     payload:
       - DOMAIN-SUFFIX,gosuslugi.ru
       - DOMAIN-SUFFIX,yandex.ru
-      - DOMAIN-SUFFIX,habr.com
       - DOMAIN-KEYWORD,sberbank
       - DOMAIN-KEYWORD,tinkoff
 
