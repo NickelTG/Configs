@@ -66,7 +66,7 @@ proxy-groups:
   - name: FALLBACK
     type: fallback
     url: https://www.gstatic.com/generate_204
-    interval: 60
+    interval: 20
     lazy: false
     use: *all_providers
 
@@ -114,7 +114,7 @@ common-settings: &common_filter
   interval: 3600  
   filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
   exclude-filter: "duplicates"
-  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
+  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 200}
   override: {udp: true,tfo: true, mptcp: true}
 
 proxy-providers:
