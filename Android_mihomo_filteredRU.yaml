@@ -108,7 +108,7 @@ proxy-groups:
 common-settings: &common_filter
   type: http
   interval: 3600  
-  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|Freak)).*$"
+  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
   exclude-filter: "duplicates"
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
   override: {udp: true,tfo: true, mptcp: true}
