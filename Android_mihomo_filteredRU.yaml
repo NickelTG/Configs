@@ -116,6 +116,7 @@ common-settings: &common_filter
   exclude-filter: "duplicates"
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
   override: {udp: true,tfo: true, mptcp: true}
+  prepend-proxy-name: true
 
 proxy-name-rewrite:
   - "^(.*)$" : "${provider_name:0:3}-${country_code}: $1"
