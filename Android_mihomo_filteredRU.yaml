@@ -55,9 +55,8 @@ proxy-groups:
     tolerance: 150
     lazy: true
     use: &all_providers
-      - Y9Felix_Best
-      - AvenCores_24
-      - HansThomas_V2Ray
+#      - Y9Felix_Best
+#      - AvenCores_24
       - Danialsamadi_DE
 #      - Zieng2_Universal
       - Firmfox_Proxify
