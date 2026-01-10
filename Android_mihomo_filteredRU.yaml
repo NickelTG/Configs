@@ -3,10 +3,6 @@ tcp-concurrent: true
 global-client-fingerprint: chrome
 keep-alive-interval: 1800
 
-proxy-name-rewrite:
-  - match: '(.*)'
-    replace: 'TEST: $1'
-
 hosts:
   'ntc.party': 130.255.77.28
 
@@ -120,6 +116,9 @@ common-settings: &common_filter
   exclude-filter: "duplicates"
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
   override: {udp: true,tfo: true, mptcp: true}
+  proxy-name-rewrite:
+    - match: "^(.*)$"
+      replace: "VPN | $1"
   prepend-proxy-name: true
 
 proxy-providers:
