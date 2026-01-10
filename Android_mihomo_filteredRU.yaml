@@ -117,10 +117,9 @@ common-settings: &common_filter
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}    
 
 proxy-providers:  
-#  Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml, override: {additional-prefix: "Zie-", udp: true, tfo: true, mptcp: true} }  
-  Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
-  AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }
-  HansThomas_V2Ray: { <<: *common_filter, url: "https://raw.githubusercontent.com/hans-thomas/v2ray-subscription/master/servers.txt", path: ./proxy_providers/hans_thomas.yml, override: {additional-prefix: "HAN-", udp: true, tfo: true, mptcp: true} }
+ # Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml, override: {additional-prefix: "Zie-", udp: true, tfo: true, mptcp: true} }  
+ # Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
+#  AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }
   Danialsamadi_DE: { <<: *common_filter, url: "https://raw.githubusercontent.com/Danialsamadi/v2go/main/Splitted-By-Country/DE.txt", path: ./proxy_providers/v2go_de.yml, override: {additional-prefix: "DAN-", udp: true, tfo: true, mptcp: true} }
   Firmfox_Proxify: { <<: *common_filter, url: "https://raw.githubusercontent.com/Firmfox/proxify/main/v2ray_configs/mixed/subscription-1.txt", path: ./proxy_providers/proxify_mixed.yml, override: {additional-prefix: "FIR-", udp: true, tfo: true, mptcp: true} }
 
