@@ -58,11 +58,10 @@ proxy-groups:
       #- Y9Felix_Best
       #- AvenCores_24      
       #- Zieng2_Universal
-      - Epodonios_Vless
-      - Matin_Hysteria
+      - Epodonios_Vless      
       - Soli_Germany
       - Aliila_Server
-      - Barry_Sub5
+      - Barry_Sub4
 
   - name: FALLBACK
     type: fallback
@@ -122,11 +121,10 @@ proxy-providers:
   #Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml, override: {additional-prefix: "Zie-", udp: true, tfo: true, mptcp: true} }  
   #Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
   #AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }
-  Epodonios_Vless: { <<: *common_filter, url: "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vless.txt", path: ./proxy_providers/epodonios_vless.yml, override: {additional-prefix: "Epod-", udp: true, tfo: true, mptcp: true} }
-  Matin_Hysteria: { <<: *common_filter, url: "https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/filtered/subs/hysteria2.txt", path: ./proxy_providers/matin_hy2.yml, override: {additional-prefix: "Mat-", udp: true, tfo: true, mptcp: true} }
+  Epodonios_Vless: { <<: *common_filter, url: "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vless.txt", path: ./proxy_providers/epodonios_vless.yml, override: {additional-prefix: "Epod-", udp: true, tfo: true, mptcp: true} }  
   Soli_Germany: { <<: *common_filter, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Germany.txt", path: ./proxy_providers/soli_de.yml, override: {additional-prefix: "SolD-", udp: true, tfo: true, mptcp: true} }
   Aliila_Server: { <<: *common_filter, url: "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/refs/heads/main/server.txt", path: ./proxy_providers/aliila.yml, override: {additional-prefix: "Ali-", udp: true, tfo: true, mptcp: true} }
-  Barry_Sub5: { <<: *common_filter, url: "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Sub5.txt", path: ./proxy_providers/barry_sub5.yml, override: {additional-prefix: "Bar-", udp: true, tfo: true, mptcp: true} }
+  Barry_Sub4: { <<: *common_filter, url: "https://raw.githubusercontent.com/barry-far/V2ray-config/main/Sub4.txt", path: ./proxy_providers/barry_sub5.yml, override: {additional-prefix: "Bar-", udp: true} }
 
 rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
