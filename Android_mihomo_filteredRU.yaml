@@ -117,8 +117,7 @@ common-settings: &common_filter
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
   override: {udp: true,tfo: true, mptcp: true}
   proxy-name-rewrite:
-    - match: "^(.*)$"
-      replace: "VPN | $1"
+    - { match: "^(.*)$", replace: "⚡ $1" } # Простейший тест с эмодзи
   prepend-proxy-name: true
 
 proxy-providers:
