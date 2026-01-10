@@ -117,7 +117,8 @@ common-settings: &common_filter
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
   override: {udp: true,tfo: true, mptcp: true}
 
-proxy-name-rewrite: - "^(.*)$" : "${provider_name:0:3}-${country_code}: $1"
+proxy-name-rewrite:
+  - "^(.*)$" : "${provider_name:0:3}-${country_code}: $1"
 
 proxy-providers:
   Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml }
