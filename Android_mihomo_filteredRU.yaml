@@ -55,13 +55,12 @@ proxy-groups:
     tolerance: 150
     lazy: true
     use: &all_providers     
-      #- Y9Felix_Best
-      #- AvenCores_24      
-      #- Zieng2_Universal
-      - Ebr_Publist
       - Mah_Eternity
+      - AvenCores_24
+      - Ebr_Publist
       - Rooster_Openpr
-      - BarryFar_Sub2
+      #- Zieng2_Universal
+      #- Y9Felix_Best
 
   - name: FALLBACK
     type: fallback
@@ -117,14 +116,13 @@ common-settings: &common_filter
   exclude-filter: "duplicates"
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}    
 
-proxy-providers:  
+proxy-providers:    
+  Mah_Eternity: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true, tfo: true, mptcp: true} }
+  AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }
+  Ebr_Publist: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/ebrasha.yml, override: {additional-prefix: "EBR-", udp: true, tfo: true, mptcp: true} }
+  Rooster_Openpr: { <<: *common_filter, url: "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt", path: ./proxy_providers/rooster.yml, override: {additional-prefix: "RST-", udp: true, tfo: true, mptcp: true} }
   #Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml, override: {additional-prefix: "Zie-", udp: true, tfo: true, mptcp: true} }  
   #Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
-  #AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }
-  Ebr_Publist: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/ebrasha.yml, override: {additional-prefix: "EBR-", udp: true, tfo: true, mptcp: true} }
-  Mah_Eternity: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true, tfo: true, mptcp: true} }
-  Rooster_Openpr: { <<: *common_filter, url: "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt", path: ./proxy_providers/rooster.yml, override: {additional-prefix: "RST-", udp: true, tfo: true, mptcp: true} }
-  BarryFar_Sub2: { <<: *common_filter, url: "https://raw.githubusercontent.com/barry-far/V2ray-Config/refs/heads/main/Base64/Sub2_base64.txt", path: ./proxy_providers/barryfar.yml, override: {additional-prefix: "BF2-", udp: true, tfo: true, mptcp: true} }
 
 rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
