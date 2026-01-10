@@ -118,7 +118,7 @@ proxy-providers:
   #Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml, override: {additional-prefix: "Zie-", udp: true, tfo: true, mptcp: true} }  
   #Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
   #AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }
-  netherlands_Soli: { <<: *common_settings, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/The_Netherlands.txt", path: ./pp/nl_soli.yml }
+  netherlands_Soli: { <<: *common_filter, url: "https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/The_Netherlands.txt", path: ./pp/nl_soli.yml }
 
 rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
