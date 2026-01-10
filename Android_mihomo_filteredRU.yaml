@@ -50,7 +50,7 @@ proxy-groups:
 
   - name: AUTO
     type: url-test
-    url: https://www.gstatic.com/generate_204
+    url: https://www.youtube.com/generate_204
     interval: 300
     tolerance: 150
     lazy: true
@@ -64,21 +64,21 @@ proxy-groups:
 
   - name: FALLBACK
     type: fallback
-    url: https://www.gstatic.com/generate_204
-    interval: 20
+    url: https://www.youtube.com/generate_204
+    interval: 15
     lazy: false
     use: *all_providers
 
   - name: BALANCE-HASH
     type: load-balance
-    url: https://www.gstatic.com/generate_204
+    url: https://www.youtube.com/generate_204
     interval: 300
     strategy: consistent-hashing
     use: *all_providers
 
   - name: BALANCE-RR
     type: load-balance
-    url: https://www.gstatic.com/generate_204
+    url: https://www.youtube.com/generate_204
     interval: 300
     strategy: round-robin
     use: *all_providers
@@ -114,8 +114,10 @@ common-settings: &common_filter
   filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
 #  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak|Iran|IR|Turkey|TR|China|CN|Relay|Traffic|Limit|Expire|Test|Direct|Dummy)).*$"
   exclude-filter: "duplicates"
-  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 100}
+  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
   override: {udp: true,tfo: true, mptcp: true}
+
+proxy-name-rewrite: - "^(.*)$" : "${provider_name:0:3}-${country_code}: $1"
 
 proxy-providers:
   Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml }
