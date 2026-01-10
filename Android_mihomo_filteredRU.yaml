@@ -119,7 +119,8 @@ common-settings: &common_filter
   prepend-proxy-name: true
 
 proxy-name-rewrite:
-  - "^(.*)$" : "${provider_name:0:3}-${country_code}: $1"
+  - match: "^(.*)$"
+    replace: "TEST: $1"
 
 proxy-providers:
   Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml }
