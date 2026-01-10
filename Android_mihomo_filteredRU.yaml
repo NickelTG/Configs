@@ -3,6 +3,10 @@ tcp-concurrent: true
 global-client-fingerprint: chrome
 keep-alive-interval: 1800
 
+proxy-name-rewrite:
+  - match: '(.*)'
+    replace: 'TEST: $1'
+
 hosts:
   'ntc.party': 130.255.77.28
 
@@ -117,10 +121,6 @@ common-settings: &common_filter
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
   override: {udp: true,tfo: true, mptcp: true}
   prepend-proxy-name: true
-
-proxy-name-rewrite:
-  - match: "^(.*)$"
-    replace: "TEST: $1"
 
 proxy-providers:
   Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml }
