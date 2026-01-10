@@ -115,9 +115,7 @@ common-settings: &common_filter
 #  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak|Iran|IR|Turkey|TR|China|CN|Relay|Traffic|Limit|Expire|Test|Direct|Dummy)).*$"
   exclude-filter: "duplicates"
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}
-  override: {udp: true,tfo: true, mptcp: true}
-  proxy-name-rewrite:
-    - { match: "^(.*)$", replace: "⚡ $1" } # Простейший тест с эмодзи
+  override: {udp: true,tfo: true, mptcp: true,additional-prefix: "⚡ "}
   prepend-proxy-name: true
 
 proxy-providers:
