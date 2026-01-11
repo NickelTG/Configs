@@ -61,7 +61,7 @@ proxy-groups:
       - ForceRun_Vless
       - Rooster_Openpr
       #- Zieng2_Universal
-      #- Y9Felix_Best
+      - Y9Felix_Best
 
   - name: FALLBACK
     type: fallback
@@ -122,10 +122,9 @@ proxy-providers:
   AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }
   Ebr_Publist: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/ebrasha.yml, override: {additional-prefix: "EBR-", udp: true, tfo: true, mptcp: true} }
   #ForceRun_Vless: { <<: *common_filter, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-protocol/vless.txt", path: ./proxy_providers/forcerun_vless.yml, override: {additional-prefix: "FRС-", udp: true, tfo: true, mptcp: true} }
-  ForceRun_Vless: { type: http, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-protocol/vless.txt", path: ./proxy_providers/forcerun_vless.yml, interval: 3600, filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB)).*$", health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}, override: {additional-prefix: "FRС-", udp: true, tfo: true, mptcp: true} }
   Rooster_Openpr: { <<: *common_filter, url: "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt", path: ./proxy_providers/rooster.yml, override: {additional-prefix: "RST-", udp: true, tfo: true, mptcp: true} }
   #Zieng2_Universal: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt", path: ./proxy_providers/vless_universal.yml, override: {additional-prefix: "Zie-", udp: true, tfo: true, mptcp: true} }  
-  #Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
+  Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
 
 rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
