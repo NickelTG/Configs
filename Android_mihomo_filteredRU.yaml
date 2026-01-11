@@ -58,7 +58,7 @@ proxy-groups:
       - Mah_Eternity
       - AvenCores_24
       - Ebr_Publist
-      - ForceRun_Vless
+      #- ForceRun_Vless
       - Rooster_Openpr
       #- Zieng2_Universal
       - Y9Felix_Best
