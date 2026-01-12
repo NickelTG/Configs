@@ -135,7 +135,7 @@ rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
   torrent-websites: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs", path: ./rule-sets/torrent-websites.mrs}
   torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}
-  telegram-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs", path: ./rule-sets/telegram-domain.mrs}
+  #telegram-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs", path: ./rule-sets/telegram-domain.mrs}
   #telegram-ips: {type: http, behavior: ipcidr, format: yaml, interval: 86400, url: "https://raw.githubusercontent.com/OMchik33/custom-rules/refs/heads/main/mihomo/telegram-ips.yaml", path: ./rule-sets/telegram-ips.yaml}
   #whatsapp-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs", path: ./rule-sets/whatsapp-domain.mrs}
   #openai: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/openai.mrs", path: ./provider/rule-set/openai.mrs}
@@ -154,7 +154,7 @@ rules:
   # AI и разработка (высший приоритет!)
   # - RULE-SET,github-ai,AI&DEV
   # - OR,((RULE-SET,ai-bundle),(RULE-SET,gemini),(RULE-SET,openai)),AI&DEV  
-   - RULE-SET,ai-bundle,AI&DEV
+  - RULE-SET,ai-bundle,AI&DEV
   
   # Социальные сети и мессенджеры и YouTube
   #- OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
