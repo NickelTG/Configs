@@ -90,12 +90,6 @@ proxy-groups:
       - VPN
       - DIRECT
 
-  - name: Meta
-    type: select    
-    proxies:
-      - VPN
-      - DIRECT
-
   - name: YouTube
     type: select        
     proxies:
@@ -144,7 +138,7 @@ rules:
   
   # Социальные сети и мессенджеры и YouTube  
   - OR,((GEOSITE,telegram),(GEOIP,telegram)),Telegram  
-  - OR,((GEOSITE,meta),(GEOIP,facebook)),Meta
+  - OR,((GEOSITE,meta),(GEOIP,facebook)),VPN
   - OR,((RULE-SET,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
   # Всякое
