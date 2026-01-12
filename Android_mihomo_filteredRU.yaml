@@ -14,7 +14,8 @@ dns:
   listen: 0.0.0.0:1053
   fake-ip-filter:
     #- "rule-set:openai,gemini,ai-bundle"
-    - "rule-set:ai-bundle"
+    #- "rule-set:ai-bundle"
+    - "GEOSITE:category-ai-!cn"
   
   # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
   default-nameserver:
