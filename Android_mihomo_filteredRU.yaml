@@ -12,28 +12,21 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.67.1/16
   listen: 0.0.0.0:1053
-  fake-ip-filter:
-    #- "rule-set:openai,gemini,ai-bundle"
-    #- "rule-set:ai-bundle"
-    - "GEOSITE:category-ai-!cn"
-  
-  # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
-  default-nameserver:
+  fake-ip-filter:    
+    - "geosite:category-ai-!cn"
+    
+  default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
     - 8.8.8.8
     - 1.1.1.1
     - 77.88.8.8
-
-  # Основные серверы резолва  
-  nameserver: &main_dns    
+  
+  nameserver: &main_dns    # Основные серверы резолва  
     - tls://dns.google    
     - https://dns.quad9.net/dns-query
     - https://cloudflare-dns.com/dns-query
-  
-  # Направляем российские домены на локальные DNS для скорости и корректных IP
+    
   nameserver-policy:
-    #"rule-set:openai,gemini,ai-bundle":
-    #"rule-set:ai-bundle":
-    "GEOSITE:category-ai-!cn":
+    "geosite:category-ai-!cn":
       - tls://xbox-dns.ru
       - https://router.comss.one/dns-query
       - https://dns.geohide.ru:444/dns-query      
@@ -120,7 +113,6 @@ common-settings: &common_filter
   type: http
   interval: 3600  
   filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
-#  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak|Iran|IR|Turkey|TR|China|CN|Relay|Traffic|Limit|Expire|Test|Direct|Dummy)).*$"
   exclude-filter: "duplicates"
   health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}    
 
@@ -136,13 +128,7 @@ proxy-providers:
 rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
   torrent-websites: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs", path: ./rule-sets/torrent-websites.mrs}
-  torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}
-  #telegram-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs", path: ./rule-sets/telegram-domain.mrs}
-  #telegram-ips: {type: http, behavior: ipcidr, format: yaml, interval: 86400, url: "https://raw.githubusercontent.com/OMchik33/custom-rules/refs/heads/main/mihomo/telegram-ips.yaml", path: ./rule-sets/telegram-ips.yaml}
-  #whatsapp-domain: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs", path: ./rule-sets/whatsapp-domain.mrs}
-  #openai: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/openai.mrs", path: ./provider/rule-set/openai.mrs}
-  #gemini: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/google-gemini.mrs", path: ./provider/rule-set/gemini.mrs}
-  ai-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/category-ai-!cn.mrs", path: ./provider/rule-set/ai-bundle.mrs}
+  torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}    
   youtube: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs", path: ./rule-sets/youtube.mrs}
   oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
@@ -153,17 +139,11 @@ rules:
   - RULE-SET,torrent-trackers,DIRECT
   - RULE-SET,torrent-websites,VPN
       
-  # AI и разработка (высший приоритет!)
-  # - RULE-SET,github-ai,AI&DEV
-  # - OR,((RULE-SET,ai-bundle),(RULE-SET,gemini),(RULE-SET,openai)),AI&DEV  
-  # - RULE-SET,ai-bundle,AI&DEV
+  # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
   
-  # Социальные сети и мессенджеры и YouTube
-  #- OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
-  #- RULE-SET,telegram-domain,Telegram  
-  - OR,((GEOSITE,telegram),(GEOIP,telegram)),Telegram
-  #- OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),Meta
+  # Социальные сети и мессенджеры и YouTube  
+  - OR,((GEOSITE,telegram),(GEOIP,telegram)),Telegram  
   - OR,((GEOSITE,meta),(GEOIP,facebook)),Meta
   - OR,((RULE-SET,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
