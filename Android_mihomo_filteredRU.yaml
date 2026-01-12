@@ -31,7 +31,8 @@ dns:
   # Направляем российские домены на локальные DNS для скорости и корректных IP
   nameserver-policy:
     #"rule-set:openai,gemini,ai-bundle":
-    "rule-set:ai-bundle":
+    #"rule-set:ai-bundle":
+    "GEOSITE:category-ai-!cn"
       - tls://xbox-dns.ru
       - https://router.comss.one/dns-query
       - https://dns.geohide.ru:444/dns-query      
@@ -154,14 +155,15 @@ rules:
   # AI и разработка (высший приоритет!)
   # - RULE-SET,github-ai,AI&DEV
   # - OR,((RULE-SET,ai-bundle),(RULE-SET,gemini),(RULE-SET,openai)),AI&DEV  
-  - RULE-SET,ai-bundle,AI&DEV
+  # - RULE-SET,ai-bundle,AI&DEV
+  - GEOSITE,category-ai-!cn,AI&DEV
   
   # Социальные сети и мессенджеры и YouTube
   #- OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
   #- RULE-SET,telegram-domain,Telegram  
   - OR,((GEOSITE,telegram),(GEOIP,telegram)),Telegram
   #- OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),Meta
-  - OR,((GEOSITE,meta),(GEOIP,meta)),Meta
+  - OR,((GEOSITE,meta),(GEOIP,facebook)),Meta
   - OR,((RULE-SET,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
   # Всякое
