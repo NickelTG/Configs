@@ -158,10 +158,10 @@ rules:
   
   # Социальные сети и мессенджеры и YouTube
   #- OR,((RULE-SET,telegram-domain),(RULE-SET,telegram-ips)),Telegram
-  #- RULE-SET,telegram-domain,Telegram
-  - GEOSITE,telegram,Telegram
+  #- RULE-SET,telegram-domain,Telegram  
+  - OR,((GEOSITE,telegram),(GEOIP,telegram)),Telegram
   #- OR,((RULE-SET,whatsapp-domain),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),Meta
-  - GEOSITE,meta,Meta
+  - OR,((GEOSITE,meta),(GEOIP,meta)),Meta
   - OR,((RULE-SET,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
   # Всякое
