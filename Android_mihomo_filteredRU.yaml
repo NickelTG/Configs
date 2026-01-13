@@ -9,17 +9,8 @@ hosts:
 dns:
   enable: true
   ipv6: false
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.67.1/16
+  enhanced-mode: redir-host # Прямой резолв без подмены IP
   listen: 0.0.0.0:1053
-  fake-ip-filter:    
-    - "geosite:category-ai-!cn"    
-    - "geosite:google"
-    - "+.googleapis.com"
-    - "+.gstatic.com"
-    - "+.google.com"
-    - "+.googleusercontent.com"
-    - "+.googlevideo.com" # Чтобы YouTube не тормозил на старте
     
   default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
     - 8.8.8.8
