@@ -14,6 +14,7 @@ dns:
   listen: 0.0.0.0:1053
   fake-ip-filter:    
     - "geosite:category-ai-!cn"
+    - "geosite:google"
     
   default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
     - 8.8.8.8
