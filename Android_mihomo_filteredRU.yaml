@@ -138,7 +138,7 @@ rules:
   
   # Социальные сети и мессенджеры и YouTube  
   - OR,((GEOSITE,telegram),(GEOIP,telegram)),Telegram  
-  - OR,((GEOSITE,meta),(GEOIP,facebook)),VPN
+  - OR,((GEOSITE,meta),(GEOIP,facebook),(GEOIP,whatsapp)),VPN
   - OR,((RULE-SET,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
   # Всякое
