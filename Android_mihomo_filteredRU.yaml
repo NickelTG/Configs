@@ -6,6 +6,16 @@ keep-alive-interval: 1800
 hosts:
   'ntc.party': 130.255.77.28
 
+tun:
+  enable: true
+  stack: gvisor          # gvisor лучше обрабатывает UDP-пакеты Google
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-detect-interface: true
+  mtu: 1280              # Безопасный размер пакета для любого мобильного оператора
+  strict-route: true
+
 dns:
   enable: true
   ipv6: false
@@ -126,6 +136,7 @@ rule-providers:
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
 
 rules:  
+  - AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
   # Торренты
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
