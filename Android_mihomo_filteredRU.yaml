@@ -8,17 +8,18 @@ hosts:
 
 tun:
   enable: true
-  stack: gvisor          # gvisor лучше обрабатывает UDP-пакеты Google
-  dns-hijack:
-    - any:53
+  stack: system           # Попробуйте вернуть system, но с правильным MTU
   auto-route: true
   auto-detect-interface: true
-  mtu: 1280              # Безопасный размер пакета для любого мобильного оператора
-  strict-route: true
+  mtu: 1280               # Оставляем 1280 для мобильных сетей
+  strict-route: false     # ВАЖНО: поставьте false. Это позволит системным сервисам Google иногда "видеть" путь в обход туннеля, если он забит
+  udp-timeout: 300        # Увеличиваем тайм-аут для мобильного UDP
+  dns-hijack:
+    - any:53
 
 dns:
   enable: true
-  ipv6: false
+  ipv6: true
   enhanced-mode: redir-host # Прямой резолв без подмены IP
   listen: 0.0.0.0:1053
     
