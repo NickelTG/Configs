@@ -124,6 +124,7 @@ rule-providers:
   torrent-websites: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs", path: ./rule-sets/torrent-websites.mrs}
   torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}    
   youtube: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs", path: ./rule-sets/youtube.mrs}
+  telegram_ip: {type: http, behavior: ipcidr, format: text, interval: 86400, url: "https://core.telegram.org/resources/cidr.txt", path: ./rule-sets/telegram_ip.txt}
   oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
 
@@ -137,8 +138,8 @@ rules:
   - GEOSITE,category-ai-!cn,AI&DEV
   
   # Социальные сети и мессенджеры и YouTube  
-  - OR,((GEOSITE,telegram),(GEOIP,telegram)),Telegram  
-  - OR,((GEOSITE,meta),(GEOIP,facebook),(GEOIP,whatsapp)),VPN
+  - OR,((GEOSITE,telegram),(RULE-SET,telegram_ip)),Telegram
+  - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN
   - OR,((RULE-SET,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
   # Всякое
