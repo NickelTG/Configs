@@ -6,27 +6,6 @@ keep-alive-interval: 1800
 hosts:
   'ntc.party': 130.255.77.28
 
-# Эти домены пойдут ВООБЩЕ мимо приложения Mihomo
-payload:
-  - "*.google.com"
-  - "*.googleapis.com"
-  - "*.gstatic.com"
-  - "*.googlevideo.com"
-  - "*.googleusercontent.com"
-  - "play.google.com"
-
-# В блоке tun (если ваше приложение поддерживает skip-proxy)
-tun:
-  enable: true
-  stack: system
-  auto-route: true
-  auto-detect-interface: true
-  # Прямое исключение из туннеля:
-  skip-proxy:
-    - "geosite:google"
-    - "142.250.0.0/15" # Подсеть Google
-    - "172.217.0.0/16" # Подсеть Google
-
 dns:
   enable: true
   ipv6: false
@@ -34,28 +13,11 @@ dns:
   listen: 0.0.0.0:1053
     
   default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
-    - 8.8.8.8
-    - 1.1.1.1
-    - 77.88.8.8
+    - system
   
   nameserver: &main_dns    # Основные серверы резолва  
-    - tls://dns.google    
-    - https://dns.quad9.net/dns-query
-    - https://cloudflare-dns.com/dns-query
-    
-  nameserver-policy:
-    "geosite:category-ai-!cn":
-      - tls://xbox-dns.ru
-      - https://router.comss.one/dns-query
-      - https://dns.geohide.ru:444/dns-query      
-      - tls://dot.dns.astracat.ru
-      - tls://dns.mafioznik.xyz
-    "rule-set:ru-bundle": *main_dns
-    "geoip:ru":
-      - tls://common.dot.dns.yandex.net
-      - tls://8.8.8.8      
-      - 77.88.8.8
-
+    - system
+  
 proxy-groups:
   - name: VPN
     type: select
@@ -147,7 +109,7 @@ rule-providers:
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
 
 rules:  
-  - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
+ # - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
   # Торренты
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
