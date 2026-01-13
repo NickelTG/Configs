@@ -147,7 +147,7 @@ rule-providers:
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
 
 rules:  
-  - AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
+  - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
   # Торренты
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
