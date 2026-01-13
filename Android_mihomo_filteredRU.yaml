@@ -13,14 +13,13 @@ dns:
   listen: 0.0.0.0:1053
     
   default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
-    - 8.8.8.8
-    - 1.1.1.1
+    - 8.8.8.8    
     - 77.88.8.8
   
   nameserver: &main_dns    # Основные серверы резолва  
-    - tls://dns.google    
-    - https://dns.quad9.net/dns-query
-    - https://cloudflare-dns.com/dns-query
+    - tls://8.8.8.8
+    - tls://8.8.4.4
+    - tls://9.9.9.9
     
   nameserver-policy:
     "geosite:category-ai-!cn":
