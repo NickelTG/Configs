@@ -26,17 +26,8 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
-
-proxy-groups:
-  - name: VPN
-    type: select
-    proxies:
       - AUTO
-      - BALANCE-HASH    
-      - BALANCE-RR      
-      - FALLBACK
-      - DIRECT
-
+      
   - name: AUTO
     type: url-test
     url: https://www.youtube.com/generate_204
