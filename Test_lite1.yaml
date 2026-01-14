@@ -37,8 +37,8 @@ proxy-providers:
     health-check:
       enable: true
       interval: 600
-      url: http://connectivity-check.ubuntu.com
-      concurrency:1
+      concurrency: 1
+      url: http://connectivity-check.ubuntu.com      
       
 rules:
   - GEOSITE,google,DIRECT,no-resolve
