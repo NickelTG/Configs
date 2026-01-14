@@ -47,14 +47,14 @@ proxy-groups:
   - name: AUTO
     type: url-test
     url: http://www.gstatic.com/generate_204
-    interval: 100
+    interval: 400
     tolerance: 150
     lazy: true
     use: &all_providers     
-      - Mah_Eternity
       - Y9Felix_Best
-      #- AvenCores_24
-      #- Ebr_Publist
+      - Ebr_Publist
+      #- Mah_Eternity      
+      #- AvenCores_24      
       #- ForceRun_Vless
       #- Rooster_Openpr
       #- Zieng2_Lite
@@ -108,20 +108,19 @@ common-settings: &common_filter
   health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, concurrency: 2}    
 
 proxy-providers:    
-  Mah_Eternity: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true, tfo: true, mptcp: true} }
   Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
-  #AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }
-  #Ebr_Publist: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/vless_configs.txt", path: ./proxy_providers/ebrasha.yml, override: {additional-prefix: "EBR-", udp: true, tfo: true, mptcp: true} }
+  Ebr_Publist: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/vless_configs.txt", path: ./proxy_providers/ebrasha.yml, override: {additional-prefix: "EBR-", udp: true, tfo: true, mptcp: true} }
+  #Mah_Eternity: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true, tfo: true, mptcp: true} }  
+  #AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }  
   #ForceRun_Vless: { <<: *common_filter, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-protocol/vless.txt", path: ./proxy_providers/forcerun_vless.yml, override: {additional-prefix: "FRС-", udp: true, tfo: true, mptcp: true} }
   #Rooster_Openpr: { <<: *common_filter, url: "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt", path: ./proxy_providers/rooster.yml, override: {additional-prefix: "RST-", udp: true, tfo: true, mptcp: true} }
-  #Zieng2_Lite: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/vless_lite.yml, override: {additional-prefix: "Zie-", udp: true, tfo: true, mptcp: true} }  
-  
+  #Zieng2_Lite: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/vless_lite.yml, override: {additional-prefix: "Zie-", udp: true, tfo: true, mptcp: true} }   
 
 rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
   torrent-websites: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs", path: ./rule-sets/torrent-websites.mrs}
   torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}    
-  youtube: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs", path: ./rule-sets/youtube.mrs}
+  #youtube: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geosite/youtube.mrs", path: ./rule-sets/youtube.mrs}
   telegram_ip: {type: http, behavior: ipcidr, format: text, interval: 86400, url: "https://core.telegram.org/resources/cidr.txt", path: ./rule-sets/telegram_ip.txt}
   oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
@@ -138,7 +137,7 @@ rules:
   # Социальные сети и мессенджеры и YouTube  
   - OR,((GEOSITE,telegram),(RULE-SET,telegram_ip)),Telegram
   - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN
-  - OR,((RULE-SET,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
+  - OR,((GEOSITE,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
   # Всякое
   - PROCESS-NAME,com.badoo.mobile,VPN
