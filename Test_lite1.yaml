@@ -32,13 +32,13 @@ proxy-providers:
   Mah_Eternity:
     type: http
     interval: 3600
-    url: "https://raw.githubusercontent.com/NickelTG/Configs/refs/heads/main/TestSRV"
-    path: ./proxy_providers/test.yml
+    url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt"
+    path: ./proxy_providers/tes2t.yml
     health-check:
       enable: true
       interval: 600
       url: http://connectivity-check.ubuntu.com
-      concurrency:
+      concurrency:1
       
 rules:
   - GEOSITE,google,DIRECT,no-resolve
