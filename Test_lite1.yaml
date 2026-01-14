@@ -1,0 +1,32 @@
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.67.1/16
+  listen: 0.0.0.0:1053
+  fake-ip-filter:    
+   # - "geosite:category-ai-!cn"    
+   # - "geosite:google"
+    - "+.googleapis.com"
+    - "+.gstatic.com"
+    - "+.google.com"
+    - "+.googleusercontent.com"
+    - "+.googlevideo.com" # Чтобы YouTube не тормозил на старте
+
+  default-nameserver:
+    - system
+    - 8.8.8.8
+
+  nameserver:
+    - system
+    - 8.8.8.8
+
+proxy-groups:
+  - name: VPN
+    type: select
+    proxies:
+      - DIRECT
+
+rules:
+  - GEOSITE,google,DIRECT
+  - MATCH,DIRECT
