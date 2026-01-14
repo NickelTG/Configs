@@ -30,7 +30,7 @@ proxy-groups:
       
   - name: AUTO
     type: url-test
-    url: https://www.youtube.com/generate_204
+    url: http://www.gstatic.com/generate_204
     interval: 100
     tolerance: 150
     lazy: true
@@ -42,4 +42,4 @@ proxy-providers:
 
 rules:
   - GEOSITE,google,DIRECT
-  - MATCH,DIRECT
+  - MATCH,VPN
