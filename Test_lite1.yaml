@@ -1,13 +1,3 @@
-profile:
-  store-selected: true
-  store-fake-ip: false # чтобы кэш не забивался
-
-interface-name: "" # Автоматический выбор интерфейса
-
-transport:
-  # Ограничение по времени для сокетов
-  dialer-timeout: 30
-
 dns:
   enable: true
   ipv6: false
@@ -42,13 +32,13 @@ proxy-providers:
   Mah_Eternity:
     type: http
     interval: 3600
-    url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt"
-    path: ./proxy_providers/eternity.yml
+    url: "https://raw.githubusercontent.com/NickelTG/Configs/refs/heads/main/TestSRV"
+    path: ./proxy_providers/test.yml
     health-check:
       enable: true
       interval: 600
       url: http://connectivity-check.ubuntu.com
-      concurrency: 5 # ОГРАНИЧЕНИЕ: тестировать только по 5 прокси одновременно
+      concurrency:
       
 rules:
   - GEOSITE,google,DIRECT,no-resolve
