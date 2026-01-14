@@ -31,7 +31,7 @@ proxy-groups:
       
   - name: AUTO
     type: url-test
-    url: http://connectivity-check.ubuntu.com
+    url: http://connectivity-check.ubuntu.com    
     interval: 1000
     tolerance: 150
     lazy: true
@@ -39,8 +39,17 @@ proxy-groups:
       - Mah_Eternity     
 
 proxy-providers:    
-  Mah_Eternity: {type: http, interval: 3600, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true} }
-
+  Mah_Eternity:
+    type: http
+    interval: 3600
+    url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt"
+    path: ./proxy_providers/eternity.yml
+    health-check:
+      enable: true
+      interval: 600
+      url: http://connectivity-check.ubuntu.com
+      concurrency: 5 # ОГРАНИЧЕНИЕ: тестировать только по 5 прокси одновременно
+      
 rules:
   - GEOSITE,google,DIRECT,no-resolve
   - DOMAIN-SUFFIX,tradingview.com,DIRECT,no-resolve
