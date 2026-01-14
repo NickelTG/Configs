@@ -1,17 +1,8 @@
 dns:
   enable: true
   ipv6: false
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.67.1/16
+  enhanced-mode: redir-host # Прямой резолв без подмены IP
   listen: 0.0.0.0:1053
-  fake-ip-filter:    
-   # - "geosite:category-ai-!cn"    
-   # - "geosite:google"
-    - "+.googleapis.com"
-    - "+.gstatic.com"
-    - "+.google.com"
-    - "+.googleusercontent.com"
-    - "+.googlevideo.com" # Чтобы YouTube не тормозил на старте
 
   default-nameserver:
     - system
@@ -31,14 +22,14 @@ proxy-groups:
   - name: AUTO
     type: url-test
     url: http://connectivity-check.ubuntu.com
-    interval: 100
+    interval: 1000
     tolerance: 150
     lazy: true
     use: &all_providers     
       - Mah_Eternity     
 
 proxy-providers:    
-  Mah_Eternity: {type: http, interval: 3600, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true} }
+  Mah_Eternity: {type: http, interval: 3600, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true, tfo: true} }
 
 rules:
   - GEOSITE,google,DIRECT
