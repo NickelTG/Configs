@@ -1,3 +1,13 @@
+profile:
+  store-selected: true
+  store-fake-ip: false # чтобы кэш не забивался
+
+interface-name: "" # Автоматический выбор интерфейса
+
+transport:
+  # Ограничение по времени для сокетов
+  dialer-timeout: 30
+
 dns:
   enable: true
   ipv6: false
@@ -29,9 +39,9 @@ proxy-groups:
       - Mah_Eternity     
 
 proxy-providers:    
-  Mah_Eternity: {type: http, interval: 3600, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true, tfo: true} }
+  Mah_Eternity: {type: http, interval: 3600, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true} }
 
 rules:
-  - GEOSITE,google,DIRECT
-  - DOMAIN-SUFFIX,tradingview.com,DIRECT
+  - GEOSITE,google,DIRECT,no-resolve
+  - DOMAIN-SUFFIX,tradingview.com,DIRECT,no-resolve
   - MATCH,VPN
