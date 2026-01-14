@@ -102,9 +102,9 @@ proxy-groups:
 common-settings: &common_filter
   type: http
   interval: 3600  
-  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
+  filter: "(?i)^(?=.*ss).*((?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*)$"
   exclude-filter: "duplicates"
-  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}    
+  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, concurrency: 5}    
 
 proxy-providers:    
   Mah_Eternity: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true, tfo: true, mptcp: true} }
@@ -148,7 +148,7 @@ rules:
   - DOMAIN-SUFFIX,flibusta.site,VPN
   - OR,((DOMAIN-SUFFIX,4pda.to),(DOMAIN-SUFFIX,4pda.ru),(PROCESS-NAME,ru.fourpda.client)),VPN
   - DOMAIN-SUFFIX,habr.com,VPN
-  #- GEOSITE,google,DIRECT
+  - GEOSITE,google,DIRECT
   
   # Заблокированные в РФ сайты
   - RULE-SET,ru-bundle,VPN  
@@ -157,7 +157,7 @@ rules:
   - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN,api.myip.com),(DOMAIN,ident.me),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
   
   # Блокировка рекламы
-  - RULE-SET,oisd_big,REJECT
+  #- RULE-SET,oisd_big,REJECT
   
   # Весь остальной трафик - напрямую  
   - MATCH,DIRECT
