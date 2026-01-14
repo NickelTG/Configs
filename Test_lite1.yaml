@@ -37,15 +37,8 @@ proxy-groups:
     use: &all_providers     
       - Mah_Eternity     
 
-common-settings: &common_filter
-  type: http
-  interval: 3600  
-  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
-  exclude-filter: "duplicates"
-  health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}    
-
 proxy-providers:    
-  Mah_Eternity: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true} }
+  Mah_Eternity: {type: http, interval: 3600, url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true} }
 
 rules:
   - GEOSITE,google,DIRECT
