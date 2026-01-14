@@ -109,7 +109,7 @@ common-settings: &common_filter
 
 proxy-providers:    
   Y9Felix_Best: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/y9felix_best.yml, override: {additional-prefix: "Y9F-", udp: true, tfo: true, mptcp: true} }
-  Ebr_Publist: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/vless_configs.txt", path: ./proxy_providers/ebrasha.yml, override: {additional-prefix: "EBR-", udp: true, tfo: true, mptcp: true} }
+  Ebr_Publist: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/ebrasha.yml, override: {additional-prefix: "EBR-", udp: true, tfo: true, mptcp: true} }
   #Mah_Eternity: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/eternity.yml, override: {additional-prefix: "ETN-", udp: true, tfo: true, mptcp: true} }  
   #AvenCores_24: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/sub_24.yml, override: {additional-prefix: "AVE-", udp: true, tfo: true, mptcp: true} }  
   #ForceRun_Vless: { <<: *common_filter, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-protocol/vless.txt", path: ./proxy_providers/forcerun_vless.yml, override: {additional-prefix: "FRС-", udp: true, tfo: true, mptcp: true} }
