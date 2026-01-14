@@ -11,6 +11,9 @@ dns:
   nameserver:
     - system
     - 8.8.8.8
+  
+  nameserver-policy:
+    "geosite:google,+.google.com,+.tradingview.com": ["system", "8.8.8.8"]
 
 proxy-groups:
   - name: VPN
