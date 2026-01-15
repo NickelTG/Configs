@@ -50,21 +50,14 @@ proxy-groups:
     interval: 200
     tolerance: 150
     lazy: true
-    use: &all_providers
-      - 1st
-      #- 2nd
-      #- 3rd
-      #- 4th
-      #- 5th
-      #- 6th
-      #- 7th
+    include-all: true    
 
   - name: FALLBACK
     type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 15
     lazy: false
-    use: *all_providers
+    include-all: true
 
   - name: BALANCE-HASH
     type: load-balance
@@ -72,7 +65,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 200
     strategy: consistent-hashing
-    use: *all_providers
+    include-all: true
 
   - name: BALANCE-RR
     type: load-balance
@@ -80,7 +73,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 200
     strategy: round-robin
-    use: *all_providers
+    include-all: true
     
   - name: Telegram
     type: select        
