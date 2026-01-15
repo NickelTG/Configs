@@ -144,6 +144,7 @@ rules:
   - GEOSITE,category-ai-!cn,AI&DEV
   
   # Социальные сети и мессенджеры и YouTube  
+  #- AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
   - OR,((GEOSITE,telegram),(RULE-SET,telegram_ip)),Telegram
   - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN  
   - AND,((NETWORK,UDP),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
