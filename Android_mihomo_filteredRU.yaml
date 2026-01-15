@@ -98,18 +98,18 @@ common-settings: &common_filter
   type: http
   interval: 3600
   exclude-type: "ss|shadowsocks|shadowsocksr"
-  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
+  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak|🏳️)).*$"
   exclude-filter: "duplicates"
   health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, concurrency: 5}    
 
 proxy-providers:    
-  1st: { <<: *common_filter, url: "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt", path: ./proxy_providers/1st.yml, override: {additional-prefix: "1#", udp: true, tfo: true, mptcp: true} }
-  #2nd: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/2nd.yml, override: {additional-prefix: "2#", udp: true, tfo: true, mptcp: true} }
-  #3rd: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/3rd.yml, override: {additional-prefix: "3#", udp: true, tfo: true, mptcp: true} }
-  #4th: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/4th.yml, override: {additional-prefix: "4#", udp: true, tfo: true, mptcp: true} }  
-  #5th: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5#", udp: true, tfo: true, mptcp: true} }   
-  #6th: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/6th.yml, override: {additional-prefix: "6#", udp: true, tfo: true, mptcp: true} }  
-  #7th: { <<: *common_filter, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-protocol/vless.txt", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7#", udp: true, tfo: true, mptcp: true} }  
+  1st: { <<: *common_filter, url: "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt", path: ./proxy_providers/1st.yml, override: {additional-prefix: "1# ", udp: true, tfo: true, mptcp: true} }
+  #2nd: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/2nd.yml, override: {additional-prefix: "2# ", udp: true, tfo: true, mptcp: true} }
+  #3rd: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/3rd.yml, override: {additional-prefix: "3# ", udp: true, tfo: true, mptcp: true} }
+  #4th: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/4th.yml, override: {additional-prefix: "4# ", udp: true, tfo: true, mptcp: true} }  
+  #5th: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5# ", udp: true, tfo: true, mptcp: true} }   
+  #6th: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/6th.yml, override: {additional-prefix: "6# ", udp: true, tfo: true, mptcp: true} }  
+  #7th: { <<: *common_filter, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-protocol/vless.txt", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7# ", udp: true, tfo: true, mptcp: true} }  
 
 rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
