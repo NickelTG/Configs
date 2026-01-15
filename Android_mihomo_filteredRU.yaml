@@ -58,7 +58,7 @@ proxy-groups:
       #- 5th
       #- 6th
       #- 7th
-	  
+
   - name: FALLBACK
     type: fallback
     url: http://www.gstatic.com/generate_204
