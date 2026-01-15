@@ -63,7 +63,7 @@ proxy-groups:
     type: fallback
     url: http://www.gstatic.com/generate_204
     interval: 15
-    lazy: true
+    lazy: false
     use: *all_providers
 
   - name: BALANCE-HASH
