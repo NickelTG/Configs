@@ -11,7 +11,7 @@ dns:
   enable: true
   ipv6: false
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.67.1/16
+  fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:1053
   fake-ip-filter:    
     - "geosite:category-ai-!cn"
