@@ -145,15 +145,15 @@ rules:
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
   - RULE-SET,torrent-websites,VPN
+  - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT # Заставит YouTube перейти на TCP (Убираем QUIC полностью)
       
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
   
-  # Социальные сети и мессенджеры и YouTube  
-  #- AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
+  # Социальные сети и мессенджеры и YouTube    
   - OR,((GEOSITE,telegram),(RULE-SET,telegram_ip)),Telegram
   - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN  
-  - AND,((NETWORK,UDP),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
+  #- AND,((NETWORK,UDP),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
   - OR,((GEOSITE,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
   # Всякое
