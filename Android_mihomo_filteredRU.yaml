@@ -1,26 +1,26 @@
 unified-delay: true
 tcp-concurrent: true
 global-client-fingerprint: chrome
-keep-alive-interval: 1200
+keep-alive-interval: 1000
 max-connections: 300
 
 hosts:
   'ntc.party': 130.255.77.28
 
+#dns:
+ # enable: true
+  #ipv6: false
+  #enhanced-mode: redir-host # Прямой резолв без подмены IP
+  #listen: 0.0.0.0:1053
+
 dns:
   enable: true
   ipv6: false
-  enhanced-mode: redir-host # Прямой резолв без подмены IP
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:1053
-
-#dns:
-  #enable: true
-  #ipv6: false
-  #enhanced-mode: fake-ip
-  #fake-ip-range: 198.18.0.1/16
-  #listen: 0.0.0.0:1053
- # fake-ip-filter:    
-#    - "geosite:category-ai-!cn"
+  fake-ip-filter:    
+    - "geosite:category-ai-!cn"
 
   default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
     - 8.8.8.8    
@@ -117,6 +117,7 @@ common-settings: &common_filter
   interval: 3600
   exclude-type: "ss|shadowsocks|shadowsocksr"
   filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
+  exclude-asn: [9002,12389,42610,25513,8359,51604,31133,34533,3216,28709,20485,41722,24638,13238,50340,49505,48282,1586,47764,201706,41095,28917,44484,39832,25532,39045,48084,12695,48187,59947,57363,35598,41934,57277,48642,42410,35807,39728,43182,29182,50473,48347,47541,60996,57146,41039,56630,50245,48933,41985,61307,41798,50764,35539,197695,51032,56430,48524,57223,25549,49877,39087,48376,41460,59779,48283,42501,60887,35549,59616,49418,41745,31213,28968,51028,50293,39582,43317,57269,49673,48145,51248,41797,59789,57456,50313,39591,47314,61068,48858,61116,39318,197068,48629,49403,56536,42437,59489,43218,59632,39821,49368,47945,42145,61293,48767,39421,57071,59989,61384,39845,48112,50875,57113,42148,39020,60495]
   exclude-filter: "duplicates"
   health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, concurrency: 5}    
 
