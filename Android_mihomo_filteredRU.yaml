@@ -129,7 +129,8 @@ proxy-providers:
   #4th: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/4th.yml, override: {additional-prefix: "4# ", udp: true, tfo: true, mptcp: true} }  
   #5th: { <<: *common_filter, url: "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/meta/mix", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5# ", udp: true, tfo: true, mptcp: true} }   
   #6th: { <<: *common_filter, url: "https://raw.githubusercontent.com/Mahdi0024/ProxyCollector/refs/heads/master/sub/proxies.txt", path: ./proxy_providers/6th.yml, override: {additional-prefix: "6# ", udp: true, tfo: true, mptcp: true} }  
-  #7th: { <<: *common_filter, url: "https://raw.githubusercontent.com/ndsphonemy/proxy-sub/main/speed.txt", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7# ", udp: true, tfo: true, mptcp: true} }  
+  #7th: { <<: *common_filter, url: "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet.txt", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7# ", udp: true, tfo: true, mptcp: true} }  
+  #8th: { <<: *common_filter, url: "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub", path: ./proxy_providers/8th.yml, override: {additional-prefix: "8# ", udp: true, tfo: true, mptcp: true} }  
   
   #WL1: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/WL1.yml, override: {additional-prefix: "WL1 ", udp: true, tfo: true, mptcp: true} }
   #WL2: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt", path: ./proxy_providers/WL2.yml, override: {additional-prefix: "WL2 ", udp: true, tfo: true, mptcp: true} }
