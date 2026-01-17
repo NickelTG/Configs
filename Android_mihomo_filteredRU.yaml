@@ -44,13 +44,13 @@ dns:
       - tls://8.8.8.8      
       - 77.88.8.8
 
-# sniffer:
-  # enable: true
-  # parse-pure-ip: true
-  # sniff:
-    # TLS:
-      # ports: [443, 8443]
-      # override-destination: false
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+      override-destination: false
 
 proxy-groups:
   - name: VPN
@@ -117,7 +117,6 @@ common-settings: &common_filter
   interval: 3600
   exclude-type: "ss|shadowsocks|shadowsocksr"
   filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|SPB|[а-яА-Я]|STR|freak)).*$"
-  exclude-asn: [9002,12389,42610,25513,8359,51604,31133,34533,3216,28709,20485,201706,41095,13238,50340,49505,48282,1586,47764,41722,24638,28917,44484,39832,39045,48084,48283,42501,25532,28968,31213,41934,48642]
   exclude-filter: "duplicates"
   health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, concurrency: 5}    
 
@@ -177,7 +176,7 @@ rules:
   - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN,api.myip.com),(DOMAIN,ident.me),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
   
   # Блокировка рекламы
-  #- RULE-SET,oisd_big,REJECT
+  - RULE-SET,oisd_big,REJECT
   
   # Весь остальной трафик - напрямую  
   - MATCH,DIRECT
