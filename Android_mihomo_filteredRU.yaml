@@ -67,7 +67,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 200
     tolerance: 150
-    max-failed-times: 3
+    #max-failed-times: 3
     lazy: true
     include-all: true    
 
@@ -129,7 +129,7 @@ proxy-providers:
   #4th: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/4th.yml, override: {additional-prefix: "4# ", udp: true, tfo: true, mptcp: true} }  
   #5th: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5# ", udp: true, tfo: true, mptcp: true} }   
   #6th: { <<: *common_filter, url: "https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/24.txt", path: ./proxy_providers/6th.yml, override: {additional-prefix: "6# ", udp: true, tfo: true, mptcp: true} }  
-  #7th: { <<: *common_filter, url: "https://raw.githubusercontent.com/F0rc3Run/F0rc3Run/refs/heads/main/splitted-by-protocol/vless.txt", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7# ", udp: true, tfo: true, mptcp: true} }  
+  #7th: { <<: *common_filter, url: "https://raw.githubusercontent.com/Firmfox/Proxify/refs/heads/main/v2ray_configs/seperated_by_protocol/other.txt", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7# ", udp: true, tfo: true, mptcp: true} }  
   
   #WL1: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/WL1.yml, override: {additional-prefix: "WL1 ", udp: true, tfo: true, mptcp: true} }
   #WL2: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt", path: ./proxy_providers/WL2.yml, override: {additional-prefix: "WL2 ", udp: true, tfo: true, mptcp: true} }
