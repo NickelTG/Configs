@@ -10,7 +10,7 @@ hosts:
 dns:
   enable: true
   ipv6: false
-  enhanced-mode: redir-host # Прямой резолв без подмены IP
+  enhanced-mode: redir-host
   listen: 0.0.0.0:1053
 
 #dns:
@@ -44,22 +44,22 @@ dns:
       - tls://8.8.8.8      
       - 77.88.8.8
 
-sniffer:
-  enable: true
-  parse-pure-ip: true
-  sniff:
-    TLS:
-      ports: [443, 8443]
-      override-destination: false
+#sniffer:
+  #enable: true
+  #parse-pure-ip: true
+  #sniff:
+    #TLS:
+      #ports: [443, 8443]
+      #override-destination: false
 
 proxy-groups:
   - name: VPN
     type: select
     proxies:
       - AUTO
+      - FALLBACK
       - BALANCE-HASH    
       - BALANCE-RR      
-      - FALLBACK
       - DIRECT
 
   - name: AUTO
@@ -72,6 +72,7 @@ proxy-groups:
 
   - name: FALLBACK
     type: fallback
+    hidden: true
     url: http://www.gstatic.com/generate_204
     interval: 15
     lazy: false
@@ -150,9 +151,9 @@ rules:
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
   
-  # Социальные сети и мессенджеры и YouTube    
+  # Социальные сети и мессенджеры и YouTube
   - OR,((GEOSITE,telegram),(RULE-SET,telegram_ip)),Telegram
-  - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN  
+  - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN
   #- AND,((NETWORK,UDP),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
   - OR,((GEOSITE,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
