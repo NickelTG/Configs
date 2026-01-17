@@ -7,20 +7,20 @@ max-connections: 300
 hosts:
   'ntc.party': 130.255.77.28
 
-#dns:
- # enable: true
-  #ipv6: false
-  #enhanced-mode: redir-host # Прямой резолв без подмены IP
-  #listen: 0.0.0.0:1053
-
 dns:
   enable: true
   ipv6: false
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
+  enhanced-mode: redir-host # Прямой резолв без подмены IP
   listen: 0.0.0.0:1053
-  fake-ip-filter:    
-    - "geosite:category-ai-!cn"
+
+#dns:
+  #enable: true
+  #ipv6: false
+  #enhanced-mode: fake-ip
+  #fake-ip-range: 198.18.0.1/16
+  #listen: 0.0.0.0:1053
+  #fake-ip-filter:    
+    #- "geosite:category-ai-!cn"
 
   default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
     - 8.8.8.8    
@@ -46,11 +46,11 @@ dns:
 
 # sniffer:
   # enable: true
-  # parse-pure-ip: true  
-  # sniff:    
+  # parse-pure-ip: true
+  # sniff:
     # TLS:
       # ports: [443, 8443]
-      # override-destination: false  
+      # override-destination: false
 
 proxy-groups:
   - name: VPN
