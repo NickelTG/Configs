@@ -127,7 +127,7 @@ proxy-providers:
   #2nd: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/2nd.yml, override: {additional-prefix: "2# ", udp: true, tfo: true, mptcp: true} }
   3rd: { <<: *common_filter, url: "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/3rd.yml, override: {additional-prefix: "3# ", udp: true, tfo: true, mptcp: true} }
   #4th: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/4th.yml, override: {additional-prefix: "4# ", udp: true, tfo: true, mptcp: true} }  
-  #5th: { <<: *common_filter, url: "https://https://github.com/AvenCores/goida-vpn-configs/raw/refs/heads/main/githubmirror/6.txt", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5# ", udp: true, tfo: true, mptcp: true} }   
+  #5th: { <<: *common_filter, url: "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/meta/mix", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5# ", udp: true, tfo: true, mptcp: true} }   
   #6th: { <<: *common_filter, url: "https://raw.githubusercontent.com/Mahdi0024/ProxyCollector/refs/heads/master/sub/proxies.txt", path: ./proxy_providers/6th.yml, override: {additional-prefix: "6# ", udp: true, tfo: true, mptcp: true} }  
   #7th: { <<: *common_filter, url: "https://raw.githubusercontent.com/Firmfox/Proxify/refs/heads/main/v2ray_configs/seperated_by_protocol/other.txt", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7# ", udp: true, tfo: true, mptcp: true} }  
   
