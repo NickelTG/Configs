@@ -69,7 +69,8 @@ proxy-groups:
     tolerance: 150
     max-failed-times: 3
     lazy: true
-    include-all: true    
+    include-all: true
+    filter: '^(?!WARP$).*'
 
   - name: FALLBACK
     type: fallback
@@ -78,6 +79,7 @@ proxy-groups:
     interval: 15
     lazy: false
     include-all: true
+    filter: '^(?!WARP$).*'
 
   - name: BALANCE-HASH
     type: load-balance
@@ -86,6 +88,7 @@ proxy-groups:
     interval: 200
     strategy: consistent-hashing
     include-all: true
+    filter: '^(?!WARP$).*'
 
   - name: BALANCE-RR
     type: load-balance
@@ -94,6 +97,7 @@ proxy-groups:
     interval: 200
     strategy: round-robin
     include-all: true
+    filter: '^(?!WARP$).*'
     
   - name: Telegram
     type: select        
@@ -158,7 +162,7 @@ proxy-providers:
   #5th: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5# ", udp: true, tfo: true, mptcp: true} }   
   #6th: { <<: *common_filter, url: "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub", path: ./proxy_providers/6th.yml, override: {additional-prefix: "6# ", udp: true, tfo: true, mptcp: true} }  
   #7th: { <<: *common_filter, url: "hhttps://raw.githubusercontent.com/liketolivefree/kobabi/refs/heads/main/sub.txt", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7# ", udp: true, tfo: true, mptcp: true} }  
-  8th: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=50&url=https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Finland.txt", path: ./proxy_providers/8th.yml, override: {additional-prefix: "8# ", udp: true, tfo: true, mptcp: true} }   
+  8th: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=50&url=https://raw.githubusercontent.com/SoliSpirit/v2ray-configs/refs/heads/main/Countries/Germany.txt", path: ./proxy_providers/8th.yml, override: {additional-prefix: "8# ", udp: true, tfo: true, mptcp: true} }   
   9th: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=50&url=https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/refs/heads/main/Config/vless.txt", path: ./proxy_providers/9th.yml, override: {additional-prefix: "9# ", udp: true, tfo: true, mptcp: true} }   
   
   #WL1: { <<: *common_filter, url: "https://raw.githubusercontent.com/Kirillo4ka/vpn-configs-for-russia/refs/heads/main/Vless-Rus-Mobile-White-List.txt", path: ./proxy_providers/WL1.yml, override: {additional-prefix: "WL1 ", udp: true, tfo: true, mptcp: true} }
