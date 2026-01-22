@@ -154,7 +154,7 @@ proxies:
     public-key: RGkflpj8nU73t7WgEmZQ45f+wF1QM3fDiKjimp5iCGA=
     allowed-ips: ['0.0.0.0/0']    
     udp: true
-    dns: 10.2.0.1
+    dns: [10.2.0.1]
     server: 185.177.124.84
     port: 51820
     amnezia-wg-option:
