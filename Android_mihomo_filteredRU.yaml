@@ -70,7 +70,7 @@ proxy-groups:
     max-failed-times: 3
     lazy: true
     include-all: true
-    filter: '^(?!AWG-$).*'
+    filter: '^(?!AWG-).*'
 
   - name: FALLBACK
     type: fallback
@@ -79,7 +79,7 @@ proxy-groups:
     interval: 15
     lazy: false
     include-all: true
-    filter: '^(?!AWG-$).*'
+    filter: '^(?!AWG-).*'
 
   - name: BALANCE-HASH
     type: load-balance
@@ -88,7 +88,7 @@ proxy-groups:
     interval: 200
     strategy: consistent-hashing
     include-all: true
-    filter: '^(?!AWG-$).*'
+    filter: '^(?!AWG-).*'
 
   - name: BALANCE-RR
     type: load-balance
@@ -97,7 +97,7 @@ proxy-groups:
     interval: 200
     strategy: round-robin
     include-all: true
-    filter: '^(?!AWG-$).*'
+    filter: '^(?!AWG-).*'
     
   - name: Telegram
     type: select        
