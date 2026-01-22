@@ -112,7 +112,7 @@ proxy-groups:
       - BALANCE-RR      
       - DIRECT
       - AWG-WARP
-      - AWG-Proton
+#      - AWG-Proton
 
   - name: AI&DEV
     type: select    
