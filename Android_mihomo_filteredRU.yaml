@@ -173,7 +173,8 @@ common-settings: &common_filter
   type: http
   interval: 3600
   exclude-type: "ss|shadowsocks|shadowsocksr"
-  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|US|[а-яА-Я]|STR|freak)).*$"
+  #filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|US|[а-яА-Я]|STR|freak)).*$"
+  filter: "(?i)(DE|Germany|NL|Netherlands|FI|Finland|LT|Lithuania|LV|Latvia|EE|Estonia|FR|France|GB|UK|United Kingdom|PL|Poland|SE|Sweden)"
   exclude-filter: "duplicates"
   health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, concurrency: 5}    
 
