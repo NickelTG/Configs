@@ -174,7 +174,7 @@ common-settings: &common_filter
   interval: 3600
   exclude-type: "ss|shadowsocks|shadowsocksr"
   #filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|US|[а-яА-Я]|STR|freak)).*$"
-  filter: "(?i)(?!🇺🇸)(DE|Germany|🇩🇪|NL|Netherlands|🇳🇱|FI|Finland|🇫🇮|LT|Lithuania|🇱🇹|LV|Latvia|🇱🇻|EE|Estonia|🇪🇪|FR|France|🇫🇷|GB|UK|🇬🇧|PL|Poland|🇵🇱|SE|Sweden|🇸🇪|IT|Italy|🇮🇹|CH|Switzerland|🇨🇭|AT|Austria|🇦🇹|CZ|Czech|🇨🇿|GE|Georgia|🇬🇪|AM|Armenia|🇦🇲|KZ|Kazakhstan|🇰🇿|MD|Moldova|🇲🇩|RS|Serbia|🇷🇸|KG|Kyrgyzstan|🇰🇬|UZ|Uzbekistan|🇺🇿)"
+  filter: "(?i)^(?!.*shatak).*(DE|Germany|🇩🇪|NL|Netherlands|🇳🇱|FI|Finland|🇫🇮|LT|Lithuania|🇱🇹|LV|Latvia|🇱🇻|EE|Estonia|🇪🇪|FR|France|🇫🇷|GB|UK|🇬🇧|PL|Poland|🇵🇱|SE|Sweden|🇸🇪|IT|Italy|🇮🇹|CH|Switzerland|🇨🇭|AT|Austria|🇦🇹|CZ|Czech|🇨🇿|GE|Georgia|🇬🇪|AM|Armenia|🇦🇲|KZ|Kazakhstan|🇰🇿|MD|Moldova|🇲🇩|RS|Serbia|🇷🇸|KG|Kyrgyzstan|🇰🇬|UZ|Uzbekistan|🇺🇿)"
   exclude-filter: "duplicates"
   health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, concurrency: 5}    
 
