@@ -132,6 +132,7 @@ proxies:
     reserved: [10, 236, 129]
     udp: true
     mtu: 1280
+    keepalive: 15
     remote-dns-resolve: true
     dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
     server: 162.159.192.1
