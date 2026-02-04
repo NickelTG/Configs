@@ -256,7 +256,7 @@ rules:
   - PROCESS-NAME,ru.pepper,DIRECT
   - DOMAIN,lens-pa.googleapis.com,DIRECT
   - DOMAIN-SUFFIX,flibusta.site,VPN
-  - DOMAIN-SUFFIX,alreader.com,AWG-WARP
+  - DOMAIN-SUFFIX,alreader.com,VPN
   - PROCESS-NAME,com.duolingo,DIRECT
   - OR,((DOMAIN-SUFFIX,4pda.to),(DOMAIN-SUFFIX,4pda.ru),(PROCESS-NAME,ru.fourpda.client)),VPN
   - DOMAIN-SUFFIX,habr.com,VPN
