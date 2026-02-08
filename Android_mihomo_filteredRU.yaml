@@ -32,12 +32,15 @@ dns:
     - tls://9.9.9.9
     
   nameserver-policy:
-    "geosite:category-ai-!cn":
-      - tls://xbox-dns.ru
-      - https://router.comss.one/dns-query
-      - https://dns.geohide.ru:444/dns-query      
-      - tls://dot.dns.astracat.ru
-      - tls://dns.mafioznik.xyz
+    "geosite:category-ai-!cn":      
+      - tls://dns.comss.one
+      #- tls://xbox-dns.ru
+      #- tls://dns.geohide.ru
+      #- tls://dns.malw.link
+      #- tls://free.shecan.ir
+      #- tls://dot.dns.astracat.ru
+      #- tls://dns.mafioznik.xyz
+      #- https://router.comss.one/dns-query
     "rule-set:ru-bundle": *main_dns
     "geoip:ru":
       - tls://common.dot.dns.yandex.net
@@ -214,7 +217,7 @@ proxy-providers:
   #5th: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_VLESS_RUS_mobile.txt", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5# ", udp: true, tfo: true, mptcp: true} }
   #6th: { <<: *common_filter, url: "https://raw.githubusercontent.com/Chm0kes/ssclprlist/refs/heads/main/sslist.txt", path: ./proxy_providers/6th.yml, override: {additional-prefix: "6# ", udp: true, tfo: true, mptcp: true} }
   #7th: { <<: *common_filter, url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/Eternity.yml", path: ./proxy_providers/7th.yml, override: {additional-prefix: "7# ", udp: true, tfo: true, mptcp: true} }  
-  8th: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=200&url=https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/8th.yml, override: {additional-prefix: "8# ", udp: true, tfo: true, mptcp: true} }   
+  #8th: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=200&url=https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha.txt", path: ./proxy_providers/8th.yml, override: {additional-prefix: "8# ", udp: true, tfo: true, mptcp: true} }   
   9th: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=100&url=https://raw.githubusercontent.com/barry-far/V2ray-config/main/Sub1.txt", path: ./proxy_providers/9th.yml, override: {additional-prefix: "9# ", udp: true, tfo: true, mptcp: true} }  
   #10th: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=50&url=https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/refs/heads/main/Config/vless.txt", path: ./proxy_providers/10th.yml, override: {additional-prefix: "10# ", udp: true, tfo: true, mptcp: true} }    
   #11th: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=50&url=https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/detailed/vless/443.txt", path: ./proxy_providers/11th.yml, override: {additional-prefix: "11# ", udp: true, tfo: true, mptcp: true} }   
