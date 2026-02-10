@@ -16,10 +16,11 @@ dns:
 #dns:
   #enable: true
   #ipv6: false
-  #enhanced-mode: fake-ip
-  #fake-ip-range: 198.18.0.1/16
   #listen: 0.0.0.0:1053
-  #fake-ip-filter:    
+  #enhanced-mode: fake-ip
+  #fake-ip-range: 198.46.0.1/16  
+  #fake-ip-filter:   
+    #- "geoip:ru"      
     #- "geosite:category-ai-!cn"
 
   default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
@@ -34,7 +35,7 @@ dns:
   nameserver-policy:
     "geosite:category-ai-!cn":      
       - tls://dns.comss.one
-      #- tls://xbox-dns.ru
+      - tls://xbox-dns.ru
       #- tls://dns.geohide.ru
       #- tls://dns.malw.link
       #- tls://free.shecan.ir
