@@ -23,7 +23,7 @@ dns:
     #- "geoip:ru"      
     #- "geosite:category-ai-!cn"
 
-  default-nameserver: # DNS для определения IP самих прокси-серверов (строго системные или быстрые локальные)
+  default-nameserver: # DNS определения IP самих прокси-серверов
     - 8.8.8.8    
     - 77.88.8.8
   
@@ -33,14 +33,14 @@ dns:
     - tls://9.9.9.9
     
   nameserver-policy:
-    "geosite:category-ai-!cn":      
-      #- tls://dns.comss.one
+    "geosite:category-ai-!cn,rule-set:geo-unblock":      
       - tls://xbox-dns.ru
       - tls://dns.geohide.ru
       #- tls://dns.malw.link
-      #- tls://free.shecan.ir
+      #- tls://dns.comss.one      
       #- tls://dot.dns.astracat.ru
       #- tls://dns.mafioznik.xyz
+      #- tls://free.shecan.ir
       #- https://router.comss.one/dns-query
     "rule-set:ru-bundle": *main_dns
     "geoip:ru":
@@ -238,6 +238,14 @@ rule-providers:
   torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}      
   telegram_ip: {type: http, behavior: ipcidr, format: text, interval: 86400, url: "https://core.telegram.org/resources/cidr.txt", path: ./rule-sets/telegram_ip.txt}  
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
+  geo-unblock:
+  type: inline
+  behavior: classical    
+  payload:
+    - DOMAIN,api.github.com
+    #- DOMAIN,copilot-proxy.githubusercontent.com      
+    #- DOMAIN,origin-tracker.githubusercontent.com
+    #- DOMAIN-SUFFIX,marketplace.visualstudio.com    
 
 rules:  
   # Торренты
