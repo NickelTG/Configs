@@ -33,7 +33,7 @@ dns:
     - tls://9.9.9.9
     
   nameserver-policy:
-    "geosite:category-ai-!cn,rule-set:geo-unblock":      
+    "geosite:category-ai-!cn": &unblock_dns
       - tls://xbox-dns.ru
       - tls://dns.geohide.ru
       #- tls://dns.malw.link
@@ -42,6 +42,7 @@ dns:
       #- tls://dns.mafioznik.xyz
       #- tls://free.shecan.ir
       #- https://router.comss.one/dns-query
+    "rule-set:geo-unblock": *unblock_dns
     "rule-set:ru-bundle": *main_dns
     "geoip:ru":
       - tls://common.dot.dns.yandex.net
