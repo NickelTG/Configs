@@ -239,13 +239,13 @@ rule-providers:
   telegram_ip: {type: http, behavior: ipcidr, format: text, interval: 86400, url: "https://core.telegram.org/resources/cidr.txt", path: ./rule-sets/telegram_ip.txt}  
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
   geo-unblock:
-  type: inline
-  behavior: classical    
-  payload:
-    - DOMAIN,api.github.com
-    #- DOMAIN,copilot-proxy.githubusercontent.com      
-    #- DOMAIN,origin-tracker.githubusercontent.com
-    #- DOMAIN-SUFFIX,marketplace.visualstudio.com    
+    type: inline
+    behavior: classical    
+    payload:
+      - DOMAIN,api.github.com
+      #- DOMAIN,copilot-proxy.githubusercontent.com      
+      #- DOMAIN,origin-tracker.githubusercontent.com
+      #- DOMAIN-SUFFIX,marketplace.visualstudio.com    
 
 rules:  
   # Торренты
