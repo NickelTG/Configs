@@ -35,7 +35,7 @@ dns:
   nameserver-policy:
     "geosite:category-ai-!cn": &unblock_dns
       - tls://xbox-dns.ru
-      - tls://dns.geohide.ru
+      #- tls://dns.geohide.ru
       #- tls://dns.malw.link
       #- tls://dns.comss.one      
       #- tls://dot.dns.astracat.ru
@@ -244,7 +244,7 @@ rule-providers:
     behavior: classical    
     payload:
       - DOMAIN,api.github.com
-      #- DOMAIN,copilot-proxy.githubusercontent.com      
+      - DOMAIN,copilot-proxy.githubusercontent.com      
       #- DOMAIN,origin-tracker.githubusercontent.com
       #- DOMAIN-SUFFIX,marketplace.visualstudio.com    
 
