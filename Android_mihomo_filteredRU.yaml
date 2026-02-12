@@ -228,7 +228,7 @@ proxy-providers:
   #15th: { <<: *common_filter, url: "https://raw.githubusercontent.com/ssrsub/ssr/master/v2ray", path: ./proxy_providers/15th.yml, override: {additional-prefix: "15# ", udp: true, tfo: true, mptcp: true} }
   #16th: { <<: *common_filter, url: "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub", path: ./proxy_providers/16th.yml, override: {additional-prefix: "16# ", udp: true, tfo: true, mptcp: true} }
   
-  #WL1: { <<: *common_filter, url: "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/default/22.txt", path: ./proxy_providers/WL1.yml, override: {additional-prefix: "WL1 ", udp: true, tfo: true, mptcp: true} }
+  #WL1: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=100&url=https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/default/22.txt", path: ./proxy_providers/WL1.yml, override: {additional-prefix: "WL1 ", udp: true, tfo: true, mptcp: true} }
   #WL2: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt", path: ./proxy_providers/WL2.yml, override: {additional-prefix: "WL2 ", udp: true, tfo: true, mptcp: true} }
   #WL3: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/WL3.yml, override: {additional-prefix: "WL3 ", udp: true, tfo: true, mptcp: true} }
 
