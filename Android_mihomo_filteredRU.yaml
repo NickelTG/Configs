@@ -85,6 +85,17 @@ proxy-groups:
     include-all: true
     filter: '^(?!AWG-).*'
 
+  - name: VPN-bbDPI
+    type: fallback
+    hidden: true
+    url: http://www.gstatic.com/generate_204
+    interval: 30
+    lazy: false
+    max-failed-times: 2
+    proxies:
+      - ByeByeDPI
+      - VPN
+
   - name: BALANCE-HASH
     type: load-balance
     hidden: true
@@ -113,6 +124,7 @@ proxy-groups:
     type: select        
     proxies:
       - VPN
+      - VPN-bbDPI
       - BALANCE-RR
       - DIRECT
       - ByeByeDPI
