@@ -115,6 +115,7 @@ proxy-groups:
       - VPN
       - BALANCE-RR
       - DIRECT
+      - ByeByeDPI
       - AWG-WARP
       - AWG-WARP_STR.WARP54258
       - AWG-Proton
@@ -201,6 +202,12 @@ proxies:
       h2: 2
       h3: 3
       h4: 4
+
+- name: ByeByeDPI
+    type: socks5
+    server: 127.0.0.1
+    port: 2081
+    udp: true
 
 common-settings: &common_filter
   type: http
