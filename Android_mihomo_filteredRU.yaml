@@ -203,7 +203,7 @@ proxies:
       h3: 3
       h4: 4
 
-- name: ByeByeDPI
+  - name: ByeByeDPI
     type: socks5
     server: 127.0.0.1
     port: 2081
