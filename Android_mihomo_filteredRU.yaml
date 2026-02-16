@@ -81,6 +81,7 @@ proxy-groups:
     type: fallback
     hidden: true
     url: http://cp.cloudflare.com/generate_204
+    #url: https://speed.cloudflare.com/__down?bytes=1000
     interval: 50
     lazy: true
     proxies:
@@ -222,7 +223,7 @@ common-settings: &common_filter
   exclude-type: "ss|shadowsocks|shadowsocksr"  
   filter: '(?i)^(?!.*(shatak|ir|iran)).*(🇩🇪|🇳🇱|🇫🇮|🇱🇹|🇱🇻|🇪🇪|🇫🇷|🇬🇧|🇵🇱|🇸🇪|🇮🇹|🇨🇭|🇦🇹|🇨🇿|🇬🇪|🇦🇲|🇰🇿|🇲🇩|🇷🇸|🇰🇬|🇺🇿|🇹🇷|🇧🇬|🇷🇴|🇱🇺|\b(DE|Germany|NL|Netherlands|FI|Finland|LT|Lithuania|LV|Latvia|EE|Estonia|FR|France|GB|UK|PL|Poland|SE|Sweden|IT|Italy|CH|Switzerland|AT|Austria|CZ|Czech|GE|Georgia|AM|Armenia|KZ|Kazakhstan|MD|Moldova|RS|Serbia|KG|Kyrgyzstan|UZ|Uzbekistan|TR|Turkey|BG|Bulgaria|RO|Romania|LU|Luxembourg)\b)'
   exclude-filter: "duplicates"
-  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, concurrency: 3}    
+  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, timeout: 1500, concurrency: 3}    
 
 proxy-providers:
   1st: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=100&url=https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/1st.yml, override: {additional-prefix: "1# ", udp: true, tfo: true, mptcp: true} }
