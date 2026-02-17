@@ -79,14 +79,14 @@ proxy-groups:
 
   - name: AUTO+
     type: fallback
-    hidden: true
-    url: http://cp.cloudflare.com/generate_204
-    #url: https://speed.cloudflare.com/__down?bytes=1000
+    hidden: true    
+    url: https://speed.cloudflare.com/__down?bytes=1000
     interval: 50
     lazy: true
     proxies:
       - AUTO
       - FALLBACK
+      - BALANCE-RR
 
   - name: FALLBACK
     type: fallback
