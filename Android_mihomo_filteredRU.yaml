@@ -279,8 +279,9 @@ rules:
   
   # Всякое
   - PROCESS-NAME,com.badoo.mobile,VPN
-  - PROCESS-NAME,com.bumble.app,VPN  
+  - PROCESS-NAME,com.bumble.app,VPN
   - PROCESS-NAME,app.bumpy.android,DIRECT
+  - PROCESS-NAME,ru.aviasales,DIRECT
   - PROCESS-NAME,com.tantantribe.tribe,VPN
   - PROCESS-NAME,ru.pepper,DIRECT
   - DOMAIN,lens-pa.googleapis.com,DIRECT
