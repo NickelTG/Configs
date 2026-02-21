@@ -226,7 +226,7 @@ common-settings: &common_filter
 
 proxy-providers:
   1st: { <<: *common_filter, url: "https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/1st.yml, override: {additional-prefix: "1# ", udp: true, tfo: true, mptcp: true} }
-  #2nd: { <<: *common_filter, url: "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt", path: ./proxy_providers/2nd.yml, override: {additional-prefix: "2# ", udp: true, tfo: true, mptcp: true} }
+  2nd: { <<: *common_filter, url: "https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_RAW.txt", path: ./proxy_providers/2nd.yml, override: {additional-prefix: "2# ", udp: true, tfo: true, mptcp: true} }
   #3rd: { <<: *common_filter, url: "https://raw.githubusercontent.com/wuqb2i4f/xray-config-toolkit/refs/heads/main/output/base64/mix-security-re", path: ./proxy_providers/3rd.yml, override: {additional-prefix: "3# ", udp: true, tfo: true, mptcp: true} }
   #4th: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_SS+All_RUS.txt", path: ./proxy_providers/4th.yml, override: {additional-prefix: "4# ", udp: true, tfo: true, mptcp: true} }
   5th: { <<: *common_filter, url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_VLESS_RUS_mobile.txt", path: ./proxy_providers/5th.yml, override: {additional-prefix: "5# ", udp: true, tfo: true, mptcp: true} }
