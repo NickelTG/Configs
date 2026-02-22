@@ -142,7 +142,7 @@ proxy-groups:
       - DIRECT      
       - AWG-WARP
       - AWG-WARP_STR.WARP54258
-      - AWG-Proton_NO-6
+      - AWG-Proton_NL-104
 
   - name: AI&DEV
     type: select    
