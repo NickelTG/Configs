@@ -316,6 +316,9 @@ rules:
   - DOMAIN-SUFFIX,nasvyazi.org,VPN
   - OR,((DOMAIN-SUFFIX,4pda.to),(DOMAIN-SUFFIX,4pda.ru),(PROCESS-NAME,ru.fourpda.client)),VPN
   - DOMAIN-SUFFIX,habr.com,VPN
+  - DOMAIN-SUFFIX,morningstar.com,VPN
+  - DOMAIN-SUFFIX,justetf.com,VPN
+  - DOMAIN-SUFFIX,proshares.com,VPN
   - GEOSITE,google,DIRECT
   
   # Заблокированные в РФ сайты
