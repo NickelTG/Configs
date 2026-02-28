@@ -292,8 +292,8 @@ rules:
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
   - RULE-SET,torrent-websites,VPN
-  #- AND,((NETWORK,UDP),(DST-PORT,443)),REJECT # Заставит YouTube перейти на TCP (Убираем QUIC полностью)
-  - AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
+  - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT # Убираем QUIC полностью
+  #- AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
       
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
