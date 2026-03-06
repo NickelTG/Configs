@@ -245,8 +245,8 @@ common-settings: &common_filter
   type: http
   interval: 3600
   exclude-type: "ss|shadowsocks|shadowsocksr"  
-  #filter: "(?i)^(?!.*(RU|Russia|🇷🇺|MSK|US|[а-яА-Я]|STR|freak)).*$"
-  filter: '(?i)^(?!.*(shatak|ir|iran)).*(🇩🇪|🇳🇱|🇫🇮|🇱🇹|🇱🇻|🇪🇪|🇫🇷|🇬🇧|🇵🇱|🇸🇪|🇮🇹|🇨🇭|🇦🇹|🇨🇿|🇬🇪|🇦🇲|🇰🇿|🇲🇩|🇷🇸|🇰🇬|🇺🇿|🇹🇷|🇧🇬|🇷🇴|🇱🇺|\b(DE|Germany|NL|Netherlands|FI|Finland|LT|Lithuania|LV|Latvia|EE|Estonia|FR|France|GB|UK|PL|Poland|SE|Sweden|IT|Italy|CH|Switzerland|AT|Austria|CZ|Czech|GE|Georgia|AM|Armenia|KZ|Kazakhstan|MD|Moldova|RS|Serbia|KG|Kyrgyzstan|UZ|Uzbekistan|TR|Turkey|BG|Bulgaria|RO|Romania|LU|Luxembourg)\b)'
+  filter: "(?i)^(?!.*(RU|Russia|🇷🇺|ir|iran|MSK|US|[а-яА-Я]|STR|freak)).*$"
+  #filter: '(?i)^(?!.*(shatak|ir|iran)).*(🇩🇪|🇳🇱|🇫🇮|🇱🇹|🇱🇻|🇪🇪|🇫🇷|🇬🇧|🇵🇱|🇸🇪|🇮🇹|🇨🇭|🇦🇹|🇨🇿|🇬🇪|🇦🇲|🇰🇿|🇲🇩|🇷🇸|🇰🇬|🇺🇿|🇹🇷|🇧🇬|🇷🇴|🇱🇺|\b(DE|Germany|NL|Netherlands|FI|Finland|LT|Lithuania|LV|Latvia|EE|Estonia|FR|France|GB|UK|PL|Poland|SE|Sweden|IT|Italy|CH|Switzerland|AT|Austria|CZ|Czech|GE|Georgia|AM|Armenia|KZ|Kazakhstan|MD|Moldova|RS|Serbia|KG|Kyrgyzstan|UZ|Uzbekistan|TR|Turkey|BG|Bulgaria|RO|Romania|LU|Luxembourg)\b)'
   exclude-filter: "duplicates"
   health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, timeout: 1500, concurrency: 2}    
 
