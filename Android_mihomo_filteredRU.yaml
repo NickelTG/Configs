@@ -67,7 +67,7 @@ proxy-groups:
 
   - name: AUTO
     type: url-test
-    url: http://cp.cloudflare.com/generate_204
+    url: https://detectportal.firefox.com/success.txt
     interval: 100
     tolerance: 100
     max-failed-times: 2
@@ -89,7 +89,7 @@ proxy-groups:
   - name: FALLBACK
     type: fallback
     hidden: true
-    url: http://www.gstatic.com/generate_204
+    url: https://detectportal.firefox.com/success.txt
     interval: 50
     lazy: true
     include-all: true
@@ -98,7 +98,7 @@ proxy-groups:
   - name: VPN+
     type: fallback
     hidden: true
-    url: http://www.gstatic.com/generate_204
+    url: https://detectportal.firefox.com/success.txt
     interval: 50
     lazy: true
     max-failed-times: 2
@@ -110,7 +110,7 @@ proxy-groups:
   - name: BALANCE-HASH
     type: load-balance
     hidden: true
-    url: http://www.gstatic.com/generate_204
+    url: https://detectportal.firefox.com/success.txt
     interval: 200
     lazy: true
     strategy: consistent-hashing
@@ -120,7 +120,7 @@ proxy-groups:
   - name: BALANCE-RR
     type: load-balance
     hidden: true
-    url: http://www.gstatic.com/generate_204
+    url: https://detectportal.firefox.com/success.txt
     interval: 200
     lazy: true
     strategy: round-robin
@@ -248,7 +248,7 @@ common-settings: &common_filter
   filter: "(?i)^(?!.*(RU|Russia|🇷🇺|ir|iran|MSK|US|[а-яА-Я]|STR|freak)).*$"
   #filter: '(?i)^(?!.*(shatak|ir|iran)).*(🇩🇪|🇳🇱|🇫🇮|🇱🇹|🇱🇻|🇪🇪|🇫🇷|🇬🇧|🇵🇱|🇸🇪|🇮🇹|🇨🇭|🇦🇹|🇨🇿|🇬🇪|🇦🇲|🇰🇿|🇲🇩|🇷🇸|🇰🇬|🇺🇿|🇹🇷|🇧🇬|🇷🇴|🇱🇺|\b(DE|Germany|NL|Netherlands|FI|Finland|LT|Lithuania|LV|Latvia|EE|Estonia|FR|France|GB|UK|PL|Poland|SE|Sweden|IT|Italy|CH|Switzerland|AT|Austria|CZ|Czech|GE|Georgia|AM|Armenia|KZ|Kazakhstan|MD|Moldova|RS|Serbia|KG|Kyrgyzstan|UZ|Uzbekistan|TR|Turkey|BG|Bulgaria|RO|Romania|LU|Luxembourg)\b)'
   exclude-filter: "duplicates"
-  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 400, timeout: 1500, concurrency: 2}    
+  health-check: {enable: true, url: https://detectportal.firefox.com/success.txt, interval: 400, timeout: 1500, concurrency: 2}    
 
 proxy-providers:
   1st: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=100&url=https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/1st.yml, override: {additional-prefix: "1# ", udp: true, tfo: true, mptcp: true} }
