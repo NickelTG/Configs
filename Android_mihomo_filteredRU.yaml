@@ -78,7 +78,7 @@ proxy-groups:
   - name: AUTO+
     type: fallback
     hidden: true    
-    url: https://speed.cloudflare.com/__down?bytes=2000
+    url: https://speed.cloudflare.com/__down?bytes=5000
     interval: 50
     lazy: true
     proxies:
@@ -244,7 +244,7 @@ proxies:
 common-settings: &common_filter
   type: http
   interval: 3600
-  exclude-type: "ss|shadowsocks|shadowsocksr"  
+  #exclude-type: "ss|shadowsocks|shadowsocksr"  
   filter: "(?i)^(?!.*(RU|Russia|🇷🇺|ir|iran|MSK|US|[а-яА-Я]|STR|freak)).*$"
   #filter: '(?i)^(?!.*(shatak|ir|iran)).*(🇩🇪|🇳🇱|🇫🇮|🇱🇹|🇱🇻|🇪🇪|🇫🇷|🇬🇧|🇵🇱|🇸🇪|🇮🇹|🇨🇭|🇦🇹|🇨🇿|🇬🇪|🇦🇲|🇰🇿|🇲🇩|🇷🇸|🇰🇬|🇺🇿|🇹🇷|🇧🇬|🇷🇴|🇱🇺|\b(DE|Germany|NL|Netherlands|FI|Finland|LT|Lithuania|LV|Latvia|EE|Estonia|FR|France|GB|UK|PL|Poland|SE|Sweden|IT|Italy|CH|Switzerland|AT|Austria|CZ|Czech|GE|Georgia|AM|Armenia|KZ|Kazakhstan|MD|Moldova|RS|Serbia|KG|Kyrgyzstan|UZ|Uzbekistan|TR|Turkey|BG|Bulgaria|RO|Romania|LU|Luxembourg)\b)'
   exclude-filter: "duplicates"
@@ -315,6 +315,7 @@ rules:
   - DOMAIN-SUFFIX,flibusta.site,VPN
   - DOMAIN-SUFFIX,alreader.com,VPN
   - PROCESS-NAME,com.duolingo,VPN
+  - PROCESS-NAME,com.thaifriendly.app,VPN
   - DOMAIN-SUFFIX,nasvyazi.org,VPN
   - OR,((DOMAIN-SUFFIX,4pda.to),(DOMAIN-SUFFIX,4pda.ru),(PROCESS-NAME,ru.fourpda.client)),VPN
   - DOMAIN-SUFFIX,habr.com,VPN
