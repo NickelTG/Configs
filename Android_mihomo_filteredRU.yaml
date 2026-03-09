@@ -301,6 +301,8 @@ rules:
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
   
+  - RULE-SET,oisd_big,REJECT # Блокировка рекламы
+  
   # Социальные сети и мессенджеры и YouTube
   - OR,((GEOSITE,telegram),(RULE-SET,telegram_ip)),Telegram
   - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN
@@ -324,11 +326,8 @@ rules:
   - DOMAIN-SUFFIX,morningstar.com,VPN
   - DOMAIN-SUFFIX,justetf.com,VPN
   - DOMAIN-SUFFIX,proshares.com,VPN
-  - GEOSITE,google,DIRECT
-  
-  # Блокировка рекламы
-  - RULE-SET,oisd_big,REJECT
-    
+  - GEOSITE,google,DIRECT    
+      
   # Заблокированные в РФ сайты
   - RULE-SET,ru-bundle,VPN  
 
