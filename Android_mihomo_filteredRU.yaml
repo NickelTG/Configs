@@ -278,7 +278,8 @@ rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
   torrent-websites: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-websites.mrs", path: ./rule-sets/torrent-websites.mrs}
   torrent-clients: {type: http, behavior: classical, format: yaml, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-clients.yaml", path: ./rule-sets/torrent-clients.yaml}      
-  telegram_ip: {type: http, behavior: ipcidr, format: text, interval: 86400, url: "https://core.telegram.org/resources/cidr.txt", path: ./rule-sets/telegram_ip.txt}  
+  telegram_ip: {type: http, behavior: ipcidr, format: text, interval: 86400, url: "https://core.telegram.org/resources/cidr.txt", path: ./rule-sets/telegram_ip.txt}
+  oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
   geo-unblock:
     type: inline
@@ -302,33 +303,37 @@ rules:
   
   # Социальные сети и мессенджеры и YouTube
   - OR,((GEOSITE,telegram),(RULE-SET,telegram_ip)),Telegram
-  - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN  
+  - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN
   - OR,((GEOSITE,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
-  # Всякое
+  # Всякое  
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN
   - PROCESS-NAME,app.bumpy.android,DIRECT
   - PROCESS-NAME,com.tantantribe.tribe,VPN
   - PROCESS-NAME,ru.pepper,DIRECT
-  - DOMAIN,lens-pa.googleapis.com,DIRECT
-  - DOMAIN-SUFFIX,flibusta.site,VPN
-  - DOMAIN-SUFFIX,alreader.com,VPN
   - PROCESS-NAME,com.duolingo,VPN
   - PROCESS-NAME,com.thaifriendly.app,VPN
-  - DOMAIN-SUFFIX,nasvyazi.org,VPN
+  - PROCESS-NAME,com.pinalove.app,VPN
   - OR,((DOMAIN-SUFFIX,4pda.to),(DOMAIN-SUFFIX,4pda.ru),(PROCESS-NAME,ru.fourpda.client)),VPN
+  - DOMAIN,lens-pa.googleapis.com,DIRECT
+  - DOMAIN-SUFFIX,nasvyazi.org,VPN
+  - DOMAIN-SUFFIX,flibusta.site,VPN
+  - DOMAIN-SUFFIX,alreader.com,VPN  
   - DOMAIN-SUFFIX,habr.com,VPN
   - DOMAIN-SUFFIX,morningstar.com,VPN
   - DOMAIN-SUFFIX,justetf.com,VPN
   - DOMAIN-SUFFIX,proshares.com,VPN
   - GEOSITE,google,DIRECT
   
+  # Блокировка рекламы
+  - RULE-SET,oisd_big,REJECT
+    
   # Заблокированные в РФ сайты
   - RULE-SET,ru-bundle,VPN  
 
   # Инструменты проверки IP    
   - OR,((DOMAIN,ipwho.is),(DOMAIN,api.ip.sb),(DOMAIN,ipapi.co),(DOMAIN,ipinfo.io),(DOMAIN,ip-api.com),(DOMAIN,api.myip.com),(DOMAIN,ident.me),(DOMAIN-SUFFIX,2ip.io),(DOMAIN-SUFFIX,2ipcore.com)),VPN
-  
+
   # Весь остальной трафик - напрямую  
   - MATCH,DIRECT
