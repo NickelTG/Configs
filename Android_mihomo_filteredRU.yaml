@@ -67,7 +67,7 @@ proxy-groups:
 
   - name: AUTO
     type: url-test
-    url: https://detectportal.firefox.com/success.txt
+    url: https://abs.twimg.com/favicons/twitter.ico
     interval: 100
     tolerance: 100
     max-failed-times: 2
@@ -248,7 +248,7 @@ common-settings: &common_filter
   filter: "(?i)^(?!.*(RU|Russia|🇷🇺|ir|iran|MSK|US|[а-яА-Я]|STR|freak)).*$"
   #filter: '(?i)^(?!.*(shatak|ir|iran)).*(🇩🇪|🇳🇱|🇫🇮|🇱🇹|🇱🇻|🇪🇪|🇫🇷|🇬🇧|🇵🇱|🇸🇪|🇮🇹|🇨🇭|🇦🇹|🇨🇿|🇬🇪|🇦🇲|🇰🇿|🇲🇩|🇷🇸|🇰🇬|🇺🇿|🇹🇷|🇧🇬|🇷🇴|🇱🇺|\b(DE|Germany|NL|Netherlands|FI|Finland|LT|Lithuania|LV|Latvia|EE|Estonia|FR|France|GB|UK|PL|Poland|SE|Sweden|IT|Italy|CH|Switzerland|AT|Austria|CZ|Czech|GE|Georgia|AM|Armenia|KZ|Kazakhstan|MD|Moldova|RS|Serbia|KG|Kyrgyzstan|UZ|Uzbekistan|TR|Turkey|BG|Bulgaria|RO|Romania|LU|Luxembourg)\b)'
   exclude-filter: "duplicates"
-  health-check: {enable: true, url: https://detectportal.firefox.com/success.txt, interval: 400, timeout: 1500, concurrency: 2}    
+  health-check: {enable: true, url: https://www.facebook.com/favicon.ico, interval: 400, timeout: 1500, concurrency: 2}    
 
 proxy-providers:
   #1st: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=100&url=https://raw.githubusercontent.com/y9felix/s/refs/heads/main/b", path: ./proxy_providers/1st.yml, override: {additional-prefix: "1# ", udp: true, tfo: true, mptcp: true} }
@@ -271,8 +271,8 @@ proxy-providers:
   
   #WL1: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=100&url=https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-checked.txt", path: ./proxy_providers/WL1.yml, override: {additional-prefix: "WL1# ", udp: true, tfo: true, mptcp: true} }
   #WL2: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=100&url=https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/Vless-Reality-White-Lists-Rus-Mobile.txt", path: ./proxy_providers/WL2.yml, override: {additional-prefix: "WL2# ", udp: true, tfo: true, mptcp: true} }
-  #WL3: { <<: *common_filter, url: "https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/WL3.yml, override: {additional-prefix: "WL3# ", udp: true, tfo: true, mptcp: true} }
-  WL4: { <<: *common_filter, url: "https://raw.githubusercontent.com/SilentGhostCodes/WhiteListVpn/refs/heads/main/Whitelist.txt", path: ./proxy_providers/WL3.yml, override: {additional-prefix: "WL4# ", udp: true, tfo: true, mptcp: true} }
+  WL3: { <<: *common_filter, url: "https://subsconv.nickel-account.workers.dev/sub?noru=1&limit=100&url=https://raw.githubusercontent.com/zieng2/wl/main/vless_lite.txt", path: ./proxy_providers/WL3.yml, override: {additional-prefix: "WL3# ", udp: true, tfo: true, mptcp: true} }
+  #WL4: { <<: *common_filter, url: "https://raw.githubusercontent.com/SilentGhostCodes/WhiteListVpn/refs/heads/main/Whitelist.txt", path: ./proxy_providers/WL3.yml, override: {additional-prefix: "WL4# ", udp: true, tfo: true, mptcp: true} }
 
 rule-providers:
   torrent-trackers: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/other/torrent-trackers.mrs", path: ./rule-sets/torrent-trackers.mrs}
