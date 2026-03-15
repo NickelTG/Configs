@@ -59,7 +59,7 @@ dns:
       #ports: [443, 8443]
       #override-destination: false
 
-proxy-groups:
+proxy-groups:      
   - name: VPN
     type: select
     proxies:      
@@ -67,13 +67,6 @@ proxy-groups:
       - FALLBACK
       - BALANCE-HASH
       - BALANCE-RR
-      - WLIST
-
-  - name: WLIST
-    type: select
-    proxies:
-      - DIRECT
-    hidden: true
 
   - name: AUTO
     type: url-test
@@ -325,9 +318,9 @@ rules:
   #- AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
 
   # Белые списки  
-  - AND,((PROXY-GROUP,VPN,WLIST),(RULE-SET,whitelist)),DIRECT
-  - AND,((PROXY-GROUP,VPN,WLIST),(RULE-SET,whitelist_ext)),DIRECT  
-  - AND,((PROXY-GROUP,VPN,WLIST),(MATCH)),AUTO+
+  #- RULE-SET,whitelist,DIRECT
+  #- RULE-SET,whitelist_ext,DIRECT
+  #- MATCH,VPN  
       
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
