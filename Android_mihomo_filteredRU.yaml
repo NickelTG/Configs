@@ -70,8 +70,9 @@ proxy-groups:
       - WLIST
 
   - name: WLIST
-    type: relay
-    proxies: [DIRECT]
+    type: select
+    proxies:
+      - DIRECT
     hidden: true
 
   - name: AUTO
