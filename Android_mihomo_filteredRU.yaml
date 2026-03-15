@@ -68,6 +68,12 @@ proxy-groups:
       - BALANCE-HASH
       - BALANCE-RR
 
+  - name: Whitelst
+    type: select        
+    proxies:
+      - PASS
+      - VPN
+
   - name: AUTO
     type: url-test
     url: https://abs.twimg.com/favicons/twitter.ico
@@ -318,9 +324,9 @@ rules:
   #- AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
 
   # Белые списки  
-  #- RULE-SET,whitelist,DIRECT
-  #- RULE-SET,whitelist_ext,DIRECT
-  #- MATCH,VPN  
+  - RULE-SET,whitelist,DIRECT
+  - RULE-SET,whitelist_ext,DIRECT
+  - MATCH,Whitelst  
       
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
