@@ -68,7 +68,7 @@ proxy-groups:
       - BALANCE-HASH
       - BALANCE-RR
 
-  - name: Whitelst
+  - name: WLmode
     type: select        
     proxies:
       - PASS
@@ -317,16 +317,14 @@ rule-providers:
       - DOMAIN-KEYWORD,tinkoff
 
 rules:  
-  # Торренты
-  - OR,((RULE-SET,torrent-clients),(RULE-SET,torrent-trackers)),DIRECT  
-  - RULE-SET,torrent-websites,VPN
+  # Всякое  
   - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT # Убираем QUIC полностью
   #- AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
 
   # Белые списки  
   - RULE-SET,whitelist,DIRECT
   - RULE-SET,whitelist_ext,DIRECT
-  - MATCH,Whitelst  
+  - MATCH,WLmode  
       
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
@@ -338,7 +336,9 @@ rules:
   - OR,((GEOSITE,meta),(GEOIP,facebook),(PROCESS-NAME,com.whatsapp)),VPN
   - OR,((GEOSITE,youtube),(PROCESS-NAME,app.revanced.android.apps.youtube.music)),YouTube
   
-  # Всякое  
+  # Разное  
+  - OR,((RULE-SET,torrent-clients),(RULE-SET,torrent-trackers)),DIRECT  
+  - RULE-SET,torrent-websites,VPN  
   - PROCESS-NAME,com.badoo.mobile,VPN
   - PROCESS-NAME,com.bumble.app,VPN  
   - PROCESS-NAME,com.tantantribe.tribe,VPN
