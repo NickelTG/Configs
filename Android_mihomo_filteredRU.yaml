@@ -31,6 +31,8 @@ dns:
     - tls://8.8.8.8
     - tls://8.8.4.4
     - tls://9.9.9.9
+    #- system
+    #- tls://77.88.8.8
     
   nameserver-policy:
     "geosite:category-ai-!cn": &unblock_dns
@@ -42,11 +44,12 @@ dns:
       #- tls://dot.dns.astracat.ru
       #- https://router.comss.one/dns-query
     "rule-set:geo-unblock": *unblock_dns
-    "rule-set:ru-bundle": *main_dns
-    "geoip:ru":
-      - tls://common.dot.dns.yandex.net
-      - tls://8.8.8.8      
-      - 77.88.8.8
+    "rule-set:ru-bundle": &ru_dns      
+      - tls://77.88.8.8
+      - system
+    "rule-set:whitelist": *ru_dns
+    "rule-set:whitelist_ext": *ru_dns
+    "geoip:ru": *ru_dns
 
 #sniffer:
   #enable: true
@@ -62,8 +65,14 @@ proxy-groups:
     proxies:      
       - AUTO+
       - FALLBACK
-      - BALANCE-HASH    
-      - BALANCE-RR      
+      - BALANCE-HASH
+      - BALANCE-RR
+      - WLIST
+
+  - name: WLIST
+    type: relay
+    proxies: [DIRECT]
+    hidden: true
 
   - name: AUTO
     type: url-test
@@ -289,6 +298,7 @@ rule-providers:
   telegram_ip: {type: http, behavior: ipcidr, format: text, interval: 86400, url: "https://core.telegram.org/resources/cidr.txt", path: ./rule-sets/telegram_ip.txt}
   oisd_big: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/oisd/big.mrs", path: ./oisd/big.mrs}
   ru-bundle: {type: http, behavior: domain, format: mrs, interval: 86400, url: "https://github.com/legiz-ru/mihomo-rule-sets/raw/main/ru-bundle/rule.mrs", path: ./ru-bundle/rule.mrs}
+  whitelist_ext: {type: http, behavior: domain, format: text, interval: 86400, url: "https://raw.githubusercontent.com/hxehex/russia-mobile-internet-whitelist/refs/heads/main/whitelist.txt", path: ./provider/rule-set/whitelist_ext.txt}
   geo-unblock:
     type: inline
     behavior: classical    
@@ -296,7 +306,15 @@ rule-providers:
       - DOMAIN,api.github.com
       - DOMAIN,copilot-proxy.githubusercontent.com      
       #- DOMAIN,origin-tracker.githubusercontent.com
-      #- DOMAIN-SUFFIX,marketplace.visualstudio.com    
+      #- DOMAIN-SUFFIX,marketplace.visualstudio.com
+  whitelist:
+    type: inline
+    behavior: classical
+    payload:
+      - DOMAIN-SUFFIX,gosuslugi.ru
+      - DOMAIN-SUFFIX,yandex.ru
+      - DOMAIN-KEYWORD,sberbank
+      - DOMAIN-KEYWORD,tinkoff
 
 rules:  
   # Торренты
@@ -304,6 +322,11 @@ rules:
   - RULE-SET,torrent-websites,VPN
   - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT # Убираем QUIC полностью
   #- AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
+
+  # Белые списки  
+  - AND,((PROXY-NAME,WLIST),(RULE-SET,whitelist)),DIRECT
+  - AND,((PROXY-NAME,WLIST),(RULE-SET,whitelist_ext)),DIRECT  
+  - AND,((PROXY-NAME,WLIST),(MATCH)),AUTO+
       
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
