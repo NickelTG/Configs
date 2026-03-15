@@ -325,9 +325,9 @@ rules:
   #- AND,((NETWORK,UDP),(DST-PORT,443),(GEOSITE,youtube)),REJECT # Заставит YouTube перейти на TCP
 
   # Белые списки  
-  - AND,((PROXY-NAME,WLIST),(RULE-SET,whitelist)),DIRECT
-  - AND,((PROXY-NAME,WLIST),(RULE-SET,whitelist_ext)),DIRECT  
-  - AND,((PROXY-NAME,WLIST),(MATCH)),AUTO+
+  - AND,((PROXY-GROUP,VPN,WLIST),(RULE-SET,whitelist)),DIRECT
+  - AND,((PROXY-GROUP,VPN,WLIST),(RULE-SET,whitelist_ext)),DIRECT  
+  - AND,((PROXY-GROUP,VPN,WLIST),(MATCH)),AUTO+
       
   # AI и разработка (высший приоритет!)  
   - GEOSITE,category-ai-!cn,AI&DEV
