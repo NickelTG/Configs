@@ -68,12 +68,6 @@ proxy-groups:
       - BALANCE-HASH
       - BALANCE-RR
 
-  - name: WLmode
-    type: select        
-    proxies:
-      - PASS
-      - VPN
-
   - name: AUTO
     type: url-test
     url: https://abs.twimg.com/favicons/twitter.ico
@@ -83,6 +77,12 @@ proxy-groups:
     lazy: false
     include-all: true
     filter: '^(?!AWG-|ByeByeDPI|WGtunnel).*'
+
+  - name: WLmode
+    type: select        
+    proxies:
+      - PASS
+      - VPN
 
   - name: AUTO+
     type: fallback
